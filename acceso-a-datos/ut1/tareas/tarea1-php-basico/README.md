@@ -10,7 +10,7 @@
 ```php
 <?php
 
->
+?>
 ```
 
 2. **Edad permitida**  
@@ -21,7 +21,7 @@
 ```php
 <?php
 
->
+?>
 ``` 
 
 3. **Positivo, negativo o cero**  
@@ -30,7 +30,7 @@
 ```php
 <?php
 
->
+?>
 ```  
 
 4. **Nota final**  
@@ -40,7 +40,7 @@
 ```php
 <?php
 
->
+?>
 ```
 
 ---
@@ -53,7 +53,7 @@
 ```php
 <?php
 
->
+?>
 ```
 
 6. **Suma acumulada**  
@@ -62,7 +62,7 @@
 ```php
 <?php
 
->
+?>
 ```
 
 7. **Tabla de multiplicar**  
@@ -71,7 +71,7 @@
 ```php
 <?php
 
->
+?>
 ```
 
 8. **Números pares**  
@@ -80,7 +80,7 @@
 ```php
 <?php
 
->
+?>
 ```
 
 9. **Cuenta atrás**  
@@ -89,7 +89,7 @@
 ```php
 <?php
 
->
+?>
 ```
 
 10. **Factorial**  
@@ -98,7 +98,7 @@
 ```php
 <?php
 
->
+?>
 ```
 
 ---
@@ -111,7 +111,7 @@
 ```php
 <?php
 
->
+?>
 ```
 
 12. **Fibonacci**  
@@ -120,7 +120,7 @@
 ```php
 <?php
 
->
+?>
 ``` 
 
 13. **Múltiplos de un número**  
@@ -129,7 +129,7 @@
 ```php
 <?php
 
->
+?>
 ```
 
 14. **Suma de pares e impares**  
@@ -138,7 +138,7 @@
 ```php
 <?php
 
->
+?>
 ```
 
 15. **Adivinar número**  
@@ -148,7 +148,7 @@
 ```php
 <?php
 
->
+?>
 ```
 
 ---
@@ -161,7 +161,7 @@
 ```php
 <?php
 
->
+?>
 ```
 
 17. **Invertir número**  
@@ -170,7 +170,7 @@
 ```php
 <?php
 
->
+?>
 ```
 
 18. **Palíndromo**  
@@ -179,7 +179,7 @@
 ```php
 <?php
 
->
+?>
 ```
 
 19. **Máximo común divisor (MCD)**  
@@ -188,7 +188,7 @@
 ```php
 <?php
 
->
+?>
 ```
 
 20. **Triángulo de asteriscos**  
@@ -205,6 +205,6 @@
 ```php
 <?php
 
->
+?>
 ```
 </div>
