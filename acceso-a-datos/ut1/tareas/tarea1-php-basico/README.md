@@ -35,9 +35,9 @@ compare($value1, $value2);
 **Output**
 
 ```
-Insert first value -> 5
-Insert second value -> 2
-5 is greater than 2
+Inserte primer valor -> 5
+Inserte segundo valor -> 2
+5 es mayor que 2
 ```
 
 2. **Edad permitida**  
@@ -63,8 +63,8 @@ checkAge($age);
 
 **Output**
 ```
-Insert your age -> 20
-You are of legal age
+Inserte su edad -> 20
+Eres mayor de edad
 ```
 
 
@@ -92,7 +92,7 @@ checkSign($value);
 **Output**
 
 ```
-The value -2 is negative!
+El valor -2 es negativo.
 ```
 
 4. **Nota final**  
@@ -298,11 +298,26 @@ echo "¡Fin!";
 
 ```php
 <?php
+$value = readline("Inserte el número para calcular su factorial -> ");
+
 function factorial(int $value) {
-    
+    $result = 1;
+    for ($i = 1; $i <= $value; $i++) {
+        $result *= $i;
+    }
+    return $result;
 }
+
+echo "$value! = " . factorial($value);
 ?>
 ```
+
+**Output**
+
+´´´
+Inserte el número para calcular su factorial -> 5
+5! = 120
+´´´
 
 ---
 
@@ -313,7 +328,27 @@ function factorial(int $value) {
 
 ```php
 <?php
+function isPrime(int $num) {
+    if ($num == 0 || $num == 1) {
+        return false;
+    }
+    for ($i = 2; $i < $num; $i++) {
+        if ($num % $i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
 
+function getPrimeNumbers(int $min = 1, int $max = 50) {
+    for ($num = $min; $num <= $max; $num++) {
+        if (isPrime($num)) {
+            echo "$num\n";
+        }
+    }
+}
+
+getPrimeNumbers();
 ?>
 ```
 
@@ -322,17 +357,80 @@ function factorial(int $value) {
 
 ```php
 <?php
+$firstTerms = 20;
 
+function fibonnaci(int $num) {
+    if ($num <= 1) {
+        return 1;
+    }
+    return fibonnaci($num-1) + fibonnaci($num-2);
+}
+
+for ($i = 0; $i < $firstTerms; $i++) {
+    echo fibonnaci($i) . "\n";
+}
 ?>
-``` 
+```
+
+**Output**
+
+```
+1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+89
+144
+233
+377
+610
+987
+1597
+2584
+4181
+6765
+```
 
 13. **Múltiplos de un número**  
     Pide un número `n` y muestra sus múltiplos hasta 100.  
 
 ```php
 <?php
+$n = readline("Inserta un número para mostrar sus múltiplos -> ");
 
+function printMultiples(int $value, int $limit = 100) {
+    for ($i = 1; $i <= $limit; $i++) {
+        $multiple = $value * $i;
+        echo "$multiple\n";
+    }
+}
+
+printMultiples($n);
 ?>
+```
+
+**Output**
+
+```
+5
+10
+15
+20
+25
+...
+...
+...
+480
+485
+490
+495
+500
 ```
 
 14. **Suma de pares e impares**  
@@ -340,8 +438,26 @@ function factorial(int $value) {
 
 ```php
 <?php
-
+$limit = 100;
+$evenSummation = 0;
+$oddSummation = 0;
+for ($i = 1; $i <= $limit; $i++) {
+    if ($i % 2 == 0) {
+        $evenSummation += $i;
+    } else {
+        $oddSummation += $i;
+    }
+}
+echo "La suma de números pares: $evenSummation\n";
+echo "La suma de números impares: $oddSummation\n";
 ?>
+```
+
+**Output**
+
+```
+La suma de números pares: 2550
+La suma de números impares: 2500
 ```
 
 15. **Adivinar número**  
@@ -350,9 +466,27 @@ function factorial(int $value) {
 
 ```php
 <?php
-
+$randomTarget = rand(1, 20);
+do {
+    $userNumber = readline("Adivina el número que estoy pensando -> ");
+    if ($userNumber < $randomTarget) {
+        echo "Es mayor\n";
+    } else if ($userNumber > $randomTarget) {
+        echo "Es menor\n";
+    }
+} while ($userNumber != $randomTarget);
+echo "¡Bien! Es el número $randomTarget!"
 ?>
 ```
+
+**Output**
+
+´´´
+Adivina el número que estoy pensando -> 16
+Es mayor
+Adivina el número que estoy pensando -> 17
+¡Bien! Es el número 17!
+´´´
 
 ---
 
@@ -363,26 +497,79 @@ function factorial(int $value) {
 
 ```php
 <?php
+$value = readline("Inserta un número para comprobar si es perfecto -> ");
+function isPerfectNumber(int $value): bool {
+    $divisorsSum = 1;
+    for ($i = 2; $i < $value; $i++) {
+        if ($value % $i == 0) {
+            $divisorsSum += $i;
+        }
+    }
+    return $divisorsSum == $value;
+}
 
+if (isPerfectNumber($value)) {
+    echo "El número $value ES perfecto.";
+} else {
+    echo "El número $value NO ES perfecto.";
+}
 ?>
 ```
+
+**Output**
+
+´´´
+Inserta un número para comprobar si es perfecto -> 24
+El número 24 NO ES perfecto.
+Inserta un número para comprobar si es perfecto -> 28
+El número 28 ES perfecto.
+´´´
 
 17. **Invertir número**  
     Escribe un algoritmo que invierta los dígitos de un número (ejemplo: `123 → 321`).  
 
 ```php
 <?php
-
+$value = readline("Inserte el número a invertir -> ");
+function reverseNumber(int $num): int {
+    $reversedNum = strrev(strval($num));
+    return (int)$reversedNum;
+}
+echo $value . " → " . reverseNumber($value);
 ?>
 ```
+
+**Output**
+
+´´´
+Inserte el número a invertir -> 123
+123 → 321
+´´´
 
 18. **Palíndromo**  
     Comprueba si una palabra almacenada en una variable es palíndroma.  
 
 ```php
 <?php
+function isPalindrome(string $word): bool {
+    $loweredWord = strtolower($word);
+    $invertedWord = strrev($loweredWord);
+    return $loweredWord == $invertedWord;
+}
 
+$targetWord = "Anna";
+if (isPalindrome($targetWord)) {
+    echo "La palabra '$targetWord' ES un palíndromo.";
+} else {
+    echo "La palabra '$targetWord' NO ES un palíndromo.";
+}
 ?>
+```
+
+**Output**
+
+```
+La palabra 'Anna' ES un palíndromo.
 ```
 
 19. **Máximo común divisor (MCD)**  
@@ -407,7 +594,27 @@ function factorial(int $value) {
 
 ```php
 <?php
-
+$n = readline("Inserte la altura del triángulo resultante -> ");
+for ($i = 1; $i <= $n; $i++) {
+    echo str_repeat("*", $i) . "\n";
+}
 ?>
 ```
+
+**Output**
+
+```
+Inserte la altura del triángulo resultante -> 10
+*
+**
+***
+****
+*****
+******
+*******
+********
+*********
+**********
+```
+
 </div>
