@@ -9,7 +9,11 @@
 
 ```php
 <?php
+$value1 = readline("Insert first value -> ");
+$value2 = readline("Insert second value -> ");
 
+function compareValues($value1, $value2) {
+}
 ?>
 ```
 
