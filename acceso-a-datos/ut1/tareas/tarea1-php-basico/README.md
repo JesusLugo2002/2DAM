@@ -2,28 +2,42 @@
 
 # Ejercicios - Conceptos básicos (introducción a PHP)
 
-### Variables y Condicionales
+- [Variables y Condicionales](#variables-y-condicionales)
+- [Bucles (for, while, foreach)](#bucles-for-while-foreach)
+- [Combinando Condicionales y Bucles](#combinando-condicionales-y-bucles)
+- [Construcción de Algorítmicos](#construcción-de-algorítmicos)
+
+
+## Variables y Condicionales
 
 1. **Mayor de dos números**  
    Pide dos números y muestra cuál es mayor o si son iguales.
 
 ```php
 <?php
-$value1 = readline("Insert first value -> ");
-$value2 = readline("Insert second value -> ");
+$value1 = readline("Inserte primer valor -> ");
+$value2 = readline("Inserte segundo valor -> ");
 
-function compare($value1, $value2) {
-    $result = "Both values are the same";
+function compare(int $value1, int $value2) {
+    $result = "Ambos valores son los mismos";
     if ($value1 > $value2) {
-        $result = "$value1 is greater than $value2";
+        $result = "$value1 es mayor que $value2";
     } elseif ($value1 < $value2) {
-        $result = "$value1 is lesser than $value2";
+        $result = "$value1 es menor que $value2";
     }
     echo $result;
 }
 
 compare($value1, $value2);
 ?>
+```
+
+**Output**
+
+```
+Insert first value -> 5
+Insert second value -> 2
+5 is greater than 2
 ```
 
 2. **Edad permitida**  
@@ -33,18 +47,53 @@ compare($value1, $value2);
 
 ```php
 <?php
+$age = readline("Inserte su edad -> ");
 
+function checkAge(int $age) {
+    $result = "Eres mayor de edad";
+    if ($age < 18) {
+        $result = "Eres menor de edad";
+    }
+    echo $result;
+}
+
+checkAge($age);
 ?>
 ``` 
+
+**Output**
+```
+Insert your age -> 20
+You are of legal age
+```
+
 
 3. **Positivo, negativo o cero**  
    Comprueba si un número almacenado en una variable es positivo, negativo o cero.
 
 ```php
 <?php
+$value = rand(-10, 10);
 
+function checkSign(int $value) {
+    $result = "El valor es cero.";
+    if ($value > 0) {
+        $result = "El valor $value es positivo.";
+    } elseif ($value < 0) {
+        $result = "El valor $value es negativo.";
+    }
+    echo $result;
+}
+
+checkSign($value);
 ?>
 ```  
+
+**Output**
+
+```
+The value -2 is negative!
+```
 
 4. **Nota final**  
    Pide la nota de un alumno y muestra:  
@@ -52,21 +101,74 @@ compare($value1, $value2);
 
 ```php
 <?php
+$mark = readline("Inserte la nota del estudiante -> ");
 
+function getMarkCategory(int $mark) {
+    if ($mark < 5) {
+        return "Suspenso";
+    }
+    if ($mark == 5 || $mark == 6) {
+        return "Aprobado";
+    }
+    if ($mark == 7 || $mark == 8) {
+        return "Notable";
+    }
+    return "Sobresaliente";
+}
+
+echo getMarkCategory($mark);
 ?>
+```
+
+**Output**
+
+```
+Inserte la nota del estudiante -> 8
+Notable
 ```
 
 ---
 
-### Bucles (for, while, foreach)
+## Bucles (for, while, foreach)
 
 5. **Contar del 1 al 100**  
    Muestra los números del 1 al 100 en pantalla.
 
 ```php
 <?php
-
+$maxValue = 100;
+for ($i = 1; $i <= $maxValue; $i++) {
+    echo "$i\n";
+}
 ?>
+```
+
+**Output**
+
+```
+1
+2
+3
+4
+5
+6
+7
+8
+9
+...
+...
+...
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
 ```
 
 6. **Suma acumulada**  
@@ -74,8 +176,22 @@ compare($value1, $value2);
 
 ```php
 <?php
+function summation(int $maxValue = 50) {
+    $result = 0;
+    for ($i = 1; $i <= $maxValue; $i++) {
+        $result += $i;
+    }
+    return $result;
+}
 
+echo "El resultado de la sumatoria es " . summation();
 ?>
+```
+
+**Output**
+
+```
+El resultado de la sumatoria es 1275
 ```
 
 7. **Tabla de multiplicar**  
@@ -83,8 +199,33 @@ compare($value1, $value2);
 
 ```php
 <?php
+$value = readline("Inserta un número para generar una tabla de multiplicar -> ");
 
+function getMultiplicationTable(int $num, int $maxMultiplier = 10) {
+    for ($i = 1; $i < $maxMultiplier; $i++) {
+        $product = $num * $i;
+        echo "$num x $i = $product\n";
+    }
+}
+
+getMultiplicationTable($value);
 ?>
+```
+
+**Output**
+
+```
+Inserta un número para generar una tabla de multiplicar -> 7
+7 x 1 = 7
+7 x 2 = 14
+7 x 3 = 21
+7 x 4 = 28
+7 x 5 = 35
+7 x 6 = 42
+7 x 7 = 49
+7 x 8 = 56
+7 x 9 = 63
+7 x 10 = 70
 ```
 
 8. **Números pares**  
@@ -92,8 +233,35 @@ compare($value1, $value2);
 
 ```php
 <?php
+function getEvenNumbers(int $min = 1, int $max = 50) {
+    for ($i = $min; $i <= $max; $i++) {
+        if ($i % 2 == 0) {
+            echo "$i\n";
+        }
+    }
+}
 
+getEvenNumbers();
 ?>
+```
+
+**Output**
+
+```
+2
+4
+6
+8
+10
+...
+...
+...
+40
+42
+44
+46
+48
+50
 ```
 
 9. **Cuenta atrás**  
@@ -101,8 +269,28 @@ compare($value1, $value2);
 
 ```php
 <?php
-
+$initialValue = 10;
+for ($i = $initialValue; $i >= 1; $i--) {
+    echo "$i\n";
+}
+echo "¡Fin!";
 ?>
+```
+
+**Output**
+
+```
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+¡Fin!
 ```
 
 10. **Factorial**  
@@ -110,13 +298,15 @@ compare($value1, $value2);
 
 ```php
 <?php
-
+function factorial(int $value) {
+    
+}
 ?>
 ```
 
 ---
 
-### Combinando Condicionales y Bucles
+## Combinando Condicionales y Bucles
 
 11. **Números primos**  
     Escribe un algoritmo que muestre los números primos entre 1 y 50.  
@@ -166,7 +356,7 @@ compare($value1, $value2);
 
 ---
 
-### Construcción de Algorítmicos
+## Construcción de Algorítmicos
 
 16. **Número perfecto**  
     Comprueba si un número es perfecto (la suma de sus divisores propios es igual al número).  
