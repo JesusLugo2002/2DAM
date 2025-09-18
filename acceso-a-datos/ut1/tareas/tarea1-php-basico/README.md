@@ -577,8 +577,29 @@ La palabra 'Anna' ES un palíndromo.
 
 ```php
 <?php
+echo "Calculadora del máximo común divisor\n";
+$firstValue = readline("Inserte el primer valor -> ");
+$secondValue = readline("Inserte el segundo valor -> ");
 
+function getMCD(int $a, int $b): int {
+    $remainder = $a % $b;
+    if ($remainder == 0) {
+        return $b;
+    }
+    return getMCD($b, $remainder);
+}
+
+echo "El máximo común divisor de $firstValue y $secondValue es " . getMCD($firstValue, $secondValue);
 ?>
+```
+
+**Output**
+
+```
+Calculadora del máximo común divisor
+Inserte el primer valor -> 18
+Inserte el segundo valor -> 12
+El máximo común divisor de 18 y 12 es 6
 ```
 
 20. **Triángulo de asteriscos**  
