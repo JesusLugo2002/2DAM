@@ -12,8 +12,17 @@
 $value1 = readline("Insert first value -> ");
 $value2 = readline("Insert second value -> ");
 
-function compareValues($value1, $value2) {
+function compare($value1, $value2) {
+    $result = "Both values are the same";
+    if ($value1 > $value2) {
+        $result = "$value1 is greater than $value2";
+    } elseif ($value1 < $value2) {
+        $result = "$value1 is lesser than $value2";
+    }
+    echo $result;
 }
+
+compare($value1, $value2);
 ?>
 ```
 
