@@ -481,12 +481,12 @@ echo "¡Bien! Es el número $randomTarget!"
 
 **Output**
 
-´´´
+```
 Adivina el número que estoy pensando -> 16
 Es mayor
 Adivina el número que estoy pensando -> 17
 ¡Bien! Es el número 17!
-´´´
+```
 
 ---
 
@@ -518,12 +518,12 @@ if (isPerfectNumber($value)) {
 
 **Output**
 
-´´´
+```
 Inserta un número para comprobar si es perfecto -> 24
 El número 24 NO ES perfecto.
 Inserta un número para comprobar si es perfecto -> 28
 El número 28 ES perfecto.
-´´´
+```
 
 17. **Invertir número**  
     Escribe un algoritmo que invierta los dígitos de un número (ejemplo: `123 → 321`).  
@@ -541,10 +541,10 @@ echo $value . " → " . reverseNumber($value);
 
 **Output**
 
-´´´
+```
 Inserte el número a invertir -> 123
 123 → 321
-´´´
+```
 
 18. **Palíndromo**  
     Comprueba si una palabra almacenada en una variable es palíndroma.  
