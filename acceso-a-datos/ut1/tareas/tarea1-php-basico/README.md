@@ -314,10 +314,10 @@ echo "$value! = " . factorial($value);
 
 **Output**
 
-´´´
+```
 Inserte el número para calcular su factorial -> 5
 5! = 120
-´´´
+```
 
 ---
 
@@ -350,6 +350,26 @@ function getPrimeNumbers(int $min = 1, int $max = 50) {
 
 getPrimeNumbers();
 ?>
+```
+
+**Output**
+
+```
+2
+3
+5
+7
+11
+13
+17
+19
+23
+29
+31
+37
+41
+43
+47
 ```
 
 12. **Fibonacci**  
