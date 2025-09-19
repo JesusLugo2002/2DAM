@@ -94,37 +94,380 @@
 
 ## Bloque 2: Práctica con comandos en Linux
 
-1.  Usa echo $$ para mostrar el PID del proceso actual.
+1.  Usa `echo $$` para mostrar el PID del proceso actual.
 
-2.  Usa echo $PPID para mostrar el PID del proceso padre.
+```bash
+echo $$
+7560
+```
 
-3.  Ejecuta pidof systemd y explica el resultado.
+2.  Usa `echo $PPID` para mostrar el PID del proceso padre.
+
+```bash
+echo $PPID
+7551
+```
+
+3.  Ejecuta `pidof systemd` y explica el resultado.
+
+```bash
+pidof systemd
+3313
+```
+**Explicación:** Indica el PID del gestor de servicios `systemd` del sistema.
 
 4.  Abre un programa gráfico (ejemplo: gedit) y usa pidof para obtener sus PID.
 
+```bash
+xed &
+[1] 12377
+
+pidof xed
+12377
+```
+
 5.  Ejecuta ps -e y explica qué significan sus columnas.
+
+```bash
+PID TTY          TIME CMD
+  1 ?        00:00:01 systemd
+  2 ?        00:00:00 kthreadd
+  3 ?        00:00:00 pool_workqueue_release
+```
+  
+**Explicación:** Muestra una lista de procesos bajo 4 columnas.
+- PID: ID del proceso.
+- TTY: Terminal usada (si hace uso de ella).
+- TIME: Tiempo de uso de procesamiento.
+- CMD: Nombre del comando.
 
 6.  Ejecuta ps -f y observa la relación entre procesos padre e hijo.
 
+```bash
+ps -f
+
+UID          PID    PPID  C STIME TTY          TIME CMD
+dam        11655   11647  0 14:47 pts/0    00:00:00 bash
+dam        12377   11655  0 14:50 pts/0    00:00:00 xed
+dam        15492   11655 99 15:03 pts/0    00:00:00 ps -f
+```
+
+**Explicación:** De los ejercicios anteriores, tanto el comando `xed` como `ps -f` fueron lanzados por la terminal de `bash` actual; esto se puede corroborar fijandose que los PPID de esos comandos es igual al PID de bash.
+
 7.  Usa ps -axf o pstree para mostrar el árbol de procesos y dibújalo.
+
+```bash
+systemd─┬─ModemManager───3*[{ModemManager}]
+        ├─NetworkManager───3*[{NetworkManager}]
+        ├─VBoxSVC─┬─VirtualBoxVM───51*[{VirtualBoxVM}]
+        │         └─17*[{VBoxSVC}]
+        ├─VBoxXPCOMIPCD
+        ├─accounts-daemon───3*[{accounts-daemon}]
+        ├─agetty
+        ├─apache2───5*[apache2]
+        ├─at-spi2-registr───3*[{at-spi2-registr}]
+        ├─avahi-daemon───avahi-daemon
+        ├─blkmapd
+        ├─colord───3*[{colord}]
+        ├─containerd───16*[{containerd}]
+        ├─containerd-shim─┬─apache2───10*[apache2]
+        │                 └─11*[{containerd-shim}]
+        ├─containerd-shim─┬─apache2───6*[apache2]
+        │                 └─11*[{containerd-shim}]
+        ├─cron
+        ├─csd-printer───3*[{csd-printer}]
+        ├─cups-browsed───3*[{cups-browsed}]
+        ├─cupsd
+        ├─dbus-daemon
+        ├─dnsmasq───dnsmasq
+        ├─dockerd─┬─docker-proxy───8*[{docker-proxy}]
+        │         ├─docker-proxy───6*[{docker-proxy}]
+        │         ├─2*[docker-proxy───7*[{docker-proxy}]]
+        │         └─29*[{dockerd}]
+        ├─firefox-bin─┬─Isolated Web Co───29*[{Isolated Web Co}]
+        │             ├─7*[Isolated Web Co───27*[{Isolated Web Co}]]
+        │             ├─Isolated Web Co───28*[{Isolated Web Co}]
+        │             ├─Privileged Cont───27*[{Privileged Cont}]
+        │             ├─RDD Process───11*[{RDD Process}]
+        │             ├─Socket Process───5*[{Socket Process}]
+        │             ├─Utility Process───4*[{Utility Process}]
+        │             ├─3*[Web Content───18*[{Web Content}]]
+        │             ├─WebExtensions───27*[{WebExtensions}]
+        │             ├─crashhelper───{crashhelper}
+        │             └─129*[{firefox-bin}]
+        ├─fsidd
+        ├─irqbalance───{irqbalance}
+        ├─2*[kerneloops]
+        ├─lightdm─┬─Xorg───11*[{Xorg}]
+        │         ├─lightdm─┬─cinnamon-sessio─┬─agent───3*[{agent}]
+        │         │         │                 ├─applet.py
+        │         │         │                 ├─at-spi-bus-laun─┬─dbus-daemon
+        │         │         │                 │                 └─4*[{at-spi-bu+
+        │         │         │                 ├─blueman-applet───4*[{blueman-ap+
+        │         │         │                 ├─cinnamon-killer───4*[{cinnamon-+
+        │         │         │                 ├─cinnamon-launch─┬─cinnamon───25+
+        │         │         │                 │                 └─6*[{cinnamon-+
+        │         │         │                 ├─csd-a11y-settin───4*[{csd-a11y-+
+        │         │         │                 ├─csd-automount───4*[{csd-automou+
+        │         │         │                 ├─csd-background───4*[{csd-backgr+
+        │         │         │                 ├─csd-clipboard───3*[{csd-clipboa+
+        │         │         │                 ├─csd-color───4*[{csd-color}]
+        │         │         │                 ├─csd-housekeepin───4*[{csd-house+
+        │         │         │                 ├─csd-keyboard───4*[{csd-keyboard+
+        │         │         │                 ├─csd-media-keys───4*[{csd-media-+
+        │         │         │                 ├─csd-power───4*[{csd-power}]
+        │         │         │                 ├─csd-print-notif───3*[{csd-print+
+        │         │         │                 ├─csd-screensaver───3*[{csd-scree+
+        │         │         │                 ├─csd-settings-re───4*[{csd-setti+
+        │         │         │                 ├─csd-wacom───3*[{csd-wacom}]
+        │         │         │                 ├─csd-xsettings───4*[{csd-xsettin+
+        │         │         │                 ├─evolution-alarm───7*[{evolution+
+        │         │         │                 ├─nemo-desktop───5*[{nemo-desktop+
+        │         │         │                 ├─socat
+        │         │         │                 ├─xapp-sn-watcher───4*[{xapp-sn-w+
+        │         │         │                 └─4*[{cinnamon-sessio}]
+        │         │         └─3*[{lightdm}]
+        │         └─3*[{lightdm}]
+        ├─mintUpdate───8*[{mintUpdate}]
+        ├─mintreport-tray───4*[{mintreport-tray}]
+        ├─nfsdcld
+        ├─polkitd───3*[{polkitd}]
+        ├─power-profiles-───3*[{power-profiles-}]
+        ├─prometheus-node───5*[{prometheus-node}]
+        ├─rpc.idmapd
+        ├─rpc.mountd
+        ├─rpc.statd
+        ├─rpcbind
+        ├─rsyslogd───3*[{rsyslogd}]
+        ├─rtkit-daemon───2*[{rtkit-daemon}]
+        ├─smartd
+        ├─socat
+        ├─switcheroo-cont───3*[{switcheroo-cont}]
+        ├─systemd─┬─(sd-pam)
+        │         ├─chrome_crashpad───2*[{chrome_crashpad}]
+        │         ├─code─┬─code───code───22*[{code}]
+        │         │      ├─code───code─┬─code───19*[{code}]
+        │         │      │             └─code───20*[{code}]
+        │         │      ├─code───14*[{code}]
+        │         │      ├─code───15*[{code}]
+        │         │      ├─2*[code───17*[{code}]]
+        │         │      ├─code─┬─2*[code───7*[{code}]]
+        │         │      │      └─16*[{code}]
+        │         │      ├─code─┬─bash───docker─┬─docker-compose───14*[{docker-+
+        │         │      │      │               └─11*[{docker}]
+        │         │      │      └─16*[{code}]
+        │         │      ├─code─┬─5*[code───7*[{code}]]
+        │         │      │      ├─devsense.php.ls───11*[{devsense.php.ls}]
+        │         │      │      ├─docker───10*[{docker}]
+        │         │      │      ├─intelliphp.ls───18*[{intelliphp.ls}]
+        │         │      │      └─16*[{code}]
+        │         │      └─38*[{code}]
+        │         ├─dbus-daemon
+        │         ├─dconf-service───3*[{dconf-service}]
+        │         ├─evolution-addre───6*[{evolution-addre}]
+        │         ├─evolution-calen───9*[{evolution-calen}]
+        │         ├─evolution-sourc───4*[{evolution-sourc}]
+        │         ├─gnome-keyring-d───4*[{gnome-keyring-d}]
+        │         ├─gnome-terminal-─┬─bash─┬─pstree
+        │         │                 │      └─xed───5*[{xed}]
+        │         │                 └─5*[{gnome-terminal-}]
+        │         ├─goa-daemon───4*[{goa-daemon}]
+        │         ├─goa-identity-se───3*[{goa-identity-se}]
+        │         ├─gvfs-afc-volume───4*[{gvfs-afc-volume}]
+        │         ├─gvfs-goa-volume───3*[{gvfs-goa-volume}]
+        │         ├─gvfs-gphoto2-vo───3*[{gvfs-gphoto2-vo}]
+        │         ├─gvfs-mtp-volume───3*[{gvfs-mtp-volume}]
+        │         ├─gvfs-udisks2-vo───4*[{gvfs-udisks2-vo}]
+        │         ├─gvfsd─┬─gvfsd-trash───4*[{gvfsd-trash}]
+        │         │       └─3*[{gvfsd}]
+        │         ├─gvfsd-fuse───6*[{gvfsd-fuse}]
+        │         ├─gvfsd-metadata───3*[{gvfsd-metadata}]
+        │         ├─obexd
+        │         ├─2*[pipewire───2*[{pipewire}]]
+        │         ├─pipewire-pulse───2*[{pipewire-pulse}]
+        │         ├─powerline-daemo
+        │         ├─speech-dispatch─┬─sd_dummy───2*[{sd_dummy}]
+        │         │                 ├─sd_espeak-ng───{sd_espeak-ng}
+        │         │                 ├─sd_espeak-ng-mb
+        │         │                 ├─sd_openjtalk
+        │         │                 └─4*[{speech-dispatch}]
+        │         ├─wireplumber───5*[{wireplumber}]
+        │         ├─xdg-desktop-por───6*[{xdg-desktop-por}]
+        │         ├─2*[xdg-desktop-por───4*[{xdg-desktop-por}]]
+        │         ├─xdg-document-po─┬─fusermount3
+        │         │                 └─6*[{xdg-document-po}]
+        │         └─xdg-permission-───3*[{xdg-permission-}]
+        ├─systemd-journal
+        ├─systemd-logind
+        ├─systemd-machine
+        ├─systemd-resolve
+        ├─systemd-timesyn───{systemd-timesyn}
+        ├─systemd-udevd
+        ├─touchegg───3*[{touchegg}]
+        ├─udisksd───5*[{udisksd}]
+        ├─upowerd───3*[{upowerd}]
+        ├─virtlockd
+        ├─virtlogd
+        ├─winbindd───wb[A108PC11]
+        ├─wpa_supplicant
+        └─zed───2*[{zed}]
+```
 
 8.  Ejecuta top o htop y localiza el proceso con mayor uso de CPU.
 
+```bash
+PID USUARIO   PR  NI    VIRT    RES    SHR S  %CPU  %MEM     HORA+ ORDEN    
+4106 dam       20   0   11,6g 754492 301172 S   9,6   2,3   1:35.44 firefox+
+```
+
 9.  Ejecuta sleep 100 en segundo plano y busca su PID con ps.
+
+```bash
+sleep 100 &
+[2] 16351
+
+ps
+  PID TTY          TIME CMD
+11655 pts/0    00:00:00 bash
+12377 pts/0    00:00:00 xed
+16351 pts/0    00:00:00 sleep
+16548 pts/0    00:00:00 ps
+```
+
+El comando `sleep` tiene de PID 16351 (también lo indica su ejecución en segundo plano).
 
 10. Finaliza un proceso con kill <PID> y comprueba con ps que ya no está.
 
+```bash
+ps
+  PID TTY          TIME CMD
+11655 pts/0    00:00:00 bash
+12377 pts/0    00:00:00 xed
+16351 pts/0    00:00:00 sleep
+16767 pts/0    00:00:00 ps
+
+kill 16351
+[2]+  Terminado               sleep 100
+
+ps
+  PID TTY          TIME CMD
+11655 pts/0    00:00:00 bash
+12377 pts/0    00:00:00 xed
+16780 pts/0    00:00:00 ps
+```
+
 ## Bloque 3: Procesos y jerarquía
 
-21. Identifica el **PID del proceso init/systemd** y explica su función.
-22. Explica qué ocurre con el **PPID** de un proceso hijo si su padre termina antes.
-23. Ejecuta un programa que genere varios procesos hijos y observa sus PIDs con `ps`.
-24. Haz que un proceso quede en **estado suspendido** con `Ctrl+Z` y réanúdalo con `fg`.
-25. Lanza un proceso en **segundo plano** con `&` y obsérvalo con `jobs`.
-26. Explica la diferencia entre los estados de un proceso: **Running, Sleeping, Zombie, Stopped**.
-27. Usa `ps -eo pid,ppid,stat,cmd` para mostrar los estados de varios procesos.
-28. Ejecuta `watch -n 1 ps -e` y observa cómo cambian los procesos en tiempo real.
-29. Explica la diferencia entre ejecutar un proceso con `&` y con `nohup`.
-30. Usa `ulimit -a` para ver los límites de recursos de procesos en tu sistema.
+1. Identifica el **PID del proceso init/systemd** y explica su función.
+
+```bash
+ps -e
+PID TTY          TIME CMD
+1 ?        00:00:01 systemd
+```
+
+Con `ps -e` podemos comprobar que el proceso `systemd` tiene el PID. Este proceso es el primero que se ejecuta por el kernel después de la carga del sistema y es el encargado de inicializar y gestionar el resto de procesos y servicios.
+
+2. Explica qué ocurre con el **PPID** de un proceso hijo si su padre termina antes.
+
+Como se explicó antes: el proceso se convierte en un proceso huérfano, siendo *adoptado* por el proceso `systemd` y luego enviado a ser hijo de otro proceso padre de forma automática. En otros sistemas, el kernel puede eliminar inmediatamente estos procesos huérfanos.
+
+3.  Ejecuta un programa que genere varios procesos hijos y observa sus PIDs con `ps`.
+
+Si tomamos una terminal de bash y ejecutamos varios procesos desde allí, estos pasan a ser hijos del proceso de bash. Esto se puede mirar usando `ps`:
+
+```bash
+ps -f
+UID          PID    PPID  C STIME TTY          TIME CMD
+dam        11655   11647  0 14:47 pts/0    00:00:00 bash
+dam        18997   11655  0 15:17 pts/0    00:00:00 bash
+dam        19174   18997  0 15:17 pts/0    00:00:00 xeyes
+dam        19182   18997  0 15:17 pts/0    00:00:00 xed
+dam        19197   18997  0 15:17 pts/0    00:00:00 top
+dam        19901   18997 99 15:18 pts/0    00:00:00 ps -f
+```
+
+Pero se puede ver de una forma más clara con `pstree $$` (aunque no se especifican los PID/PPID):
+
+```bash
+pstree $$
+bash─┬─pstree
+     ├─top
+     ├─xed───5*[{xed}]
+     └─xeyes
+```
+
+4.  Haz que un proceso quede en **estado suspendido** con `Ctrl+Z` y réanúdalo con `fg`.
+
+```bash
+jobs
+[1]+  Detenido                php
+
+fg
+```
+
+Con `jobs` comprobamos que la terminal de php está detenida.
+
+5.  Lanza un proceso en **segundo plano** con `&` y obsérvalo con `jobs`.
+  
+```bash
+xeyes &
+[1] 21988
+
+jobs
+[1]+  Ejecutando              xeyes &
+```
+
+6.  Explica la diferencia entre los estados de un proceso: **Running, Sleeping, Zombie, Stopped**.
+
+- Running: es un proceso activo.
+- Sleeping: es un proceso que está esperando que se active un evento o termine una operación.
+- Zombie: un proceso *zombie*, mal finalizado. No consume memoria o cpu pero indica una mala ejecución del proceso padre.
+- Stopped: un proceso que no tiene ningún tipo de procesamiento activo por parte del kernel.
+
+7.  Usa `ps -eo pid,ppid,stat,cmd` para mostrar los estados de varios procesos.
+
+```bash
+ps -eo pid,ppid,stat,cmd
+    PID    PPID STAT CMD
+      1       0 Ss   /sbin/init splash
+      2       0 S    [kthreadd]
+      3       2 S    [pool_workqueue_release]
+```
+
+8.  Ejecuta `watch -n 1 ps -e` y observa cómo cambian los procesos en tiempo real.
+
+Lo que hace `watch` es ejecutar `ps -e` cada segundo.
+
+9.  Explica la diferencia entre ejecutar un proceso con `&` y con `nohup`.
+
+Que `nohup` captura las señales *hangup*, cosa que `&` no realiza. Este señal es enviada una vez se cierra la shell donde se ejecutó.
+
+10. Usa `ulimit -a` para ver los límites de recursos de procesos en tu sistema.
+
+```bash
+ulimit -a
+real-time non-blocking time  (microseconds, -R) unlimited
+core file size              (blocks, -c) 0
+data seg size               (kbytes, -d) unlimited
+scheduling priority                 (-e) 0
+file size                   (blocks, -f) unlimited
+pending signals                     (-i) 125404
+max locked memory           (kbytes, -l) 4026016
+max memory size             (kbytes, -m) unlimited
+open files                          (-n) 1024
+pipe size                (512 bytes, -p) 8
+POSIX message queues         (bytes, -q) 819200
+real-time priority                  (-r) 0
+stack size                  (kbytes, -s) 8192
+cpu time                   (seconds, -t) unlimited
+max user processes                  (-u) 125404
+virtual memory              (kbytes, -v) unlimited
+file locks                          (-x) unlimited
+```
+
+<div align=center>
+  <img src="./img/bg-3.gif">
+</div>
 
 </div>
