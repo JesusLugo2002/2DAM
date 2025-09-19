@@ -30,13 +30,13 @@
 
   **Fuente**: [IONOS - ¿Qué es el kernel?](https://www.ionos.es/digitalguide/servidores/know-how/que-es-el-kernel/)
 
-2. ¿Qué son **PID** y **PPID**? Explica con un ejemplo.
+3. ¿Qué son **PID** y **PPID**? Explica con un ejemplo.
 
   **Respuesta**: PID (*Process ID*). Es el identificador que se adjunta a un programa cuando comienza a ejecutarse, mientras que el PPID (*Process Parent ID*) representa el proceso que creó el proceso que está comprobando. Un ejemplo puede ser un proceso de un cliente de correo electrónicos con PID 7000 y un PPID de 6500, que hace referencia al generador de clientes que lo inicializó.
   
   **Fuente**: [UnixLinux - ¿Cómo encontrar el PID y el PPID de un proceso?](https://es.unixlinux.online/ix/1002029346.html)
 
-3. Describe qué es un **cambio de contexto** y por qué es costoso.  
+4. Describe qué es un **cambio de contexto** y por qué es costoso.  
 
   **Respuesta**: Un cambio de contexto es el proceso de almacenar el estado de un proceso o subproceso, de modo que pueda restaurarse y reanudar la ejecución en un punto posterior, y luego restaurar un estado diferente previamente guardado, estado. Esto permite que múltiples procesos compartan una sola unidad central de procesamiento (CPU) y es una característica esencial de un sistema operativo multitarea.
 
@@ -45,7 +45,7 @@
   **Fuente**: [AcademiaLab - Cambio de contexto](https://academia-lab.com/enciclopedia/cambio-de-contexto/)
 
 
-4. Explica qué es un **PCB (Process Control Block)** y qué información almacena.
+5. Explica qué es un **PCB (Process Control Block)** y qué información almacena.
 
   **Respuesta**: Un bloque de control de proceso (PCB), también llamado a veces descriptor de proceso, es una estructura de datos utilizada por un sistema operativo de computadora para almacenar toda la información sobre un proceso. 
   
@@ -53,19 +53,19 @@
 
   **Fuente**: [AcademiaLab - Bloques de control de procesos](https://academia-lab.com/enciclopedia/bloque-de-control-de-proceso/)
 
-5. Diferencia entre **proceso padre** y **proceso hijo**. 
+6. Diferencia entre **proceso padre** y **proceso hijo**. 
 
   **Respuesta**: Los procesos existen en jerarquías de padre-hijo. Un proceso iniciado por un programa o mandato es un proceso padre; un proceso hijo es el producto del proceso padre. Un proceso padre puede tener varios procesos hijo, pero un proceso hijo sólo puede tener un padre.
 
   **Fuente**: [IBM - Procesos](https://www.ibm.com/docs/es/aix/7.2.0?topic=processes-)
 
-6. Explica qué ocurre cuando un proceso queda **huérfano** en Linux.  
+7. Explica qué ocurre cuando un proceso queda **huérfano** en Linux.  
 
   **Respuesta**: cualquier proceso huérfano será adoptado inmediatamente por un proceso del sistema definido por la implementación: el núcleo establece el padre para este proceso. Ocurre automáticamente. En otros sistemas, el kernel finaliza inmediatamente los procesos huérfanos.
 
   **Fuente**: [AcademiaLab - Proceso huérfano](https://academia-lab.com/enciclopedia/proceso-huerfano/)
 
-7. ¿Qué es un proceso **zombie**? Da un ejemplo de cómo puede ocurrir.  
+8. ¿Qué es un proceso **zombie**? Da un ejemplo de cómo puede ocurrir.  
 
   **Respuesta**: Un proceso zombi es un proceso que ha finalizado su ejecución, pero que aún permanece en la tabla de procesos del sistema. Estos procesos no realizan ninguna actividad ni consumen recursos del sistema; simplemente esperan a que el proceso padre reciba su código de salida. Una vez que se obtiene esta información, el proceso zombi se elimina del sistema.
 
@@ -78,13 +78,13 @@
 </div>
 <br>
 
-8.  Diferencia entre **concurrencia** y **paralelismo**.
+9.  Diferencia entre **concurrencia** y **paralelismo**.
 
   **Respuesta**: La principal diferencia entre concurrencia y paralelismo está relacionada con la ejecución real y simultánea de las tareas. En la concurrencia, parece que las tareas se ejecutan al mismo tiempo, pero en realidad pueden no estar ejecutándose simultáneamente, principalmente en CPU de un solo núcleo. En cambio, en el paralelismo las tareas se ejecutan realmente al mismo tiempo, principalmente en CPU multinúcleo.
 
   **Fuente**: [StudySmarter - Concurrencia vs Paralelismo](https://www.studysmarter.es/resumenes/ciencias-de-la-computacion/programacion-de-computadoras/concurrencia-vs-paralelismo/)
 
-9.  Explica qué es un **hilo (thread)** y en qué se diferencia de un proceso.  
+10.  Explica qué es un **hilo (thread)** y en qué se diferencia de un proceso.  
 
   **Respuesta**: Un hilo, o también llamado subproceso, es básicamente un flujo de ejecución o una secuencia de instrucciones manejada de forma independiente. Un hilo vive dentro del contexto de un proceso y este utiliza todos sus recursos; como por ejemplo, la memoria o los registradores.
 
