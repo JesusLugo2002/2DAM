@@ -6,6 +6,8 @@
     <img src="./img/bg.gif">
 </div>
 
+# Contenidos
+
 - [Número capicúa (palíndromo numérico)](#número-capicúa-palíndromo-numérico)
 - [Escalera de asteriscos](#escalera-de-asteriscos)
 - [Suma de dígitos](#suma-de-dígitos)
