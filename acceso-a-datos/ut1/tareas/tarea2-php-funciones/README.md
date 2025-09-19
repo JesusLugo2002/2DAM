@@ -2,6 +2,10 @@
 
 # Ejercicios - Introducción a Php, uso de funciones
 
+<div align=center>
+    <img src="./img/bg.gif">
+</div>
+
 - [Número capicúa (palíndromo numérico)](#número-capicúa-palíndromo-numérico)
 - [Escalera de asteriscos](#escalera-de-asteriscos)
 - [Suma de dígitos](#suma-de-dígitos)
@@ -56,8 +60,41 @@ Implementa una función __montañaAsteriscos(int $n, $m): void__ que imprima una
 
 ```php
 <?php
+$height = (int)readline("Inserte la altura de las montañas -> ");
+function asteriskMountain(int $height, int $mountains): void {
+    $mountain = [];
+    $horizontalSize = $height * $mountains - 1;
+    for ($i = 1; $i <= $height; $i++) {
+        $row = array_fill(0, $horizontalSize, "*");
+        for ($j = $i; $j < $horizontalSize - $i; $j++) {
+            $row[$j] = " ";
+        }
+        $mountain[] = $row; 
+    }
 
+    foreach ($mountain as $row) {
+        echo implode("", $row) . "\n";
+    }
+}
+
+asteriskMountain($height, 2);
 ?>
+```
+
+**Output**
+
+```
+Inserte la altura de las montañas -> 10
+*                 *
+**               **
+***             ***
+****           ****
+*****         *****
+******       ******
+*******     *******
+********   ********
+********* *********
+*******************
 ```
 
 ## Suma de dígitos
