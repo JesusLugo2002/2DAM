@@ -167,7 +167,11 @@ systemctl --user status fecha-log.service --no-pager -l | sed -n '1,10p'
 **Salida (pega un extracto):**
 
 ```text
+○ fecha-log.service - Escribe fecha en $HOME/dam/logs/fecha.log
+     Loaded: loaded (/home/dam/.config/systemd/user/fecha-log.service; static)
+     Active: inactive (dead)
 
+sep 23 19:55:23 a108pc11 systemd[3276]: Started fecha-log.service - Escribe fecha en $HOME/dam/logs/fecha.log.
 ```
 
 **Pregunta:** ¿Se creó/actualizó `~/dam/logs/fecha.log`? Muestra las últimas líneas:
@@ -179,13 +183,13 @@ tail -n 5 "$DAM/logs/fecha.log"
 **Salida:**
 
 ```text
-
+2025-09-23T19:55:23+01:00 :: hello from user timer
 ```
 
 **Reflexiona la salida:**
 
 ```text
-
+El servicio ha funcionado y lanzado el script que tiene configurado: ha añadido un log con la fecha y hora actual.
 ```
 
 ---
@@ -214,11 +218,18 @@ systemctl --user list-timers --all | grep fecha-log || true
 **Salida (recorta):**
 
 ```text
+systemctl --user daemon-reload
+
+systemctl --user enable --now fecha-log.timer
+Created symlink /home/dam/.config/systemd/user/timers.target.wants/fecha-log.timer → /home/dam/.config/systemd/user/fecha-log.timer.
+
+systemctl --user list-timers --all | grep fecha-log || true
+Tue 2025-09-23 19:59:00 WEST  45s -                                       - fecha-log.timer                fecha-log.service
 
 ```
 **Pregunta:** ¿Qué diferencia hay entre `enable` y `start` cuando usas `systemctl --user`?  
 
-**Respuesta:**
+**Respuesta:** `enable` crea un `symlink` del servicio para que este se ejecute al arrancar el sistema, mientras que `start` lo ejecuta al instante.
 
 ---
 
@@ -231,11 +242,20 @@ journalctl --user -u fecha-log.service -n 10 --no-pager
 **Salida:**
 
 ```text
-
+sep 23 19:55:23 a108pc11 systemd[3276]: Started fecha-log.service - Escribe fecha en $HOME/dam/logs/fecha.log.
+sep 23 19:55:56 a108pc11 systemd[3276]: Started fecha-log.service - Escribe fecha en $HOME/dam/logs/fecha.log.
+sep 23 19:59:04 a108pc11 systemd[3276]: Started fecha-log.service - Escribe fecha en $HOME/dam/logs/fecha.log.
+sep 23 20:00:46 a108pc11 systemd[3276]: Started fecha-log.service - Escribe fecha en $HOME/dam/logs/fecha.log.
+sep 23 20:01:46 a108pc11 systemd[3276]: Started fecha-log.service - Escribe fecha en $HOME/dam/logs/fecha.log.
+sep 23 20:02:46 a108pc11 systemd[3276]: Started fecha-log.service - Escribe fecha en $HOME/dam/logs/fecha.log.
+sep 23 20:03:46 a108pc11 systemd[3276]: Started fecha-log.service - Escribe fecha en $HOME/dam/logs/fecha.log.
+sep 23 20:04:46 a108pc11 systemd[3276]: Started fecha-log.service - Escribe fecha en $HOME/dam/logs/fecha.log.
+sep 23 20:05:17 a108pc11 systemd[3276]: Started fecha-log.service - Escribe fecha en $HOME/dam/logs/fecha.log.
+sep 23 20:06:20 a108pc11 systemd[3276]: Started fecha-log.service - Escribe fecha en $HOME/dam/logs/fecha.log.
 ```
 **Pregunta:** ¿Ves ejecuciones activadas por el timer? ¿Cuándo fue la última?  
 
-**Respuesta:**
+**Respuesta:** Todas las últimas ejecuciones fueron activadas por el timer.
 
 ---
 
@@ -249,8 +269,33 @@ lsof -i -P -n | grep LISTEN || ss -lntp
 **Salida:**
 
 ```text
-
+State   Recv-Q   Send-Q     Local Address:Port      Peer Address:Port  Process  
+LISTEN  0        4096           127.0.0.1:631            0.0.0.0:*              
+LISTEN  0        4096       127.0.0.53%lo:53             0.0.0.0:*              
+LISTEN  0        32         192.168.122.1:53             0.0.0.0:*              
+LISTEN  0        4096             0.0.0.0:48625          0.0.0.0:*              
+LISTEN  0        4096          127.0.0.54:53             0.0.0.0:*              
+LISTEN  0        4096             0.0.0.0:60345          0.0.0.0:*              
+LISTEN  0        64               0.0.0.0:44627          0.0.0.0:*              
+LISTEN  0        4096             0.0.0.0:8000           0.0.0.0:*              
+LISTEN  0        4096             0.0.0.0:33631          0.0.0.0:*              
+LISTEN  0        4096             0.0.0.0:111            0.0.0.0:*              
+LISTEN  0        4096             0.0.0.0:34653          0.0.0.0:*              
+LISTEN  0        64               0.0.0.0:2049           0.0.0.0:*              
+LISTEN  0        4096                [::]:47951             [::]:*              
+LISTEN  0        4096                   *:9100                 *:*              
+LISTEN  0        4096                [::]:43775             [::]:*              
+LISTEN  0        4096                [::]:53389             [::]:*              
+LISTEN  0        4096                [::]:56247             [::]:*              
+LISTEN  0        4096                [::]:8000              [::]:*              
+LISTEN  0        511                    *:80                   *:*              
+LISTEN  0        4096                [::]:111               [::]:*              
+LISTEN  0        4096                   *:22                   *:*              
+LISTEN  0        64                  [::]:32801             [::]:*              
+LISTEN  0        4096               [::1]:631               [::]:*              
+LISTEN  0        64                  [::]:2049              [::]:*              
 ```
+
 **Pregunta:** ¿Qué procesos *tuyos* están escuchando? (si no hay, explica por qué)  
 
 **Respuesta:**
