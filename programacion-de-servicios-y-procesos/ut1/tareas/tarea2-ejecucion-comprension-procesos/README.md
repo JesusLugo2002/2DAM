@@ -73,15 +73,21 @@ _Fuentes:_ [Introduction to Control Groups - Red Hat Documentation](https://docs
 
 4) ¿Qué es un **unit file** y tipos (`service`, `timer`, `socket`, `target`)?  
 
-**Respuesta:**  
+**Respuesta:** son la representación estandarizada de los recursos del sistema que pueden ser gestionado por el conjunto de servicios y manipulados por otros servicios proporcionados. Hay de varios tipos:
+  - Service: describen la forma de gestionar un servicio o aplicación en el servidor.
+  - Timer: define un temporizador que será gestionado por `systemd`, similar al `cron` utilizado para retrasar las rutinas de activación.
+  - Socket: describe una red o un socket Unix para utilizar el sistema de ficheros como dirección de espacios de nombres; lo que los procesos toman como archivos de un sistema de archivos.
+  - Target: utilizado para proveer puntos de sincronización a otras unidades cuando se está arrancando el sistema o se cambia de estados.
 
-_Fuentes:_
+_Fuentes:_ [Understanding Systemd Units and Unit Files](https://www.digitalocean.com/community/tutorials/understanding-systemd-units-and-unit-files)
 
 5) ¿Qué hace `journalctl` y cómo ver logs **de usuario**?  
 
-**Respuesta:**  
+**Respuesta:** Es el servicio encargado de centralizar la administración de  registros del `systemd`. Los registros suelen estar dispersos por todo el sistema, cuando hablamos de otros sistemas operativos, pero en Linux, `journalctl` se encarga de centralizar todo este proceso, gestionando todos los registros producidos por el kernel, `initrd`, otros servicios y demás.
 
-_Fuentes:_
+Con distintas opciones podemos ver los registros. El comando simple `journalctl` muestra una lista, siendo las de arriba las más antigüas. Pero por ejemplo, con la opción `--utc` podemos mostrar las marcas de tiempo en hora UTC. 
+
+_Fuentes:_ [Cómo usar Journalctl para ver y manipular los registros de Systemd](https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs-es)
 
 ---
 
@@ -99,29 +105,30 @@ echo "PID=$$  PPID=$PPID"
 **Salida:**
 
 ```text
-
+PID=40477  PPID=40468
 ```
 
 **Pregunta:** ¿Qué proceso es el padre (PPID) de tu shell ahora?  
 
-**Respuesta:**
+**Respuesta:** El 40468.
 
 ---
 
-**12.** PID del `systemd --user` (manager de usuario) y explicación.
+**12.** PID del `systemd` (manager de usuario) y explicación.
 
 ```bash
-pidof systemd --user || pgrep -u "$USER" -x systemd
+pidof systemd || pgrep -u "$USER" -x systemd
 ```
 
 **Salida:**
 
 ```text
-
+3323
 ```
+
 **Pregunta:** ¿Qué hace el *user manager* de systemd para tu sesión?  
 
-**Respuesta:**
+**Respuesta:** Es una instancia del `systemd` responsable del lanzamiento y la gestión de procesos y servicios del usuario específico.
 
 ---
 
@@ -162,6 +169,7 @@ systemctl --user status fecha-log.service --no-pager -l | sed -n '1,10p'
 ```text
 
 ```
+
 **Pregunta:** ¿Se creó/actualizó `~/dam/logs/fecha.log`? Muestra las últimas líneas:
 
 ```bash
