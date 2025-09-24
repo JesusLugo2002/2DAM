@@ -150,6 +150,23 @@ void main() {
 
 8. Escribe una función que genere una lista con los cuadrados de los primeros n números enteros. Usa una función flecha (=>).
 
+```dart
+import 'dart:math';
+
+void main() {
+  List<num> getSquares(List<num> values) {
+    List<num> result = [];
+    values.forEach((value) => result.add(pow(value, 2)));
+    return result;
+  }
+
+  List<num> values = [2, 4, 7];
+  print(
+    "Para una lista con valores ${values}, sus cuadrados son: ${getSquares(values)}",
+  );
+}
+```
+
 9.  Crea una función que devuelva otra función (closure). La función devuelta debe multiplicar por un factor fijo el número que reciba.
 Ejemplo:
 
@@ -158,9 +175,29 @@ var porTres = multiplicador(3);
 print(porTres(5)); // 15
 ```
 
+```dart
+void main() {
+  Function multiplicador(int value) {
+    return (otherValue) => value * otherValue;
+  }
+
+  Function multiplicarPorCinco = multiplicador(5);
+  print(multiplicarPorCinco(2));
+}
+```
+
 10. Simula el comportamiento de un botón:
 Declara una función onPressed que recibe un callback sin parámetros y lo ejecuta.
 Llama a esa función pasándole una función anónima que imprima en consola "Botón pulsado".
 
+```dart
+void main() {
+  void onPressed(Function callback) {
+    return callback();
+  }
+
+  onPressed(() => print("Botón pulsado"));
+}
+```
 
 </div>
