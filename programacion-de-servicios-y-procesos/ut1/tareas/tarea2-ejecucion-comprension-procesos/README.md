@@ -7,7 +7,7 @@
   - [2.2 — Servicios **de usuario** con systemd](#22--servicios-de-usuario-con-systemd)
   - [2.3 — Observación de procesos sin root](#23--observación-de-procesos-sin-root)
   - [2.4 — Estados y jerarquía (sin root)](#24--estados-y-jerarquía-sin-root)
-  - [2.5 — Limpieza (solo tu usuario)](#25--limpieza-solo-tu-usuario)
+  - [25 — Limpieza (solo tu usuario)](#25--limpieza-solo-tu-usuario)
 - [¿Qué estás prácticando?](#qué-estás-prácticando)
 
 
@@ -366,11 +366,28 @@ pstree -p | head -n 50
 **Salida (recorta):**
 
 ```text
-
+systemd(1)-+-ModemManager(1856)-+-{ModemManager}(1866)
+           |                    |-{ModemManager}(1868)
+           |                    `-{ModemManager}(1870)
+           |-NetworkManager(1829)-+-{NetworkManager}(1861)
+           |                      |-{NetworkManager}(1862)
+           |                      `-{NetworkManager}(1863)
+           |-accounts-daemon(1155)-+-{accounts-daemon}(1191)
+           |                       |-{accounts-daemon}(1192)
+           |                       `-{accounts-daemon}(1824)
+¡
 ```
+
 **Pregunta:** ¿Bajo qué proceso aparece tu `systemd --user`?  
 
-**Respuesta:**
+**Respuesta:** Con `head -n 50` no puedo verlo, pero eliminando esta parte del comando, podemos comprobar que es el proceso con PID 3354. Algo que también se puede comprobar al lanzar  `pidof systemd`.
+
+```text
+├─systemd(3354)─┬─(sd-pam)(3355)
+           │               ├─chrome_crashpad(48206)─┬─{chrome_crashpad}(48207)
+           │               │                        └─{chrome_crashpad}(48208)
+           │               ├─code(48175)─┬─code(48184)───code(48223)─┬─{code}(4+
+```
 
 ---
 
@@ -382,11 +399,31 @@ ps -eo pid,ppid,stat,cmd | head -n 20
 **Salida:**
 
 ```text
-
+    PID    PPID STAT CMD
+      1       0 Ss   /sbin/init splash
+      2       0 S    [kthreadd]
+      3       2 S    [pool_workqueue_release]
+      4       2 I<   [kworker/R-rcu_g]
+      5       2 I<   [kworker/R-rcu_p]
+      6       2 I<   [kworker/R-slub_]
+      7       2 I<   [kworker/R-netns]
+     10       2 I<   [kworker/0:0H-events_highpri]
+     12       2 I<   [kworker/R-mm_pe]
+     13       2 I    [rcu_tasks_kthread]
+     14       2 I    [rcu_tasks_rude_kthread]
+     15       2 I    [rcu_tasks_trace_kthread]
+     16       2 S    [ksoftirqd/0]
+     17       2 I    [rcu_preempt]
+     18       2 S    [migration/0]
+     19       2 S    [idle_inject/0]
+     20       2 S    [cpuhp/0]
+     21       2 S    [cpuhp/1]
+     22       2 S    [idle_inject/1]
 ```
+
 **Pregunta:** Explica 3 flags de `STAT` que veas (ej.: `R`, `S`, `T`, `Z`, `+`).  
 
-**Respuesta:**
+**Respuesta:** `S` es para los detenidos *no interruptibles*, que están esperando eventos para activarse. `Z` para los procesos *zombies* y `I` para los hilos provenientes del kernel en un estado inactivo.
 
 ---
 
@@ -408,11 +445,18 @@ ps -o pid,stat,cmd -p "$pid"
 **Pega los dos estados (antes/después):**
 
 ```text
+ANTES
+    PID STAT CMD
+  53410 T    sleep 120
 
+DESPUES
+    PID STAT CMD
+  53410 S    sleep 120
 ```
+
 **Pregunta:** ¿Qué flag indicó la suspensión?  
 
-**Respuesta:**
+**Respuesta:** La `T` indica que fue interrumpido por una señal de control, lo que lo deja en estado de suspensión.
 
 ---
 
@@ -434,15 +478,15 @@ ps -el | grep ' Z '
 **Salida (recorta):**
 
 ```text
-
+1 Z  1001   54926   54925  0  80   0 -     0 -      pts/0    00:00:00 zombie
 ```
 **Pregunta:** ¿Por qué el estado `Z` y qué lo limpia finalmente?  
 
-**Respuesta:**
+**Respuesta:** El estado `Z` es el indicativo de un proceso *zombie* y la forma rápida de eliminarlo es eliminando su proceso padre.
 
 ---
 
-### 2.5 — Limpieza (solo tu usuario)
+### 25 — Limpieza (solo tu usuario)
 
 Detén y deshabilita tu **timer/servicio de usuario** y borra artefactos si quieres.
 
