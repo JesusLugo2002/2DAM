@@ -269,54 +269,39 @@ lsof -i -P -n | grep LISTEN || ss -lntp
 **Salida:**
 
 ```text
-State   Recv-Q   Send-Q     Local Address:Port      Peer Address:Port  Process  
-LISTEN  0        4096           127.0.0.1:631            0.0.0.0:*              
-LISTEN  0        4096       127.0.0.53%lo:53             0.0.0.0:*              
-LISTEN  0        32         192.168.122.1:53             0.0.0.0:*              
-LISTEN  0        4096             0.0.0.0:48625          0.0.0.0:*              
-LISTEN  0        4096          127.0.0.54:53             0.0.0.0:*              
-LISTEN  0        4096             0.0.0.0:60345          0.0.0.0:*              
-LISTEN  0        64               0.0.0.0:44627          0.0.0.0:*              
-LISTEN  0        4096             0.0.0.0:8000           0.0.0.0:*              
-LISTEN  0        4096             0.0.0.0:33631          0.0.0.0:*              
-LISTEN  0        4096             0.0.0.0:111            0.0.0.0:*              
-LISTEN  0        4096             0.0.0.0:34653          0.0.0.0:*              
-LISTEN  0        64               0.0.0.0:2049           0.0.0.0:*              
-LISTEN  0        4096                [::]:47951             [::]:*              
-LISTEN  0        4096                   *:9100                 *:*              
-LISTEN  0        4096                [::]:43775             [::]:*              
-LISTEN  0        4096                [::]:53389             [::]:*              
-LISTEN  0        4096                [::]:56247             [::]:*              
-LISTEN  0        4096                [::]:8000              [::]:*              
-LISTEN  0        511                    *:80                   *:*              
-LISTEN  0        4096                [::]:111               [::]:*              
-LISTEN  0        4096                   *:22                   *:*              
-LISTEN  0        64                  [::]:32801             [::]:*              
-LISTEN  0        4096               [::1]:631               [::]:*              
-LISTEN  0        64                  [::]:2049              [::]:*              
+State    Recv-Q   Send-Q     Local Address:Port     Peer Address:Port  Process  
+LISTEN   0        4096          127.0.0.54:53            0.0.0.0:*              
+LISTEN   0        4096       127.0.0.53%lo:53            0.0.0.0:*              
+LISTEN   0        4096           127.0.0.1:631           0.0.0.0:*              
+LISTEN   0        4096               [::1]:631              [::]:*           
 ```
 
 **Pregunta:** ¿Qué procesos *tuyos* están escuchando? (si no hay, explica por qué)  
 
-**Respuesta:**
+**Respuesta:** No hay procesos *mios* porque en la columna de *Process* no aparece nada de información sobre usuarios que hayan lanzado el proceso.
 
 ---
 
 **18.** Ejecuta un proceso bajo **cgroup de usuario** con límite de memoria.
 
 ```bash
-systemd-run --user --scope -p MemoryMax=50M sleep 200
+systemd-run --user --scope -p MemoryMax=50M sleep 200 &
 ps -eo pid,ppid,cmd,stat | grep "[s]leep 200"
 ```
 
 **Salida:**
 
 ```text
+systemd-run --user --scope -p MemoryMax=50M sleep 200 &
+Running as unit: run-ra0f92797da66486e8cc22069378b6021.scope; invocation ID: 836cc9fc40cf480e96eefa23e93a45e7
 
+ps -eo pid,ppid,cmd,stat | grep "[s]leep 200"
+   4013    3409 /usr/bin/sleep 200          S
 ```
+
 **Pregunta:** ¿Qué ventaja tiene lanzar con `systemd-run --user` respecto a ejecutarlo “a pelo”?  
 
-**Respuesta:**
+**Respuesta:** Que la ejecución pasa a través del gestor de servicios y permite algunas características como visualizarlo en el *output* de `systemctl list-units` como cualquier otro servicio.
 
 ---
 
@@ -328,11 +313,25 @@ top -b -n 1 | head -n 15
 **Salida (resumen):**
 
 ```text
+top - 01:17:38 up 24 min,  1 user,  load average: 0,00, 0,03, 0,08
+Tareas: 217 total,   1 ejecutar,  216 hibernar,    0 detener,    0 zombie
+%Cpu(s):  0,0 us,  0,0 sy,  0,0 ni,100,0 id,  0,0 wa,  0,0 hi,  0,0 si,  0,0 st 
+MiB Mem :   7941,9 total,   5984,2 libre,   1017,0 usado,   1207,8 búf/caché    
+MiB Intercambio:   3898,0 total,   3898,0 libre,      0,0 usado.   6924,9 dispon
 
+    PID USUARIO   PR  NI    VIRT    RES    SHR S  %CPU  %MEM     HORA+ ORDEN
+   4076 dam       20   0   20192   5752   3576 R   9,1   0,1   0:00.01 top
+      1 root      20   0   22544  13332   9364 S   0,0   0,2   0:02.84 systemd
+      2 root      20   0       0      0      0 S   0,0   0,0   0:00.06 kthreadd
+      3 root      20   0       0      0      0 S   0,0   0,0   0:00.00 pool_wo+
+      4 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 kworker+
+      5 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 kworker+
+      6 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 kworker+
+      7 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 kworker+
 ```
 **Pregunta:** ¿Cuál es tu proceso con mayor `%CPU` en ese momento?  
 
-**Respuesta:**
+**Respuesta:** En el momento de ejecución, el proceso con PID 4076 es el que tiene mayor `%CPU` (9.1), y es el de la orden top; el mismo comando con el que se mostró esta información.
 
 ---
 
@@ -347,11 +346,12 @@ strace -p "$pid" -e trace=nanosleep -tt -c -f 2>&1 | sed -n '1,10p'
 **Salida (fragmento):**
 
 ```text
-
+strace: -t/--absolute-timestamps has no effect with -c/--summary-only
+strace: attach: ptrace(PTRACE_SEIZE, 4178): Operación no permitida
 ```
 **Pregunta:** Explica brevemente la syscall que observaste.  
 
-**Respuesta:**
+**Respuesta:** 
 
 ---
 
