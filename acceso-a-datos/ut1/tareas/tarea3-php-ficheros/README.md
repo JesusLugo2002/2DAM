@@ -37,6 +37,21 @@ numeros.txt
 10
 ```
 
+**Solución**
+
+```php
+if (!$fp = fopen("numeros.txt", "w")) {
+    echo "Cannot open file";
+    exit;
+}
+for ($i = 1; $i <= 10; $i++) {
+    fwrite("$i\n");
+}
+fclose($fp);
+
+echo file_get_contents("numeros.txt");
+```
+
 ---
 
 ### 3) Contar palabras en un fichero
