@@ -1,4 +1,12 @@
+<div align=justify>
+
 # Ejecución y comprensión de procesos
+
+<div align=center>
+  <img src="./img/bg-1.gif">
+</div>
+
+# Contenidos
 
 - [Preparación](#preparación)
 - [Bloque 1 — Conceptos (breve + fuentes)](#bloque-1--conceptos-breve--fuentes)
@@ -506,3 +514,5 @@ rm -rf "$DAM/bin" "$DAM/logs" "$DAM/units"
 - [ x ] Usaste **systemd --user** y **journalctl --user**.  
 - [ x ] Probaste `systemd-run --user` con límites de memoria.  
 - [ x ] Practicaste señales (`STOP`/`CONT`), `pstree`, `ps` y `strace` **sobre tus procesos**.
+
+</div>
