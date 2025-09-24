@@ -501,8 +501,8 @@ rm -rf "$DAM/bin" "$DAM/logs" "$DAM/units"
 ---
 
 ## ¿Qué estás prácticando?
-- [ ] Pegaste **salidas reales**.  
-- [ ] Explicaste **qué significan**.  
-- [ ] Usaste **systemd --user** y **journalctl --user**.  
-- [ ] Probaste `systemd-run --user` con límites de memoria.  
-- [ ] Practicaste señales (`STOP`/`CONT`), `pstree`, `ps` y `strace` **sobre tus procesos**.
+- [ x ] Pegaste **salidas reales**.  
+- [ x ] Explicaste **qué significan**.  
+- [ x ] Usaste **systemd --user** y **journalctl --user**.  
+- [ x ] Probaste `systemd-run --user` con límites de memoria.  
+- [ x ] Practicaste señales (`STOP`/`CONT`), `pstree`, `ps` y `strace` **sobre tus procesos**.
