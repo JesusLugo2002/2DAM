@@ -66,6 +66,18 @@ texto.txt
 PHP es muy divertido y potente.
 ```
 
+**Solución**
+
+```php
+file_put_contents("texto.txt", "PHP es muy divertido y potente");
+
+function countWords(String $filename): int {
+    return str_word_count(file_get_contents($filename));
+}
+
+echo "El archivo texto.txt tiene " . countWords("texto.txt") . " palabras.";
+```
+
 ---
 
 ### 4) Escribir y leer array en fichero
