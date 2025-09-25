@@ -1,14 +1,28 @@
 <?php
 const FILENAME = "files/ranking.txt";
 
-function getTopRankings(): array {
+function sortRankings(array $rankings): array {
+    $result = [];
+    foreach ($rankings as $ranking) {
+        $parts = explode(":", $ranking);
+        array_push($result, array("name" => $parts[0], "rank" => (int)$parts[1]));
+    }
+    usort($result, function ($a, $b) {
+        return $b["rank"] <=> $a["rank"];
+    });
+    return $result;
+}
+
+function getTopRankings(int $firstTerms = 3): array {
     if (!$rankings = file(FILENAME)) {
         echo "Cannot open " . FILENAME;
         return [];
     }
-    echo var_dump($rankings);
-    return $rankings;
+    $sortedRankings = sortRankings($rankings);
+    return array_slice($sortedRankings, 0, $firstTerms);
 }
 
-getTopRankings();
+foreach (getTopRankings() as $ranking) {
+    echo $ranking["name"] . ": " . $ranking["rank"] . "\n";
+}
 ?>
