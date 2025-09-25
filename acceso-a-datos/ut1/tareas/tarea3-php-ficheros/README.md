@@ -16,8 +16,9 @@ Hola Mundo desde PHP
 
 ```php
 <?php
-file_put_contents("datos.txt", "Hola Mundo desde PHP");
-echo file_get_contents("datos.txt");
+$filename = "files/datos.txt";
+file_put_contents($filename, "Hola Mundo desde PHP");
+echo file_get_contents($filename);
 ?>
 ```
 
@@ -43,18 +44,18 @@ numeros.txt
 
 ```php
 <?php
-function generateRange(string $filename, int $limit): void {
+function generateRange(string $filename, int $limit): bool {
     if (!$fp = fopen($filename, "w")) {
         echo "Cannot open file";
-        return;
+        return false;
     }
     for ($i = 1; $i <= $limit; $i++) {
         fwrite($fp, "$i\n");
     }   
-    fclose($fp);
-}   
+    return fclose($fp);
+}
 
-$filename = "numeros.txt";
+$filename = "files/numeros.txt";
 generateRange($filename, 10);
 echo file_get_contents($filename);
 ?>
@@ -77,12 +78,15 @@ PHP es muy divertido y potente.
 **Solución**
 
 ```php
+<?php
 function countWords(String $filename): int {
     return str_word_count(file_get_contents($filename));
 }
 
-file_put_contents("texto.txt", "PHP es muy divertido y potente");
-echo "El archivo texto.txt tiene " . countWords("texto.txt") . " palabras.";
+$filename = "files/texto.txt";
+file_put_contents($filename, "PHP es muy divertido y potente");
+echo "El archivo $filename tiene " . countWords($filename) . " palabras.";
+?>
 ```
 
 ---
@@ -106,7 +110,34 @@ Julia
 **Solución**
 
 ```php
+<?php
+function createNameList(String $filename, array $names): bool {
+    if (!$fp = fopen($filename, "w")) {
+        echo "Cannot open $filename";
+        return false;
+    }
+    foreach ($names as $name) {
+        fwrite($fp, $name . "\n");
+    }
+    return fclose($fp);
+}
 
+function showNameList(String $filename): bool {
+    if (!$fp = fopen($filename, "r")) {
+        echo "Cannot open $filename";
+        return false;
+    }
+    while ($line = fgets($fp)) {
+        echo $line;
+    }
+    return fclose($fp);
+}
+
+$names = ["Ana", "Luis", "Marta", "Carlos", "Julia"];
+$filename = "files/nombres.txt";
+createNameList($filename, $names);
+showNameList($filename);
+?>
 ```
 
 ---
@@ -130,6 +161,22 @@ copia.txt
 Este es el archivo original.
 ```
 
+**Solución**:
+
+```php
+<?php
+$sourceFilename = "files/origen.txt";
+$targetFilename = "files/copia.txt";
+
+file_put_contents($sourceFilename, "Este es el archivo original.");
+echo "$sourceFilename\n";
+echo file_get_contents($sourceFilename) . "\n";
+copy($sourceFilename, $targetFilename);
+echo "$targetFilename\n";
+echo file_get_contents($targetFilename) . "\n";
+?>
+```
+
 ---
 
 ### 6) Invertir el contenido de un fichero
@@ -151,6 +198,18 @@ frase_invertida.txt
 PHP aloH
 ```
 
+**Solución**
+
+```php
+<?php
+$phrase = file_get_contents("files/frase.txt");
+echo "$phrase\n";
+$invertedPhrase = strrev($phrase);
+file_put_contents("files/frase_invertida.txt", $invertedPhrase);
+echo file_get_contents("files/frase_invertida.txt") . "\n";
+?>
+```
+
 ---
 
 ### 7) Calcular suma desde fichero
@@ -163,6 +222,16 @@ PHP aloH
 ```code
 datos_numericos.txt
 10,20,30,40
+```
+
+**Solución**
+
+```php
+<?php
+$values = explode(",", file_get_contents("files/datos_numericos.txt"));
+$sum = array_sum($values);
+echo "La suma de " . implode(" + ", $values) . " es igual a $sum"; 
+?>
 ```
 
 ---
@@ -180,6 +249,38 @@ tabla5.txt
 5 x 2 = 10
 ...
 5 x 10 = 50
+```
+
+**Solución**
+
+```php
+<?php
+function generateMultiplicationTable(String $filename, int $multiplier): bool {
+    if (!$fp = fopen($filename, "w")) {
+        echo "Cannot open $filename.";
+        return false;
+    }
+    for ($i = 1; $i <= $multiplier; $i++) {
+        fwrite($fp, "$multiplier x $i = " . $multiplier * $i . "\n");
+    }
+    return fclose($fp);
+}
+
+function showMultiplicationTable(String $filename): bool {
+    if (!$fp = fopen($filename, "r")) {
+        echo "Cannot open $filename.";
+        return false;
+    }
+    foreach (file($filename) as $row) {
+        echo $row;
+    }
+    return fclose($fp);
+}
+
+$filename = "files/tabla5.txt";
+generateMultiplicationTable($filename, 5);
+showMultiplicationTable($filename);
+?>
 ```
 
 ---
@@ -215,6 +316,18 @@ datos.json
 ]
 ```
 
+**Solución**
+
+```php
+<?php
+$json = file_get_contents("files/datos.json");
+$data = json_decode($json);
+foreach ($data as $person) {
+    echo "$person->name tiene $person->age años.\n";
+}
+?>
+```
+
 ---
 
 ### 11) Diario personal secreto
@@ -227,6 +340,37 @@ datos.json
 diario.txt
 [2025-09-24 10:00] Hoy aprendí PHP con ficheros 😄
 [2025-09-24 12:00] Almorcé pizza mientras programaba.
+```
+
+**Solución**
+
+```php
+<?php
+const FILENAME = "files/diario.txt";
+function addLog(String $content): bool {
+    if (!$fp = fopen(FILENAME, "a")) {
+        echo "Cannot open " . FILENAME;
+        return false;
+    }
+    $datetime = date_format(date_create(), "Y-m-d H:i");
+    fwrite($fp, "[$datetime] $content \n");
+    return fclose($fp);
+}
+
+function printLogs(): bool {
+    if (!$fp = fopen(FILENAME, "r")) {
+        echo "Cannot open " . FILENAME;
+        return false;
+    }
+    while ($line = fgets($fp)) {
+        echo $line;
+    }
+    return fclose($fp);
+}
+
+addLog("Probando, probando, 1, 2, 3");
+printLogs();
+?>
 ```
 
 ---
