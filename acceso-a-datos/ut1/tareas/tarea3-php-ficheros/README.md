@@ -403,6 +403,19 @@ Bohemian Rhapsody
 Africa
 ```
 
+**Solución**
+
+```php
+<?php
+function getRandomLine(String $filename): String {
+    return array_rand(file($filename));
+}
+
+$filename = "files/canciones.txt";
+echo getRandomLine($filename);
+?>
+```
+
 ---
 
 ### 14) Generador de excusas divertidas
