@@ -1,26 +1,28 @@
 <?php
-const FILENAME = "files/diario.txt";
-function addLog(String $content): bool {
-    if (!$fp = fopen(FILENAME, "a")) {
-        echo "Cannot open " . FILENAME;
-        return false;
+const FILENAME = "files/ranking.txt";
+
+function sortRankings(array $rankings): array {
+    $result = [];
+    foreach ($rankings as $ranking) {
+        $parts = explode(":", $ranking);
+        array_push($result, array("name" => $parts[0], "rank" => (int)$parts[1]));
     }
-    $datetime = date_format(date_create(), "Y-m-d H:i");
-    fwrite($fp, "[$datetime] $content \n");
-    return fclose($fp);
+    usort($result, function ($a, $b) {
+        return $b["rank"] <=> $a["rank"];
+    });
+    return $result;
 }
 
-function printLogs(): bool {
-    if (!$fp = fopen(FILENAME, "r")) {
+function getTopRankings(int $firstTerms = 3): array {
+    if (!$rankings = file(FILENAME)) {
         echo "Cannot open " . FILENAME;
-        return false;
+        return [];
     }
-    while ($line = fgets($fp)) {
-        echo $line;
-    }
-    return fclose($fp);
+    $sortedRankings = sortRankings($rankings);
+    return array_slice($sortedRankings, 0, $firstTerms);
 }
 
-addLog("Probando, probando, 1, 2, 3");
-printLogs();
+foreach (getTopRankings() as $ranking) {
+    echo $ranking["name"] . ": " . $ranking["rank"] . "\n";
+}
 ?>

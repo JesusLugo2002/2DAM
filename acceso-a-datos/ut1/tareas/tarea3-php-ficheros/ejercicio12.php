@@ -1,28 +1,23 @@
 <?php
-const FILENAME = "files/ranking.txt";
-
-function sortRankings(array $rankings): array {
-    $result = [];
-    foreach ($rankings as $ranking) {
-        $parts = explode(":", $ranking);
-        array_push($result, array("name" => $parts[0], "rank" => (int)$parts[1]));
+function createSongList(String $filename, array $songs): bool {
+    if (!$fp = fopen($filename, "w")) {
+        echo "Cannot open $filename";
+        return false;
     }
-    usort($result, function ($a, $b) {
-        return $b["rank"] <=> $a["rank"];
-    });
-    return $result;
-}
-
-function getTopRankings(int $firstTerms = 3): array {
-    if (!$rankings = file(FILENAME)) {
-        echo "Cannot open " . FILENAME;
-        return [];
+    foreach ($songs as $song) {
+        fwrite($fp, "$song\n");
     }
-    $sortedRankings = sortRankings($rankings);
-    return array_slice($sortedRankings, 0, $firstTerms);
+    return fclose($fp);
 }
 
-foreach (getTopRankings() as $ranking) {
-    echo $ranking["name"] . ": " . $ranking["rank"] . "\n";
+function getRandomLine(String $filename): String {
+    $songs = file($filename);
+    $randIndex = array_rand($songs);
+    return $songs[$randIndex];
 }
+
+$filename = "files/canciones.txt";
+$songs = ["RAWFEAR", "My Man on Willpower", "Altars of Apostasy"];
+createSongList($filename, $songs);
+echo getRandomLine($filename);
 ?>

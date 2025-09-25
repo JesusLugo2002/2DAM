@@ -285,23 +285,7 @@ showMultiplicationTable($filename);
 
 ---
 
-### 9) Registrar entradas de usuario
-
-**Enunciado:** Guarda los nombres recibidos en un formulario dentro de `usuarios.txt` (cada nombre en una línea). Luego muéstralos.  
-**Funciones sugeridas:** `fopen`, `fwrite`, `file`  
-
-**Ejemplo de fichero:**
-
-```code
-usuarios.txt
-Ana
-Pedro
-Lucía
-```
-
----
-
-### 10) Leer JSON desde fichero
+### 9) Leer JSON desde fichero
 
 **Enunciado:** Crea `datos.json` con información de personas (nombre y edad). Haz que el programa lo lea y muestre los datos.  
 **Funciones sugeridas:** `file_get_contents`, `json_decode`  
@@ -330,7 +314,7 @@ foreach ($data as $person) {
 
 ---
 
-### 11) Diario personal secreto
+### 10) Diario personal secreto
 
 **Enunciado:** Guarda entradas con fecha y hora en `diario.txt`. Luego muéstralas todas.  
 
@@ -375,7 +359,7 @@ printLogs();
 
 ---
 
-### 12) Ranking de videojuegos
+### 11) Ranking de videojuegos
 
 **Enunciado:** Guarda juegos con puntuaciones en `ranking.txt`, ordénalos y muestra el top 3.  
 
@@ -423,7 +407,7 @@ foreach (getTopRankings() as $ranking) {
 
 ---
 
-### 13) Canción aleatoria
+### 12) Canción aleatoria
 
 **Enunciado:** Guarda títulos en `canciones.txt` y muestra uno al azar.  
 
@@ -466,7 +450,7 @@ echo getRandomLine($filename);
 
 ---
 
-### 14) Generador de excusas divertidas
+### 13) Generador de excusas divertidas
 
 **Enunciado:** Lee excusas desde `excusas.txt` y muestra una aleatoria.  
 
@@ -495,7 +479,7 @@ echo getRandomLine($filename);
 
 ---
 
-### 15) Lista de chistes (rotativos)
+### 14) Lista de chistes (rotativos)
 
 **Enunciado:** Muestra un chiste distinto en cada ejecución desde `chistes.txt`.  
 
@@ -516,7 +500,7 @@ Yo no sudo, compilo.
 
 ---
 
-### 16) Adivina la palabra
+### 15) Adivina la palabra
 
 **Enunciado:** Elige una palabra de `palabras.txt` y muestra solo 2 letras, el usuario debe adivinarla.  
 
@@ -533,6 +517,18 @@ cereza
 
 ```php
 <?php
+function setDisplayWord(String $word): String {
+    $countChars = strlen($word);
+    $displayWord = str_repeat("-", $countChars);
+    $firstIndex = rand(0, $countChars - 1);
+    do {
+        $secondIndex = rand(0, $countChars - 1);
+    } while ($secondIndex == $firstIndex);
+    $displayWord = substr_replace($displayWord, substr($word, $firstIndex, 1), $firstIndex, 1);
+    $displayWord = substr_replace($displayWord, substr($word, $secondIndex, 1), $secondIndex, 1);
+    return $displayWord;
+}
+
 function guessWord(String $filename): void {
     if (!$words = file($filename)) {
         echo "Cannot open $filename";
@@ -540,14 +536,7 @@ function guessWord(String $filename): void {
     }
 
     $target = trim($words[array_rand($words)]);
-    $countChars = strlen($target);
-    $displayWord = str_repeat("-", $countChars);
-    $firstIndex = rand(0, $countChars - 1);
-    do {
-        $secondIndex = rand(0, $countChars - 1);
-    } while ($secondIndex == $firstIndex);
-    $displayWord = substr_replace($displayWord, substr($target, $firstIndex, 1), $firstIndex, 1);
-    $displayWord = substr_replace($displayWord, substr($target, $secondIndex, 1), $secondIndex, 1);
+    $displayWord = setDisplayWord($target);
 
     echo "Adivina la palabra";
     do {
@@ -564,7 +553,7 @@ guessWord($filename);
 
 ---
 
-### 17) Generador de nombres para superhéroes
+### 16) Generador de nombres para superhéroes
 
 **Enunciado:** Combina palabras de `adjetivos.txt` y `animales.txt`.  
 
@@ -584,9 +573,39 @@ Tigre
 Lobo
 ```
 
+**Solución**
+
+```php
+<?php
+const ADJECTIVES_FILENAME = "files/adjetivos.txt";
+const ANIMALS_FILENAME = "files/animales.txt";
+
+function getRandomWord(String $filename): String|bool {
+    if (!$words = file($filename)) {
+        echo "Cannot open $filename";
+        return false;
+    }
+    $index = array_rand($words);
+    return trim($words[$index]);
+
+}
+function generateSuperHeroName(): String|bool {
+    $adjective = getRandomWord(ADJECTIVES_FILENAME);
+    $animal = getRandomWord(ANIMALS_FILENAME);
+    if (!$adjective || !$animal) {
+        echo "Error getting the words!";
+        return false;
+    }
+    return "$adjective $animal";
+}
+
+echo generateSuperHeroName();
+?>
+```
+
 ---
 
-### 18) Encuesta de comidas favoritas
+### 17) Encuesta de comidas favoritas
 
 **Enunciado:** Guarda respuestas de usuarios en `comidas.txt` y genera ranking.  
 
@@ -602,7 +621,7 @@ pasta
 
 ---
 
-### 19) Simulador de tweets
+### 18) Simulador de tweets
 
 **Enunciado:** Guarda tweets en `tweets.txt` con fecha y hora, muestra los últimos 5.  
 
@@ -616,7 +635,7 @@ tweets.txt
 
 ---
 
-### 20) Historias locas (Mad Libs)
+### 19) Historias locas (Mad Libs)
 
 **Enunciado:** Reemplaza placeholders en `plantilla.txt` con palabras aleatorias de otros ficheros.  
 

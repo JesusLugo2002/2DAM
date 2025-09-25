@@ -1,28 +1,25 @@
 <?php
-function guessWord(String $filename): void {
+const ADJECTIVES_FILENAME = "files/adjetivos.txt";
+const ANIMALS_FILENAME = "files/animales.txt";
+
+function getRandomWord(String $filename): String|bool {
     if (!$words = file($filename)) {
         echo "Cannot open $filename";
-        return;
+        return false;
     }
+    $index = array_rand($words);
+    return trim($words[$index]);
 
-    $target = trim($words[array_rand($words)]);
-    $countChars = strlen($target);
-    $displayWord = str_repeat("-", $countChars);
-    $firstIndex = rand(0, $countChars - 1);
-    do {
-        $secondIndex = rand(0, $countChars - 1);
-    } while ($secondIndex == $firstIndex);
-    $displayWord = substr_replace($displayWord, substr($target, $firstIndex, 1), $firstIndex, 1);
-    $displayWord = substr_replace($displayWord, substr($target, $secondIndex, 1), $secondIndex, 1);
-
-    echo "Adivina la palabra";
-    do {
-        echo "\n$displayWord\n";
-        $userWord = strtolower(trim(readline("-> ")));
-    } while ($target != $userWord);
-    echo "¡Lo adivinaste!";
+}
+function generateSuperHeroName(): String|bool {
+    $adjective = getRandomWord(ADJECTIVES_FILENAME);
+    $animal = getRandomWord(ANIMALS_FILENAME);
+    if (!$adjective || !$animal) {
+        echo "Error getting the words!";
+        return false;
+    }
+    return "$adjective $animal";
 }
 
-$filename = "files/palabras.txt";
-guessWord($filename);
+echo generateSuperHeroName();
 ?>
