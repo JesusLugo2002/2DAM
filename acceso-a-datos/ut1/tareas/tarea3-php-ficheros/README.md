@@ -407,11 +407,24 @@ Africa
 
 ```php
 <?php
+function createSongList(String $filename, array $songs): bool {
+    if (!$fp = fopen($filename, "w")) {
+        echo "Cannot open $filename";
+        return false;
+    }
+    foreach ($songs as $song) {
+        fwrite($fp, "$song\n");
+    }
+    return fclose($fp);
+}
+
 function getRandomLine(String $filename): String {
     return array_rand(file($filename));
 }
 
 $filename = "files/canciones.txt";
+$songs = ["RAWFEAR", "My Man on Willpower", "Altars of Apostasy"];
+createSongList($filename, $songs);
 echo getRandomLine($filename);
 ?>
 ```
@@ -429,6 +442,19 @@ excusas.txt
 Mi perro se comió la tarea.
 El Wi-Fi decidió tomarse el día libre.
 Me abdujeron los marcianos.
+```
+
+**Solución**
+
+```php
+<?php
+function getRandomLine(String $filename): String {
+    return array_rand(file($filename));
+}
+
+$filename = "files/excusas.txt";
+echo getRandomLine($filename);
+?>
 ```
 
 ---
