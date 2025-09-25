@@ -6,6 +6,7 @@ function askFood(String $filename): bool {
     }
     $food = strtolower(readline("¿Qué comida te gusta? -> "));
     fwrite($fp, "$food\n");
+    showFoodRanking($filename);
     return fclose($fp);
 }
 
@@ -14,9 +15,14 @@ function showFoodRanking(String $filename): void {
         echo "Cannot open $filename";
         return;
     }
-    $rankings = [];
-    foreach (array_unique($foods) as $food) {
-        array_push($food);
+    $frequencies = array_count_values($foods);
+    arsort($frequencies);
+    echo "Ranking de comida\n";
+    foreach ($frequencies as $food => $quantity) {
+        echo trim($food) . ": " . trim($quantity) . "\n";
     }
 }
+
+$filename = "files/comidas.txt";
+askFood($filename);
 ?>

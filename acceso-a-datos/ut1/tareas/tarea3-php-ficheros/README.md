@@ -1,4 +1,32 @@
+<div align=justify>
+
 # Ejercicios de ficheros - PHP
+
+<div align=center>
+    <img src="./img/bg.gif" width="320"/>
+</div>
+
+# Contenidos
+
+- [1) Hola fichero (crear y leer)](#1-hola-fichero-crear-y-leer)
+- [2) Guardar números en un fichero](#2-guardar-números-en-un-fichero)
+- [3) Contar palabras en un fichero](#3-contar-palabras-en-un-fichero)
+- [4) Escribir y leer array en fichero](#4-escribir-y-leer-array-en-fichero)
+- [5) Copiar contenido de un fichero a otro](#5-copiar-contenido-de-un-fichero-a-otro)
+- [6) Invertir el contenido de un fichero](#6-invertir-el-contenido-de-un-fichero)
+- [7) Calcular suma desde fichero](#7-calcular-suma-desde-fichero)
+- [8) Crear fichero de multiplicaciones](#8-crear-fichero-de-multiplicaciones)
+- [9) Leer JSON desde fichero](#9-leer-json-desde-fichero)
+- [10) Diario personal secreto](#10-diario-personal-secreto)
+- [11) Ranking de videojuegos](#11-ranking-de-videojuegos)
+- [12) Canción aleatoria](#12-canción-aleatoria)
+- [13) Generador de excusas divertidas](#13-generador-de-excusas-divertidas)
+- [14) Lista de chistes (rotativos)](#14-lista-de-chistes-rotativos)
+- [15) Adivina la palabra](#15-adivina-la-palabra)
+- [16) Generador de nombres para superhéroes](#16-generador-de-nombres-para-superhéroes)
+- [17) Encuesta de comidas favoritas](#17-encuesta-de-comidas-favoritas)
+- [18) Simulador de tweets](#18-simulador-de-tweets)
+- [19) Historias locas (Mad Libs)](#19-historias-locas-mad-libs)
 
 ### 1) Hola fichero (crear y leer)
 
@@ -619,6 +647,39 @@ pizza
 pasta
 ```
 
+**Solución**
+
+```php
+<?php
+function askFood(String $filename): bool {
+    if (!$fp = fopen($filename, "a")) {
+        echo "Cannot open $filename";
+        return false;
+    }
+    $food = strtolower(readline("¿Qué comida te gusta? -> "));
+    fwrite($fp, "$food\n");
+    showFoodRanking($filename);
+    return fclose($fp);
+}
+
+function showFoodRanking(String $filename): void {
+    if (!$foods = file($filename)) {
+        echo "Cannot open $filename";
+        return;
+    }
+    $frequencies = array_count_values($foods);
+    arsort($frequencies);
+    echo "Ranking de comida\n";
+    foreach ($frequencies as $food => $quantity) {
+        echo trim($food) . ": " . trim($quantity) . "\n";
+    }
+}
+
+$filename = "files/comidas.txt";
+askFood($filename);
+?>
+```
+
 ---
 
 ### 18) Simulador de tweets
@@ -631,6 +692,38 @@ pasta
 tweets.txt
 [2025-09-24 09:30] Aprendiendo PHP con ejercicios divertidos #php
 [2025-09-24 10:00] Otro día más programando 🚀
+```
+
+**Solución**
+
+```php
+<?php
+const FILENAME = "files/tweets.txt";
+
+function addTweet(): bool {
+    if (!$fp = fopen(FILENAME, "a")) {
+        echo "Cannot open " . FILENAME;
+        return false;
+    }
+    $content = readline("Twittea! -> ");
+    $datetime = date_format(date_create(), "Y-m-d H:i");
+    fwrite($fp, "[$datetime] $content\n");
+    return fclose($fp);
+}
+
+function getLastTweets(int $limit = 5): array|bool {
+    if (!$tweets = file(FILENAME)) {
+        echo "Cannot open " . FILENAME;
+        return false;
+    }
+    return array_slice($tweets, -$limit);
+}
+
+addTweet();
+foreach (getLastTweets() as $tweet) {
+    echo $tweet;
+}
+?>
 ```
 
 ---
@@ -666,3 +759,38 @@ tacos
 ramen
 helado
 ```
+
+**Solución**
+
+```php
+<?php
+const ANIMALS_FILENAME = "files/animales.txt";
+const PLACES_FILENAME = "files/lugares.txt";
+const FOOD_FILENAME = "files/comidas.txt";
+
+function getRandomWord(String $filename): String|bool {
+    if (!$words = file($filename)) {
+        echo "Cannot open $filename";
+        return false;
+    }
+    $index = array_rand($words);
+    return $words[$index];
+}
+
+function useTemplate(String $filename): String {
+    $phrase = file_get_contents($filename);
+    $animal = trim(getRandomWord(ANIMALS_FILENAME));
+    $place = trim(getRandomWord(PLACES_FILENAME));
+    $food = trim(getRandomWord(FOOD_FILENAME));
+    $phrase = preg_replace("/\[animal\]/", $animal, $phrase);
+    $phrase = preg_replace("/\[lugar\]/", $place, $phrase);
+    $phrase = preg_replace("/\[comida\]/", $food, $phrase);
+    return $phrase;
+}
+
+$filename = "files/plantilla.txt";
+echo useTemplate($filename);
+?>
+```
+
+</div>
