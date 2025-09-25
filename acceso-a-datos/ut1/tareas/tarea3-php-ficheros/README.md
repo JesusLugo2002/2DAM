@@ -3,7 +3,7 @@
 # Ejercicios de ficheros - PHP
 
 <div align=center>
-    <img src="./img/bg.gif" width="320"/>
+    <img src="./img/bg.gif"/>
 </div>
 
 # Contenidos
