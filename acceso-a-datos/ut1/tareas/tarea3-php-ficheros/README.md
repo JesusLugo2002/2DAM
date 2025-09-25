@@ -15,8 +15,10 @@ Hola Mundo desde PHP
 **Solución**
 
 ```php
+<?php
 file_put_contents("datos.txt", "Hola Mundo desde PHP");
 echo file_get_contents("datos.txt");
+?>
 ```
 
 ---
@@ -40,16 +42,22 @@ numeros.txt
 **Solución**
 
 ```php
-if (!$fp = fopen("numeros.txt", "w")) {
-    echo "Cannot open file";
-    exit;
-}
-for ($i = 1; $i <= 10; $i++) {
-    fwrite("$i\n");
-}
-fclose($fp);
+<?php
+function generateRange(string $filename, int $limit): void {
+    if (!$fp = fopen($filename, "w")) {
+        echo "Cannot open file";
+        return;
+    }
+    for ($i = 1; $i <= $limit; $i++) {
+        fwrite($fp, "$i\n");
+    }   
+    fclose($fp);
+}   
 
-echo file_get_contents("numeros.txt");
+$filename = "numeros.txt";
+generateRange($filename, 10);
+echo file_get_contents($filename);
+?>
 ```
 
 ---
@@ -69,12 +77,11 @@ PHP es muy divertido y potente.
 **Solución**
 
 ```php
-file_put_contents("texto.txt", "PHP es muy divertido y potente");
-
 function countWords(String $filename): int {
     return str_word_count(file_get_contents($filename));
 }
 
+file_put_contents("texto.txt", "PHP es muy divertido y potente");
 echo "El archivo texto.txt tiene " . countWords("texto.txt") . " palabras.";
 ```
 
@@ -94,6 +101,12 @@ Luis
 Marta
 Carlos
 Julia
+```
+
+**Solución**
+
+```php
+
 ```
 
 ---
