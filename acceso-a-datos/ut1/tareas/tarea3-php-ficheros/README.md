@@ -508,6 +508,12 @@ Ayer vi un bit triste… estaba des-bit-ido.
 Yo no sudo, compilo.
 ```
 
+**Solución**
+
+```php
+
+```
+
 ---
 
 ### 16) Adivina la palabra
