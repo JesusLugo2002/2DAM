@@ -1,0 +1,23 @@
+total 9
+únicas 6
++larga estrella
++corta: sol
+
+orden:
+cielo
+cielo
+estrella
+luna
+luna
+mar
+nube
+sol
+sol
+
+numero palabras:
+cielo: 2
+estrella: 1
+luna: 2
+mar: 1
+nube: 1
+sol: 2
