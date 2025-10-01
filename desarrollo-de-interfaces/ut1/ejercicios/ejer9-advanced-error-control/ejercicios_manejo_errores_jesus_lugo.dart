@@ -12,7 +12,7 @@ class ElementoNoEnteroException implements Exception {
   }
 }
 
-void main() {
+void main() async {
   // Ejercicio 1
   print("\nEjercicio 1");
   int toIntSeguro(String valor) {
@@ -106,5 +106,8 @@ void main() {
     throw Exception("Archivo no encontrado");
   }
 
-  print(cargarArchivo("datos.txt").catchError(() => print(error)));
+  print(await cargarArchivo("datos.txt").catchError((e) {
+    print(e);
+    return "";
+  }));
 }
