@@ -8,7 +8,15 @@ public class ConsoleRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("Hello world!");
-    }
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("Cierra la aplicación");
+        }));
+
+        System.out.println("=== Lanzador de Procesos (CLI) Linux/Windows ===");
+
+        while (true) {
+            
+        }
+    } 
 
 }
