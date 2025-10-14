@@ -1,0 +1,61 @@
+.
+├── mis_procesos.txt
+├── pom.xml
+├── README.md
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── org
+│   │   │       └── formacion
+│   │   │           └── procesos
+│   │   │               ├── controller
+│   │   │               │   ├── abstracts
+│   │   │               │   │   └── CommandControllerAbstract.java
+│   │   │               │   └── CommandControllerPs.java
+│   │   │               ├── Procesos.java
+│   │   │               ├── ProcesosServiciosApplication.java
+│   │   │               └── servicios
+│   │   │                   └── RunnerService.java
+│   │   └── resources
+│   │       └── application.properties
+│   └── test
+│       └── java
+│           └── org
+│               └── formacion
+│                   └── procesosservicios
+│                       └── ProcesosServiciosApplicationTests.java
+└── target
+    ├── classes
+    │   ├── application.properties
+    │   └── org
+    │       └── formacion
+    │           └── procesos
+    │               ├── controller
+    │               │   ├── abstracts
+    │               │   │   └── CommandControllerAbstract.class
+    │               │   └── CommandControllerPs.class
+    │               ├── Procesos.class
+    │               ├── ProcesosServiciosApplication.class
+    │               └── servicios
+    │                   └── RunnerService.class
+    ├── generated-sources
+    │   └── annotations
+    ├── generated-test-sources
+    │   └── test-annotations
+    ├── maven-status
+    │   └── maven-compiler-plugin
+    │       ├── compile
+    │       │   └── default-compile
+    │       │       ├── createdFiles.lst
+    │       │       └── inputFiles.lst
+    │       └── testCompile
+    │           └── default-testCompile
+    │               ├── createdFiles.lst
+    │               └── inputFiles.lst
+    └── test-classes
+        └── org
+            └── formacion
+                └── procesosservicios
+                    └── ProcesosServiciosApplicationTests.class
+
+38 directories, 21 files
