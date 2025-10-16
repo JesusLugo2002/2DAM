@@ -24,8 +24,8 @@ public class ConsoleRunner implements CommandLineRunner {
 
         String line;
         do {
-            line = scanner.nextLine();
-        } while (line.trim().toLowerCase() != "exit");
+            line = scanner.nextLine();            
+        } while (!line.equalsIgnoreCase("exit"));
 
         scanner.close();
     }
