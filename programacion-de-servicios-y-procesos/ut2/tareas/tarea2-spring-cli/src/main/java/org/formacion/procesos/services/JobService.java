@@ -7,17 +7,11 @@ import org.springframework.stereotype.Service;
 public class JobService {
 
     @Autowired
-    ProcessExecutorListDir processExecutorListDir;
+    ProcessExecutorLS processExecutorLS;
 
     public void init(String commandLine) {
-        String[] commandSegments = commandLine.split(" ");
-        switch (commandSegments[0]) {
-            case "list_dir":
-                processExecutorListDir.execute();
-                break;
-        
-            default:
-                break;
+        if (commandLine.startsWith("ls")) {
+            processExecutorLS.setupCommand(commandLine);
         }
     }
 
