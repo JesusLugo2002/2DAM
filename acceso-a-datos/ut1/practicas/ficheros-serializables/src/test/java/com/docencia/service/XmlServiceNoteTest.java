@@ -19,14 +19,9 @@ class XmlServiceNoteTest {
     }
 
     @Test
-    void serializeNote() {
+    void serialization() {
         String noteStr = xmlServiceNote.noteToString(note);
         Note noteTest = xmlServiceNote.stringToNote(noteStr);
         Assertions.assertEquals(note, noteTest, "The objects need to be equals!");
-    }
-
-    @Test
-    void deserializeNote() {
-        
     }
 }
