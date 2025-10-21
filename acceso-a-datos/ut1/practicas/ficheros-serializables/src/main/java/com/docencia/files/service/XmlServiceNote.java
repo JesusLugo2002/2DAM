@@ -3,13 +3,17 @@ package com.docencia.files.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.docencia.files.model.Note;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
-public class XmlServiceNote implements IServiceNote {
+public class XmlServiceNote extends ServiceNoteAbstract {
 
     XmlMapper xmlMapper;
+    private static Logger logger = LoggerFactory.getLogger(XmlServiceNote.class);
 
     public XmlServiceNote() {
         xmlMapper = new XmlMapper();
@@ -51,7 +55,7 @@ public class XmlServiceNote implements IServiceNote {
         try {
             result = xmlMapper.writeValueAsString(note);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            logger.error("Serialization error with note: {}", note, e);
         }
         return result;
     }
@@ -61,7 +65,7 @@ public class XmlServiceNote implements IServiceNote {
         try {
             return xmlMapper.readValue(data, Note.class);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            logger.error("Deserialization error with data: {}", data, e);
         }
         return null;
     }
