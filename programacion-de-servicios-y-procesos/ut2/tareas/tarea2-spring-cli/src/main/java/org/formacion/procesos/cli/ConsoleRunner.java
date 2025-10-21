@@ -19,7 +19,7 @@ public class ConsoleRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            System.out.println("End application!");
+            System.out.println("[OUTPUT] End application!");
         }));
 
         Scanner scanner = new Scanner(System.in);

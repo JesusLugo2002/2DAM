@@ -9,9 +9,14 @@ public class JobService {
     @Autowired
     ProcessExecutorLS processExecutorLS;
 
+    @Autowired
+    ProcessExecutorPING processExecutorPING;
+
     public void init(String commandLine) {
         if (commandLine.startsWith("ls")) {
             processExecutorLS.setupCommand(commandLine);
+        } else if (commandLine.startsWith("ping")) {
+            processExecutorPING.setupCommand(commandLine);
         }
     }
 

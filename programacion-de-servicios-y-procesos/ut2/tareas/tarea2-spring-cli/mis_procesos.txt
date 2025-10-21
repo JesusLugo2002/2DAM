@@ -1,6 +1,6 @@
-README.md
 justfile
 mis_procesos.txt
 pom.xml
+README.md
 src
 target
