@@ -1,7 +1,6 @@
 package com.docencia.files.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,6 +14,12 @@ public abstract class ServiceNoteAbstract implements IServiceNote {
 
     public IFileNoteRepository getFileNoteRepository() {
         return this.fileNoteRepository;
+    }
+
+    @Override
+    public List<Note> findAll() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
