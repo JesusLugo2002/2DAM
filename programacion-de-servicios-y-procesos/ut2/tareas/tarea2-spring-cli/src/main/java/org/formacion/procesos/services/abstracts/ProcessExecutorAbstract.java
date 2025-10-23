@@ -4,11 +4,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.formacion.procesos.domain.JobType;
+import org.formacion.procesos.repositories.interfaces.CrudInterface;
 
 public abstract class ProcessExecutorAbstract {
+
+    CrudInterface fileRepository;
+
     private String mainCommand;
     private JobType jobType;
     private String regex;
+
+    public CrudInterface getFileRepository() {
+        return fileRepository;
+    }
+
+    public void setFileRepository(CrudInterface fileRepository) {
+        this.fileRepository = fileRepository;
+    }
 
     public String getRegex() {
         return this.regex;
@@ -38,9 +50,9 @@ public abstract class ProcessExecutorAbstract {
     }
 
     public void setupCommand(String commandLine) {
-        String[] commandSegments = commandLine.split("\s+"); // ls, la
-        this.setMainCommand(commandSegments[0]); // ls
-        if (!validate(commandSegments)) { // ls, la
+        String[] commandSegments = commandLine.split("\s+");
+        this.setMainCommand(commandSegments[0]);
+        if (!validate(commandSegments)) {
             System.out.println("[ERROR] Invalid parameters.");
         }
             
@@ -64,9 +76,8 @@ public abstract class ProcessExecutorAbstract {
     public abstract void printOutput();
 
     public boolean validate(String[] commandSegments) {
-        if (!validateMainCommand()) {
-            return false;
-        }
+        if (!validateMainCommand()) return false;
+        if (commandSegments.length == 1) return true;
         String parameter = commandSegments[1]; 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(parameter);

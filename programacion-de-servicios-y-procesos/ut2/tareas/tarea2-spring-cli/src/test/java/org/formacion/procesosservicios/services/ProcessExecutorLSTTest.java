@@ -10,9 +10,9 @@ class ProcessExecutorLSTTest {
     ProcessExecutorLS processExecutorLS;
     
     @BeforeEach
-    void before() {
+    void beforeEach() {
         processExecutorLS = new ProcessExecutorLS();
-        processExecutorLS.setupCommand("ls");
+        processExecutorLS.setupCommand("ls -la");
     }
 
     @Test
@@ -47,6 +47,6 @@ class ProcessExecutorLSTTest {
     void validateBlankSpace() {
         String[] commandSegments = {"ls"};
         boolean isValid = processExecutorLS.validate(commandSegments);
-        Assertions.assertFalse(isValid, "The parameters are valid!");
+        Assertions.assertTrue(isValid, "The parameters are valid!");
     }
 }
