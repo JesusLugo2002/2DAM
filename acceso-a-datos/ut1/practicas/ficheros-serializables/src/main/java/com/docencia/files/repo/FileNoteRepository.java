@@ -9,14 +9,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import com.docencia.files.model.Note;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class FileNoteRepository implements IFileNoteRepository {
+public class FileNoteRepository extends FileNoteAbstractRepository {
 
     private String filePath;
     private Path path;
@@ -54,7 +53,7 @@ public class FileNoteRepository implements IFileNoteRepository {
     @Override
     public Note findById(String id) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        throw new UnsupportedOperationException("Unimplemented method 'exists'");
     }
 
     @Override
@@ -68,7 +67,7 @@ public class FileNoteRepository implements IFileNoteRepository {
     }
 
     @Override
-    public Note save(Note n, Optional<String> expOpt) {
+    public Note save(Note note) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'save'");
     }
@@ -89,6 +88,11 @@ public class FileNoteRepository implements IFileNoteRepository {
         } catch (IOException e) {
             throw new RuntimeException("Error leyendo JSON", e);
         }
+    }
+    @Override
+    public Note find(Note note) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'find'");
     }
     
 }
