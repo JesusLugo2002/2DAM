@@ -1,0 +1,11 @@
+/home/dam/repos/2DAM/acceso-a-datos/ut2/tareas/spring-data-orm/src/main/java/com/docencia/Main.java
+/home/dam/repos/2DAM/acceso-a-datos/ut2/tareas/spring-data-orm/src/main/java/com/docencia/files/model/Note.java
+/home/dam/repos/2DAM/acceso-a-datos/ut2/tareas/spring-data-orm/src/main/java/com/docencia/repo/FileNoteAbstractRepository.java
+/home/dam/repos/2DAM/acceso-a-datos/ut2/tareas/spring-data-orm/src/main/java/com/docencia/repo/FileNoteJsonRepository.java
+/home/dam/repos/2DAM/acceso-a-datos/ut2/tareas/spring-data-orm/src/main/java/com/docencia/repo/FileNoteRepository.java
+/home/dam/repos/2DAM/acceso-a-datos/ut2/tareas/spring-data-orm/src/main/java/com/docencia/repo/FileNoteXmlRepository.java
+/home/dam/repos/2DAM/acceso-a-datos/ut2/tareas/spring-data-orm/src/main/java/com/docencia/repo/INoteRepository.java
+/home/dam/repos/2DAM/acceso-a-datos/ut2/tareas/spring-data-orm/src/main/java/com/docencia/service/IServiceNote.java
+/home/dam/repos/2DAM/acceso-a-datos/ut2/tareas/spring-data-orm/src/main/java/com/docencia/service/JsonServiceNote.java
+/home/dam/repos/2DAM/acceso-a-datos/ut2/tareas/spring-data-orm/src/main/java/com/docencia/service/ServiceNoteAbstract.java
+/home/dam/repos/2DAM/acceso-a-datos/ut2/tareas/spring-data-orm/src/main/java/com/docencia/service/XmlServiceNote.java
