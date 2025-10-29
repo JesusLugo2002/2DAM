@@ -1,19 +1,80 @@
 package dam.jesus.process_cli_application.repositories;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
+
+import dam.jesus.process_cli_application.domain.Job;
 import dam.jesus.process_cli_application.repositories.interfaces.JobRepository;
 
+@Repository
 public class FileJobRepository implements JobRepository {
 
-    @Override
-    public void writeOutput(String[] lines) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'writeOutput'");
+    private static Logger logger = LoggerFactory.getLogger(FileJobRepository.class);
+    private File directory;
+
+    public File getDirectory() {
+        return directory;
     }
 
-    @Override
-    public void writeError(String[] lines) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'writeError'");
+    public void setDirectory(File directory) {
+        this.directory = directory;
+    }
+
+    public FileJobRepository() {
+        this.directory = new File("logs/");
+        if (!this.directory.exists()) {
+            directory.mkdirs();
+        }
+    }
+
+    public boolean createFile(Path filepath) {
+        try {
+            return new File(filepath.toString()).createNewFile();
+        } catch (IOException e) {
+            logger.error("Error creating file with path: {}", filepath, e);
+        }
+        return false;
+    }
+
+    public boolean exists(Path filepath) {
+        return new File(filepath.toString()).exists();
+    }
+
+    public void writeFile(Job job) {
+        Process process = job.getProcess();
+        if (process == null) {
+            logger.error("The process was not executed!");
+            return;
+        }
+        Path path = Paths.get(getDirectory() + "/" + job.getId() + ".txt");
+        if (!exists(path)) createFile(path);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path.toString()))) {
+            job.getOutLines().forEach(line -> {
+                try {
+                    writer.write(line + "\n");
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            });
+            job.getErrLines().forEach(line -> {
+                try {
+                    writer.write(line + "\n");
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            });
+        } catch (IOException e) {
+            logger.error("Error writing on file {}", path, e);
+        }
     }
 
 }
