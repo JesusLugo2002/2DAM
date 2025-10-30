@@ -1,0 +1,10 @@
+com/docencia/files/service/JsonServiceNote.class
+com/docencia/files/repo/FileNoteRepository.class
+com/docencia/ficheros/ficheros_serializables/ServletInitializer.class
+com/docencia/ficheros/ficheros_serializables/FicherosSerializablesApplication.class
+com/docencia/files/model/Note.class
+com/docencia/files/service/IServiceNote.class
+com/docencia/ficheros/serializacion/SimpleBean.class
+com/docencia/ficheros/ClaseEjemplo.class
+com/docencia/files/service/XmlServiceNote.class
+com/docencia/files/repo/IFileNoteRepository.class

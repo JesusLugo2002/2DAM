@@ -9,6 +9,12 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Clase Job
+ * @author JesusLugo2002
+ * Representa un proceso y contiene los metodos para mostrar y cargar el
+ * output de su ejecucion. 
+ */
 public class Job {
 
     private static Logger logger = LoggerFactory.getLogger(Job.class);
@@ -64,6 +70,12 @@ public class Job {
         this.command = command;
     }
 
+    /**
+     * Ejecuta el proceso construyendo un ProcessBuilder con el comando actual.
+     * El proceso ejecutado es guardado y se almacena como variables la salida estandar
+     * y la salida de error.
+     * @return Proceso ejecutado o {@code null} si hubo un error.
+     */
     public Process execute() {
         ProcessBuilder processBuilder = new ProcessBuilder("sh", "-c", this.getCommand());
         processBuilder.redirectErrorStream(false);
@@ -74,11 +86,16 @@ public class Job {
             saveStderr(process);
             return process;
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("An error happens executing the process", e);
         }
         return null;
     }
 
+    /**
+     * Guarda la salida estandar como variable de la instancia como lista,
+     * aplicando el prefijo [OUT].
+     * @param process proceso del que se extraera la salida.
+     */
     private void saveStdout(Process process) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
             setOutLines(reader.lines().map(line -> "[OUT] " + line).toList());
@@ -87,6 +104,11 @@ public class Job {
         }
     }
 
+    /**
+     * Guarda la salida de error como variable de la instancia como lista,
+     * aplicando el prefijo [ERR].
+     * @param process proceso del que se extraera la salida.
+     */
     private void saveStderr(Process process) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()))) {
             setErrLines(reader.lines().map(line -> "[ERR] " + line).toList());

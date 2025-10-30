@@ -13,6 +13,12 @@ import org.springframework.stereotype.Repository;
 import dam.jesus.process_cli_application.domain.Job;
 import dam.jesus.process_cli_application.repositories.interfaces.JobRepository;
 
+/**
+ * Clase FileJobRepository
+ * @author JesusLugo2002
+ * Repositorio encargado de crear y escribir los logs contenedores
+ * de las salidas de los procesos ejecutados en el programa.
+ */
 @Repository
 public class FileJobRepository implements JobRepository {
 
@@ -60,16 +66,14 @@ public class FileJobRepository implements JobRepository {
                 try {
                     writer.write(line + "\n");
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    logger.error("Error while writing stdout!", e);
                 }
             });
             job.getErrLines().forEach(line -> {
                 try {
                     writer.write(line + "\n");
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    logger.error("Error while writing stderr!", e);
                 }
             });
         } catch (IOException e) {

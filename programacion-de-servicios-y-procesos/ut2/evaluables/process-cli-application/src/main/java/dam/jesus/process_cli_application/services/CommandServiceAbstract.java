@@ -11,12 +11,19 @@ import dam.jesus.process_cli_application.domain.Job;
 import dam.jesus.process_cli_application.repositories.FileJobRepository;
 import dam.jesus.process_cli_application.services.interfaces.ICommandService;
 
+/**
+ * Clase CommandServiceAbstract
+ * @author JesusLugo2002
+ * Se encarga de la configuracion, validacion y ejecucion del comando en el servicio,
+ * asi como tambien de imprimir la salida del proceso en la terminal.
+ */
 public abstract class CommandServiceAbstract implements ICommandService {
 
     @Autowired
     FileJobRepository fileJobRepository;
 
     private static Logger logger = LoggerFactory.getLogger(CommandServiceAbstract.class);
+
     private Job job;
     private String regex;
 
@@ -36,6 +43,9 @@ public abstract class CommandServiceAbstract implements ICommandService {
         this.regex = regex;
     }
 
+    /**
+     * @returns {@code true} si todo ha ido bien, si no, {@code false}.
+     */
     public boolean setupCommand(String line) {
         if (!validate(line)) {
             logger.warn("Invalid command or parameters!");
@@ -47,17 +57,18 @@ public abstract class CommandServiceAbstract implements ICommandService {
         return true;
     }
 
+    /**
+     * @returns Si la estructura concuerda con la expresion regular, {@code true}, si no, {@code false}.
+     */
     public boolean validate(String line) {
         Pattern pattern = Pattern.compile(getRegex());
         Matcher matcher = pattern.matcher(line);
         return matcher.matches();
     }
 
-    public void printOutput(Job job) {
-        job.getOutLines().forEach(line -> System.out.println(line));
-        job.getErrLines().forEach(line -> System.out.println(line));
-    }
-    
+    /**
+     * @returns {@code true} si la ejecucion se ha realizado correctamente, si no, {@code false}.
+     */
     public boolean runCommand() {
         Job job = getJob();
         Process process = job.execute();
@@ -68,5 +79,10 @@ public abstract class CommandServiceAbstract implements ICommandService {
         fileJobRepository.writeFile(job);
         printOutput(job);
         return true;
+    }
+
+    public void printOutput(Job job) {
+        job.getOutLines().forEach(line -> System.out.println(line));
+        job.getErrLines().forEach(line -> System.out.println(line));
     }
 }

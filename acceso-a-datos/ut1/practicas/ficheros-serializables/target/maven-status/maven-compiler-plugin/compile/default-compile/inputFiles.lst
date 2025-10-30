@@ -1,0 +1,10 @@
+/home/jesus/2DAM/acceso-a-datos/ut1/practicas/ficheros-serializables/src/main/java/com/docencia/ficheros/ClaseEjemplo.java
+/home/jesus/2DAM/acceso-a-datos/ut1/practicas/ficheros-serializables/src/main/java/com/docencia/ficheros/ficheros_serializables/FicherosSerializablesApplication.java
+/home/jesus/2DAM/acceso-a-datos/ut1/practicas/ficheros-serializables/src/main/java/com/docencia/ficheros/ficheros_serializables/ServletInitializer.java
+/home/jesus/2DAM/acceso-a-datos/ut1/practicas/ficheros-serializables/src/main/java/com/docencia/ficheros/serializacion/SimpleBean.java
+/home/jesus/2DAM/acceso-a-datos/ut1/practicas/ficheros-serializables/src/main/java/com/docencia/files/model/Note.java
+/home/jesus/2DAM/acceso-a-datos/ut1/practicas/ficheros-serializables/src/main/java/com/docencia/files/repo/FileNoteRepository.java
+/home/jesus/2DAM/acceso-a-datos/ut1/practicas/ficheros-serializables/src/main/java/com/docencia/files/repo/IFileNoteRepository.java
+/home/jesus/2DAM/acceso-a-datos/ut1/practicas/ficheros-serializables/src/main/java/com/docencia/files/service/IServiceNote.java
+/home/jesus/2DAM/acceso-a-datos/ut1/practicas/ficheros-serializables/src/main/java/com/docencia/files/service/JsonServiceNote.java
+/home/jesus/2DAM/acceso-a-datos/ut1/practicas/ficheros-serializables/src/main/java/com/docencia/files/service/XmlServiceNote.java
