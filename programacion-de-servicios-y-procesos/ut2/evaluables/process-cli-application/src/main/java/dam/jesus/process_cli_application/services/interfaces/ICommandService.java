@@ -6,6 +6,7 @@ public interface ICommandService {
     /**
      * Configura el Job tras la validacion y ejecuta el comando.
      * @param line el comando a configurar.
+     * @return true/false si ejecuta correctamente
      */
     public boolean setupCommand(String line);
 

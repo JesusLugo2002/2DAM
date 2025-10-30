@@ -5,14 +5,19 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import dam.jesus.process_cli_application.domain.Job;
+import dam.jesus.process_cli_application.repositories.FileJobRepository;
 
 class CommandServicesTest {
 
     static LsofService lsofService;
 
+    static FileJobRepository fileJobRepository;
+
     @BeforeAll
     static void beforeAll() {
         lsofService = new LsofService();
+        fileJobRepository = new FileJobRepository();
+        lsofService.setFileJobRepository(fileJobRepository);
     }
 
     @Test

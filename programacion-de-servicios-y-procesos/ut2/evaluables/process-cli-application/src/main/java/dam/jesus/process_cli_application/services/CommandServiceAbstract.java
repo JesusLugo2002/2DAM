@@ -19,8 +19,12 @@ import dam.jesus.process_cli_application.services.interfaces.ICommandService;
  */
 public abstract class CommandServiceAbstract implements ICommandService {
 
-    @Autowired
     FileJobRepository fileJobRepository;
+
+    @Autowired
+    public void setFileJobRepository(FileJobRepository fileJobRepository) {
+        this.fileJobRepository = fileJobRepository;
+    }
 
     private static Logger logger = LoggerFactory.getLogger(CommandServiceAbstract.class);
 
@@ -43,16 +47,13 @@ public abstract class CommandServiceAbstract implements ICommandService {
         this.regex = regex;
     }
 
-    /**
-     * @returns {@code true} si todo ha ido bien, si no, {@code false}.
-     */
     public boolean setupCommand(String line) {
         if (!validate(line)) {
             logger.warn("Invalid command or parameters!");
             return false;
         }
         Job job = new Job(line);
-        setJob(job);
+        this.setJob(job);
         this.runCommand();
         return true;
     }
