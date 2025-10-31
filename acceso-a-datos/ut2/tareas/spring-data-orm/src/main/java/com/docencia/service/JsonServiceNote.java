@@ -30,8 +30,6 @@ public class JsonServiceNote extends ServiceNoteAbstract {
         throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }
 
-
-
     @Override
     public Note save(Note note) {
         // TODO Auto-generated method stub

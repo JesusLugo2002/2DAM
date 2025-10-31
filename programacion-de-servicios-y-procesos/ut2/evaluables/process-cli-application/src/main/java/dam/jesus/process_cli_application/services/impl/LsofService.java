@@ -14,7 +14,7 @@ import dam.jesus.process_cli_application.services.abstracts.CommandServiceAbstra
 public class LsofService extends CommandServiceAbstract {
 
     public LsofService() {
-        setRegex("^(lsof)\\s+(-i)$");
+        setRegex("^(lsof)(?:\\s+(-i))?$");
     }
 
 }

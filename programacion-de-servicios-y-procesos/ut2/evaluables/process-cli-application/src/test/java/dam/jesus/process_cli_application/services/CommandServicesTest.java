@@ -29,7 +29,7 @@ class CommandServicesTest {
 
     @Test
     void testConstructionWithoutParameters() {
-        boolean wasBuilt = lsofService.setupCommand("lsof");
+        boolean wasBuilt = lsofService.setupCommand("lsof -a");
         Assertions.assertFalse(wasBuilt);
     }
 

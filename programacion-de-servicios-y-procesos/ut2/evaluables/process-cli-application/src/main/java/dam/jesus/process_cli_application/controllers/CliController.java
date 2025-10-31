@@ -26,7 +26,7 @@ public class CliController implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("=== Lanzador de Procesos (CLI) Linux ===\r\n" + //
                         "Comandos:\r\n" + //
-                        "  lsof -i\r\n" + //
+                        "  lsof [-i]\r\n" + //
                         "  top -n1 -b\r\n" + //
                         "  ps aux | head\n");
         Scanner scanner = new Scanner(System.in);
