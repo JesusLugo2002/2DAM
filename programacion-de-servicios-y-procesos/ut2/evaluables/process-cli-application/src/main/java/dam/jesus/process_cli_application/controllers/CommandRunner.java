@@ -5,9 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import dam.jesus.process_cli_application.services.LsofService;
-import dam.jesus.process_cli_application.services.PsService;
-import dam.jesus.process_cli_application.services.TopService;
+import dam.jesus.process_cli_application.services.impl.LsofService;
+import dam.jesus.process_cli_application.services.impl.PsService;
+import dam.jesus.process_cli_application.services.impl.TopService;
 
 /**
  * Clase CommandRunner
@@ -19,23 +19,35 @@ public class CommandRunner {
 
     private static Logger logger = LoggerFactory.getLogger(CommandRunner.class);
 
-    @Autowired
     LsofService lsofService;
-
-    @Autowired
     TopService topService;
+    PsService psService;
+    
+    @Autowired
+    public void setLsofService(LsofService lsofService) {
+        this.lsofService = lsofService;
+    }
 
     @Autowired
-    PsService psService;
+    public void setTopService(TopService topService) {
+        this.topService = topService;
+    }
+
+    @Autowired
+    public void setPsService(PsService psService) {
+        this.psService = psService;
+    }
 
     /**
      * Activa el servicio necesario segun el comando recibido.
      * @param line el comando recibido.
+     * @return si el comando puede ser ejecutado, devuelve {@code true},
+     * si no, {@code false}.
      */
-    public void handle(String line) {
+    public boolean handle(String line) {
         if (line == null || line.isBlank()) {
             logger.error("Empty command.");
-            return;
+            return false;
         }
         String command = line.split("\\s+")[0];
         switch (command) {
@@ -44,5 +56,6 @@ public class CommandRunner {
             case "ps" -> psService.setupCommand(line);
             default -> logger.info("Undefined command.");
         }
+        return true;
     }
 }

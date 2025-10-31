@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import dam.jesus.process_cli_application.domain.Job;
+import dam.jesus.process_cli_application.repositories.impl.FileJobRepository;
 
 class FileJobRepositoryTest {
 
@@ -26,6 +27,19 @@ class FileJobRepositoryTest {
     void testCreateFile() {
         fileJobRepository.createFile(filepath);
         Assertions.assertTrue(fileJobRepository.exists(filepath));
+    }
+
+    @Test
+    void testCreateFileWithoutFilepath() {
+        boolean fileCreated = fileJobRepository.createFile(null);
+        Assertions.assertFalse(fileCreated);
+    }
+
+    @Test
+    void testWriteFileWithoutProcessJob() {
+        Job jobWithoutExecute = new Job("lsof -i");
+        boolean wasWrote = fileJobRepository.writeFile(jobWithoutExecute);
+        Assertions.assertFalse(wasWrote);
     }
 
     @Test

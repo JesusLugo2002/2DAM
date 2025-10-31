@@ -1,6 +1,8 @@
-package dam.jesus.process_cli_application.services;
+package dam.jesus.process_cli_application.services.impl;
 
 import org.springframework.stereotype.Service;
+
+import dam.jesus.process_cli_application.services.abstracts.CommandServiceAbstract;
 
 /**
  * Clase TopService
@@ -12,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class TopService extends CommandServiceAbstract {
     
     public TopService() {
-        setRegex("^top$");
+        setRegex("^(top)\\s+(-n\\s*1\\s+-b)$");
     }
 
 }

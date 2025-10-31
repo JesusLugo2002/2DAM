@@ -1,4 +1,4 @@
-package dam.jesus.process_cli_application.repositories;
+package dam.jesus.process_cli_application.repositories.impl;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -43,7 +43,7 @@ public class FileJobRepository implements JobRepository {
     public boolean createFile(Path filepath) {
         try {
             return new File(filepath.toString()).createNewFile();
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("Error creating file with path: {}", filepath, e);
         }
         return false;
@@ -53,11 +53,11 @@ public class FileJobRepository implements JobRepository {
         return new File(filepath.toString()).exists();
     }
 
-    public void writeFile(Job job) {
+    public boolean writeFile(Job job) {
         Process process = job.getProcess();
         if (process == null) {
             logger.error("The process was not executed!");
-            return;
+            return false;
         }
         Path path = Paths.get(getDirectory() + "/" + job.getId() + ".txt");
         if (!exists(path)) createFile(path);
@@ -66,19 +66,21 @@ public class FileJobRepository implements JobRepository {
                 try {
                     writer.write(line + "\n");
                 } catch (IOException e) {
-                    logger.error("Error while writing stdout!", e);
+                    logger.warn("Error while writing stdout!", e);
                 }
             });
             job.getErrLines().forEach(line -> {
                 try {
                     writer.write(line + "\n");
                 } catch (IOException e) {
-                    logger.error("Error while writing stderr!", e);
+                    logger.warn("Error while writing stderr!", e);
                 }
             });
         } catch (IOException e) {
             logger.error("Error writing on file {}", path, e);
+            return false;
         }
+        return true;
     }
 
 }

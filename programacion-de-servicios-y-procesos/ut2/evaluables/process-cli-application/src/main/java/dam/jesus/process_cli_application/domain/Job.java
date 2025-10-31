@@ -1,7 +1,6 @@
 package dam.jesus.process_cli_application.domain;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalTime;
 import java.util.List;
@@ -85,7 +84,7 @@ public class Job {
             saveStdout(process);
             saveStderr(process);
             return process;
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("An error happens executing the process", e);
         }
         return null;

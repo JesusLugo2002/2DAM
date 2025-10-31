@@ -6,7 +6,7 @@ public interface ICommandService {
     /**
      * Configura el Job tras la validacion y ejecuta el comando.
      * @param line el comando a configurar.
-     * @return true/false si ejecuta correctamente
+     * @return {@code true} si el comando se configura correctamente, si no, {@code false}
      */
     public boolean setupCommand(String line);
 
@@ -14,12 +14,14 @@ public interface ICommandService {
      * Valida el comando recibido haciendo uso de la expresion regular
      * que establece la estructura correcta.
      * @param line el comando a validar.
+     * @return Si la estructura concuerda con la expresion regular, {@code true}, si no, {@code false}.
      */
     public boolean validate(String line);
 
     /**
      * Ejecuta el {@code Job} configurado del servicio, imprime en pantalla la salida
      * y la guarda en el fichero.
+     * @return {@code true} si la ejecucion se ha realizado correctamente, si no, {@code false}.
      */
     public boolean runCommand();
 

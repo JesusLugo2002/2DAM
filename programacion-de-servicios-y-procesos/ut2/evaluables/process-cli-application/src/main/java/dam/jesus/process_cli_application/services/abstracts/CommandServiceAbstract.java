@@ -1,4 +1,4 @@
-package dam.jesus.process_cli_application.services;
+package dam.jesus.process_cli_application.services.abstracts;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dam.jesus.process_cli_application.domain.Job;
-import dam.jesus.process_cli_application.repositories.FileJobRepository;
+import dam.jesus.process_cli_application.repositories.impl.FileJobRepository;
 import dam.jesus.process_cli_application.services.interfaces.ICommandService;
 
 /**
@@ -58,18 +58,12 @@ public abstract class CommandServiceAbstract implements ICommandService {
         return true;
     }
 
-    /**
-     * @returns Si la estructura concuerda con la expresion regular, {@code true}, si no, {@code false}.
-     */
     public boolean validate(String line) {
         Pattern pattern = Pattern.compile(getRegex());
         Matcher matcher = pattern.matcher(line);
         return matcher.matches();
     }
 
-    /**
-     * @returns {@code true} si la ejecucion se ha realizado correctamente, si no, {@code false}.
-     */
     public boolean runCommand() {
         Job job = getJob();
         Process process = job.execute();

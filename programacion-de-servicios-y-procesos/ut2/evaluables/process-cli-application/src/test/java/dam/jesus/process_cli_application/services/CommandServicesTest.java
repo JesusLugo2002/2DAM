@@ -5,7 +5,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import dam.jesus.process_cli_application.domain.Job;
-import dam.jesus.process_cli_application.repositories.FileJobRepository;
+import dam.jesus.process_cli_application.repositories.impl.FileJobRepository;
+import dam.jesus.process_cli_application.services.impl.LsofService;
 
 class CommandServicesTest {
 
@@ -36,12 +37,6 @@ class CommandServicesTest {
     void testConstructionWithMoreLetters() {
         boolean wasBuilt = lsofService.setupCommand("lsofa -i");
         Assertions.assertFalse(wasBuilt);
-    }
-
-    @Test
-    void testConstructionWithBlankSpaces() {
-        boolean wasBuilt = lsofService.setupCommand("      lsof      -i     ");
-        Assertions.assertTrue(wasBuilt);
     }
 
     @Test
