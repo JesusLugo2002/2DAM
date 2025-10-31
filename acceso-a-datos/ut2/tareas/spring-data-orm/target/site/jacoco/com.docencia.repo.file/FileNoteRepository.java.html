@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FileNoteRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Proyecto de Spring Data ORM</a> &gt; <a href="index.source.html" class="el_package">com.docencia.repo.file</a> &gt; <span class="el_source">FileNoteRepository.java</span></div><h1>FileNoteRepository.java</h1><pre class="source lang-java linenums">package com.docencia.repo.file;
+
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import com.docencia.model.Note;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
+public class FileNoteRepository extends FileNoteAbstractRepository {
+    private String nameFile;
+    private Path path;
+<span class="nc" id="L20">    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();</span>
+
+<span class="nc" id="L22">    public FileNoteRepository() {</span>
+<span class="nc" id="L23">        this.nameFile = &quot;note-repository.txt&quot;;</span>
+        try {
+<span class="nc" id="L25">            path = verificarFichero();</span>
+<span class="nc" id="L26">        } catch (IOException e) {</span>
+<span class="nc" id="L27">            e.printStackTrace();</span>
+<span class="nc" id="L28">        }</span>
+<span class="nc" id="L29">    }</span>
+
+    /**
+     * Si existe y no es un directorio
+     * Si no existe lo creo
+     * 
+     * @throws IOException
+     */
+
+    private Path verificarFichero() throws IOException {
+
+        URL resource;
+<span class="nc" id="L41">        resource = getClass().getClassLoader().getResource(nameFile);</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (resource == null) {</span>
+<span class="nc" id="L43">            throw new IOException(&quot;El fichero no existe &quot; + nameFile);</span>
+        }
+
+<span class="nc" id="L46">        return Paths.get(resource.getPath()) ;</span>
+
+    }
+
+    @Override
+    public boolean exists(String id) {
+        // TODO Auto-generated method stub
+<span class="nc" id="L53">        throw new UnsupportedOperationException(&quot;Unimplemented method 'exists'&quot;);</span>
+    }
+
+    @Override
+    public Note findById(String id) {
+<span class="nc" id="L58">       return null;</span>
+    }
+
+    @Override
+    public List&lt;Note&gt; findAll() {
+<span class="nc" id="L63">        lock.readLock().lock();</span>
+        try {
+<span class="nc" id="L65">            return Collections.unmodifiableList(readAllInternal());</span>
+        } finally {
+<span class="nc" id="L67">            lock.readLock().unlock();</span>
+        }
+    }
+
+    @Override
+    public Note save(Note note) {
+        // TODO Auto-generated method stub
+<span class="nc" id="L74">        throw new UnsupportedOperationException(&quot;Unimplemented method 'save'&quot;);</span>
+    }
+
+    @Override
+    public boolean delete(String id) {
+        // TODO Auto-generated method stub
+<span class="nc" id="L80">        throw new UnsupportedOperationException(&quot;Unimplemented method 'delete'&quot;);</span>
+    }
+
+    private List&lt;Note&gt; readAllInternal() {
+<span class="nc" id="L84">        XmlMapper xmlMapper = new XmlMapper();</span>
+        try {
+<span class="nc bnc" id="L86" title="All 4 branches missed.">            if (!Files.exists(path) || Files.size(path) == 0) return new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L87">            Note[] arrayNotes = xmlMapper.readValue(Files.readAllBytes(path), Note[].class);</span>
+<span class="nc" id="L88">            return new ArrayList&lt;&gt;(Arrays.asList(arrayNotes));</span>
+<span class="nc" id="L89">        } catch (IOException e) {</span>
+<span class="nc" id="L90">            throw new RuntimeException(&quot;Error leyendo JSON&quot;, e);</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

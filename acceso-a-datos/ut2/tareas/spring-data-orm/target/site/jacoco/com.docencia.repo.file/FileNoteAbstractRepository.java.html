@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FileNoteAbstractRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Proyecto de Spring Data ORM</a> &gt; <a href="index.source.html" class="el_package">com.docencia.repo.file</a> &gt; <span class="el_source">FileNoteAbstractRepository.java</span></div><h1>FileNoteAbstractRepository.java</h1><pre class="source lang-java linenums">package com.docencia.repo.file;
+
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import com.docencia.model.Note;
+import com.docencia.repo.INoteRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.micrometer.common.util.StringUtils;
+
+
+public abstract class FileNoteAbstractRepository implements INoteRepository {
+
+    private String nameFile;
+    private Path path;
+<span class="nc" id="L28">    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();</span>
+    ObjectMapper mapper;
+
+<span class="nc" id="L31">    public FileNoteAbstractRepository() { }</span>
+
+<span class="nc" id="L33">    public FileNoteAbstractRepository(String nameFile, ObjectMapper mapper) {</span>
+<span class="nc" id="L34">        this.nameFile = nameFile;</span>
+<span class="nc" id="L35">        path = verificarFichero();</span>
+<span class="nc" id="L36">        this.mapper = mapper;</span>
+<span class="nc" id="L37">    }</span>
+
+    private Path verificarFichero() {
+        URL resource;
+<span class="nc" id="L41">        resource = getClass().getClassLoader().getResource(nameFile);</span>
+<span class="nc" id="L42">        return Paths.get(resource.getPath());</span>
+
+    }
+
+    private List&lt;Note&gt; readAllInternal() {
+        try {
+<span class="nc bnc" id="L48" title="All 4 branches missed.">            if (!Files.exists(path) || Files.size(path) == 0)</span>
+<span class="nc" id="L49">                return new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L50">            Note[] arrayNotes = mapper.readValue(Files.readAllBytes(path), Note[].class);</span>
+<span class="nc" id="L51">            return new ArrayList&lt;&gt;(Arrays.asList(arrayNotes));</span>
+<span class="nc" id="L52">        } catch (IOException e) {</span>
+<span class="nc" id="L53">            throw new RuntimeException(&quot;Error leyendo JSON&quot;, e);</span>
+        }
+    }
+
+    private void writeAllInternal(List&lt;Note&gt; items) {
+        try {
+<span class="nc" id="L59">            byte[] bytes = mapper.writerWithDefaultPrettyPrinter().writeValueAsBytes(items);</span>
+<span class="nc" id="L60">            Files.write(path, bytes,</span>
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.TRUNCATE_EXISTING,
+                    StandardOpenOption.WRITE);
+<span class="nc" id="L64">        } catch (IOException e) {</span>
+<span class="nc" id="L65">            throw new RuntimeException(&quot;Error escribiendo JSON&quot;, e);</span>
+<span class="nc" id="L66">        }</span>
+<span class="nc" id="L67">    }</span>
+
+    @Override
+    public boolean exists(String id) {
+        // TODO Auto-generated method stub
+<span class="nc" id="L72">        throw new UnsupportedOperationException(&quot;Unimplemented method 'exists'&quot;);</span>
+    }
+
+    @Override
+    public Note findById(String id) {
+<span class="nc" id="L77">        Note elemento = new Note(id);</span>
+<span class="nc" id="L78">        return find(elemento);</span>
+    }
+
+    @Override
+    public Note find(Note note) {
+<span class="nc" id="L83">        List&lt;Note&gt; notes = findAll();</span>
+<span class="nc" id="L84">        int posicon = notes.indexOf(note);</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        if (posicon &lt; 0 ) {</span>
+<span class="nc" id="L86">            return null;</span>
+        }
+<span class="nc" id="L88">        return notes.get(posicon);</span>
+    }
+
+    @Override
+    public List&lt;Note&gt; findAll() {
+<span class="nc" id="L93">        lock.readLock().lock();</span>
+        try {
+<span class="nc" id="L95">            return Collections.unmodifiableList(readAllInternal());</span>
+        } finally {
+<span class="nc" id="L97">            lock.readLock().unlock();</span>
+        }
+    }
+
+    @Override
+    public Note save(Note note) {
+<span class="nc" id="L103">       lock.writeLock().lock();</span>
+        try {
+<span class="nc" id="L105">            List&lt;Note&gt; notes = readAllInternal();</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">            if (StringUtils.isEmpty(note.getId()))  {</span>
+<span class="nc" id="L107">                note.setId(UUID.randomUUID().toString());</span>
+            }
+<span class="nc" id="L109">            notes.removeIf(n -&gt; Objects.equals(n.getId(), note.getId()));</span>
+<span class="nc" id="L110">            notes.add(note);</span>
+<span class="nc" id="L111">            writeAllInternal(notes);</span>
+<span class="nc" id="L112">            return note;</span>
+        } finally {
+<span class="nc" id="L114">            lock.writeLock().unlock();</span>
+        }
+    }
+
+    @Override
+    public boolean delete(String id) {
+        // TODO Auto-generated method stub
+<span class="nc" id="L121">        throw new UnsupportedOperationException(&quot;Unimplemented method 'delete'&quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NoteJpaRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Proyecto de Spring Data ORM</a> &gt; <a href="index.source.html" class="el_package">com.docencia.repo.jpa</a> &gt; <span class="el_source">NoteJpaRepository.java</span></div><h1>NoteJpaRepository.java</h1><pre class="source lang-java linenums">package com.docencia.repo.jpa;
+
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.stereotype.Repository;
+
+import com.docencia.model.Note;
+import com.docencia.repo.INoteRepository;
+
+import io.micrometer.common.util.StringUtils;
+
+@Repository
+public class NoteJpaRepository implements INoteRepository {
+
+    private final ISqliteNoteRepository repository;
+
+    /**
+     * Constructor por defecto
+     */
+<span class="nc" id="L21">    public NoteJpaRepository() {</span>
+<span class="nc" id="L22">        this.repository = null;</span>
+<span class="nc" id="L23">    }</span>
+
+    /**
+     * Constructor con repositorio inicializado
+     * @param repository repositorio de conexion sobre la base de datos
+     */
+<span class="nc" id="L29">    public NoteJpaRepository(ISqliteNoteRepository repository) {</span>
+<span class="nc" id="L30">        this.repository = repository;</span>
+<span class="nc" id="L31">    }</span>
+
+    @Override
+    public boolean exists(String id) {
+<span class="nc" id="L35">        return repository.existsById(id);</span>
+    }
+
+    @Override
+    public Note findById(String id) {
+<span class="nc" id="L40">        return repository.findById(id).orElse(null);</span>
+    }
+
+    @Override
+    public Note find(Note note) {
+<span class="nc" id="L45">        return this.findById(note.getId());</span>
+    }
+
+    @Override
+    public List&lt;Note&gt; findAll() {
+<span class="nc" id="L50">        return repository.findAll();</span>
+    }
+
+    @Override
+    public Note save(Note note) {
+<span class="nc bnc" id="L55" title="All 4 branches missed.">        if (note.getId() == null || StringUtils.isEmpty(note.getId())) {</span>
+<span class="nc" id="L56">            note.setId(UUID.randomUUID().toString());</span>
+        }
+<span class="nc" id="L58">        return repository.save(note);</span>
+    }
+
+    @Override
+    public boolean delete(String id) {
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (!exists(id)) {</span>
+<span class="nc" id="L64">            return false;</span>
+        }
+<span class="nc" id="L66">        repository.deleteById(id);</span>
+<span class="nc" id="L67">        return true;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

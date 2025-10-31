@@ -1,0 +1,11 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Proyecto de Spring Data ORM,com.docencia,Main,7,0,0,0,3,0,2,0,2,0
+Proyecto de Spring Data ORM,com.docencia.service,ServiceNoteAbstract,8,3,0,0,2,1,2,1,2,1
+Proyecto de Spring Data ORM,com.docencia.service,JsonServiceNote,36,24,0,0,10,6,4,4,4,4
+Proyecto de Spring Data ORM,com.docencia.service,XmlServiceNote,41,24,0,0,11,6,5,4,5,4
+Proyecto de Spring Data ORM,com.docencia.model,Note,31,39,2,2,11,15,5,8,3,8
+Proyecto de Spring Data ORM,com.docencia.repo.file,FileNoteXmlRepository,12,0,0,0,4,0,2,0,2,0
+Proyecto de Spring Data ORM,com.docencia.repo.file,FileNoteJsonRepository,12,0,0,0,4,0,2,0,2,0
+Proyecto de Spring Data ORM,com.docencia.repo.file,FileNoteRepository,113,0,6,0,25,0,11,0,8,0
+Proyecto de Spring Data ORM,com.docencia.repo.file,FileNoteAbstractRepository,201,0,8,0,42,0,16,0,12,0
+Proyecto de Spring Data ORM,com.docencia.repo.jpa,NoteJpaRepository,63,0,6,0,17,0,11,0,8,0
