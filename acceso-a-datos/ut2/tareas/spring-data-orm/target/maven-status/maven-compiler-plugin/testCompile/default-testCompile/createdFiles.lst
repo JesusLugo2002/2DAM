@@ -1,2 +1,4 @@
 com/docencia/service/XmlServiceNoteTest.class
 com/docencia/service/JsonServiceNoteTest.class
+com/docencia/repo/FileNoteRepositoryTest.class
+com/docencia/repo/NoteJpaRepositoryTest.class
