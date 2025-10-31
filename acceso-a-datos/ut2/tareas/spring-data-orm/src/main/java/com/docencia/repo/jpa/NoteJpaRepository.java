@@ -10,10 +10,26 @@ import com.docencia.repo.INoteRepository;
 @Repository
 public class NoteJpaRepository implements INoteRepository {
 
+    private final ISqliteNoteRepository repository;
+
+    /**
+     * Constructor por defecto
+     */
+    public NoteJpaRepository() {
+        this.repository = null;
+    }
+
+    /**
+     * Constructor con repositorio inicializado
+     * @param repository repositorio de conexion sobre la base de datos
+     */
+    public NoteJpaRepository(ISqliteNoteRepository repository) {
+        this.repository = repository;
+    }
+
     @Override
     public boolean exists(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'exists'");
+        return repository.existsById(id);
     }
 
     @Override
