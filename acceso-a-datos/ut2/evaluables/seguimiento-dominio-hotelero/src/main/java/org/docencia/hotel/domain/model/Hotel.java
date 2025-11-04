@@ -1,7 +1,5 @@
 package org.docencia.hotel.domain.model;
 
-import java.util.UUID;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -10,30 +8,28 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "hotel")
-@NotBlank
+@Table(name = "Hotel")
 public class Hotel {
 
     @Id
-    @Column(name = "id")
-    @NotBlank
-    private UUID id;
+    @Column(name = "id", nullable = false)
+    private int id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     @Size(max = 255)
     @NotBlank
     private String name;
 
-    @Column(name = "address")
+    @Column(name = "address", nullable = false)
     @Size(max = 255)
     @NotBlank
     private String address;
 
-    public UUID getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 

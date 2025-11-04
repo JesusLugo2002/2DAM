@@ -1,39 +1,32 @@
 package org.docencia.hotel.domain.model;
 
-import java.util.UUID;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Room")
 public class Room {
 
     @Id
-    @Column(name = "id")
-    @NotBlank
-    private UUID id;
+    @Column(name = "id", nullable = false)
+    private int id;
 
-    @Column(name = "number")
-    @NotBlank
+    @Column(name = "number", nullable = false)
     private int number;
 
     @Column(name = "type")
-    @NotBlank
     private String type;
 
-    @Column(name = "pricePerNight")
-    @NotBlank
+    @Column(name = "pricePerNight", nullable = false)
     private double pricePerNight;
 
-    public UUID getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 
