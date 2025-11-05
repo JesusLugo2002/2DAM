@@ -16,32 +16,32 @@ public interface IGuestRepository {
      * @param id id del Guest.
      * @return {@code true} si existe, {@code false} si no.
      */
-    boolean exists(int id);
+    public boolean exists(String id);
 
     /**
      * Obtiene una entidad Guest por su id.
      * @param id id del Guest.
      * @return la entidad Guest encontrada, o {@code null} si no existe.
      */
-    Guest findById(int id);
+    public Guest findById(String id);
 
     /**
      * Obtiene la lista de entidades Guest.
      * @return un {@code ArrayList} con todos los huespedes.
      */
-    ArrayList<Guest> findAll();
+    public ArrayList<Guest> findAll();
 
     /**
      * Crea o actualiza la entidad Guest dependiendo si ya existe o no.
      * @param Guest la entidad Guest a guardar/actualizar.
      * @return La entidad Guest guardada/creada.
      */
-    Guest save(Guest Guest);
+    public Guest save(Guest Guest);
 
     /**
      * Elimina la entidad Guest por su id.
      * @param id id del Guest.
      * @return {@code true} si se elimino, si no, {@code false}.
      */
-    boolean delete(int id);
+    public boolean delete(String id);
 }

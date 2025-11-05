@@ -18,34 +18,34 @@ public interface IBookingRepository {
      * @param id id del Booking.
      * @return {@code true} si existe, {@code false} si no.
      */
-    boolean exists(int id);
+    public boolean exists(String id);
 
     /**
      * Obtiene una entidad Booking por su id.
      * @param id id del Booking.
      * @return la entidad Booking encontrada, o {@code null} si no existe.
      */
-    Booking findById(int id);
+    public Booking findById(String id);
 
     /**
      * Obtiene la lista de entidades Booking.
      * @return un {@code ArrayList} con todas las reservas.
      */
-    ArrayList<Booking> findAll();
+    public ArrayList<Booking> findAll();
 
     /**
      * Crea o actualiza la entidad Booking dependiendo si ya existe o no.
      * @param Booking la entidad Booking a guardar/actualizar.
      * @return La entidad Booking guardada/creada.
      */
-    Booking save(Booking Booking);
+    public Booking save(Booking Booking);
 
     /**
      * Elimina la entidad Booking por su id.
      * @param id id del Booking.
      * @return {@code true} si se elimino, si no, {@code false}.
      */
-    boolean delete(int id);
+    public boolean delete(String id);
     
     /**
      * Obtiene todas las reservas de una habitacion en concreto 
@@ -55,5 +55,5 @@ public interface IBookingRepository {
      * @param endDate fecha de fin.
      * @return Una lista de reservas de la habitacion en el rango de fechas determinado.
      */
-    ArrayList<Booking> findRoomBookings(Room room, LocalDateTime startDate, LocalDateTime endDate);
+    public ArrayList<Booking> findRoomBookings(Room room, LocalDateTime startDate, LocalDateTime endDate);
 }

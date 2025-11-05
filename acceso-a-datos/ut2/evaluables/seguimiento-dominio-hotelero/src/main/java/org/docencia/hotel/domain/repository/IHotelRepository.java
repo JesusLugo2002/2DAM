@@ -16,32 +16,32 @@ public interface IHotelRepository {
      * @param id id del hotel.
      * @return {@code true} si existe, {@code false} si no.
      */
-    boolean exists(int id);
+    public boolean exists(String id);
 
     /**
      * Obtiene una entidad Hotel por su id.
      * @param id id del hotel.
      * @return la entidad Hotel encontrada, o {@code null} si no existe.
      */
-    Hotel findById(int id);
+    public Hotel findById(String id);
 
     /**
      * Obtiene la lista de entidades Hotel.
      * @return un {@code ArrayList} con todos los hoteles.
      */
-    ArrayList<Hotel> findAll();
+    public ArrayList<Hotel> findAll();
 
     /**
      * Crea o actualiza la entidad Hotel dependiendo si ya existe o no.
      * @param hotel la entidad Hotel a guardar/actualizar.
      * @return La entidad Hotel guardada/creada.
      */
-    Hotel save(Hotel hotel);
+    public Hotel save(Hotel hotel);
 
     /**
      * Elimina la entidad Hotel por su id.
      * @param id id del hotel.
      * @return {@code true} si se elimino, si no, {@code false}.
      */
-    boolean delete(int id);
+    public boolean delete(String id);
 }

@@ -17,39 +17,39 @@ public interface IRoomRepository {
      * @param id id del Room.
      * @return {@code true} si existe, {@code false} si no.
      */
-    boolean exists(int id);
+    public boolean exists(String id);
 
     /**
      * Obtiene una entidad Room por su id.
      * @param id id del Room.
      * @return la entidad Room encontrada, o {@code null} si no existe.
      */
-    Room findById(int id);
+    public Room findById(String id);
 
     /**
      * Obtiene la lista de entidades Room.
      * @return un {@code ArrayList} con todas las habitaciones.
      */
-    ArrayList<Room> findAll();
+    public ArrayList<Room> findAll();
 
     /**
      * Crea o actualiza la entidad Room dependiendo si ya existe o no.
      * @param Room la entidad Room a guardar/actualizar.
      * @return La entidad Room guardada/creada.
      */
-    Room save(Room Room);
+    public Room save(Room Room);
 
     /**
      * Elimina la entidad Room por su id.
      * @param id id del Room.
      * @return {@code true} si se elimino, si no, {@code false}.
      */
-    boolean delete(int id);
+    public boolean delete(String id);
 
     /**
      * Obtiene todas las habitaciones de un hotel concreto.
      * @param hotel Entidad Hotel donde se extraeran sus habitaciones.
      * @return Un {@code ArrayList} con todas las habitaciones del hotel.
      */
-    ArrayList<Room> getRoomsByHotel(Hotel hotel);
+    public ArrayList<Room> getRoomsByHotel(Hotel hotel);
 }

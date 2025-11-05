@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "bookings")
@@ -16,7 +17,8 @@ public class Booking {
 
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    @NotBlank
+    private String id;
 
     @Column(name = "checkIn", nullable = false)
     private LocalDateTime checkIn;
@@ -32,11 +34,21 @@ public class Booking {
     @JoinColumn(name = "guest_id")
     private Guest guest;
 
-    public int getId() {
+    public Booking() {}
+
+    public Booking(String id, LocalDateTime checkIn, LocalDateTime checkOut, Room room, Guest guest) {
+        this.id = id;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.room = room;
+        this.guest = guest;
+    }
+
+    public String getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

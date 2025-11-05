@@ -16,7 +16,8 @@ public class Hotel {
 
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    @NotBlank
+    private String id;
 
     @Column(name = "name", nullable = false)
     @Size(max = 255)
@@ -31,11 +32,22 @@ public class Hotel {
     @OneToMany(mappedBy = "hotel")
     private ArrayList<Room> rooms = new ArrayList<>();
 
-    public int getId() {
+    public Hotel() {
+    }
+
+    public Hotel(String id, @Size(max = 255) @NotBlank String name, @Size(max = 255) @NotBlank String address,
+            ArrayList<Room> rooms) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.rooms = rooms;
+    }
+
+    public String getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

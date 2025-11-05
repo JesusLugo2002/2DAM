@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "rooms")
@@ -16,7 +17,8 @@ public class Room {
 
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    @NotBlank
+    private String id;
 
     @Column(name = "number", nullable = false)
     private int number;
@@ -34,11 +36,23 @@ public class Room {
     @OneToMany(mappedBy = "room")
     private ArrayList<Booking> bookings = new ArrayList<>();
 
-    public int getId() {
+    public Room() {
+    }
+
+    public Room(String id, int number, String type, double pricePerNight, Hotel hotel, ArrayList<Booking> bookings) {
+        this.id = id;
+        this.number = number;
+        this.type = type;
+        this.pricePerNight = pricePerNight;
+        this.hotel = hotel;
+        this.bookings = bookings;
+    }
+
+    public String getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -66,7 +80,7 @@ public class Room {
         this.pricePerNight = pricePerNight;
     }
 
-        public Hotel getHotel() {
+    public Hotel getHotel() {
         return hotel;
     }
 
