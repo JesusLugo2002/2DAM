@@ -1,4 +1,4 @@
-package org.docencia.hotel.domain.model;
+package org.docencia.hotel.model;
 
 import java.util.ArrayList;
 

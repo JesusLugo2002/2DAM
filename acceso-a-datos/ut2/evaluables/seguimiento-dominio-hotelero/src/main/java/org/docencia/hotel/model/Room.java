@@ -1,4 +1,4 @@
-package org.docencia.hotel.domain.model;
+package org.docencia.hotel.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
