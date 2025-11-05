@@ -3,6 +3,8 @@ package org.docencia.hotel.domain.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,6 +23,10 @@ public class Room {
 
     @Column(name = "pricePerNight", nullable = false)
     private double pricePerNight;
+
+    @ManyToOne
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
 
     public int getId() {
         return this.id;
@@ -52,6 +58,14 @@ public class Room {
 
     public void setPricePerNight(double pricePerNight) {
         this.pricePerNight = pricePerNight;
+    }
+
+        public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
 }

@@ -5,10 +5,12 @@ import java.time.LocalDateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Booking")
+@Table(name = "bookings")
 public class Booking {
 
     @Id
@@ -20,6 +22,14 @@ public class Booking {
 
     @Column(name = "checkOut")
     private LocalDateTime checkOut;
+
+    @OneToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
+
+    @OneToOne
+    @JoinColumn(name = "guest_id")
+    private Guest guest;
 
     public int getId() {
         return this.id;
@@ -43,6 +53,22 @@ public class Booking {
 
     public void setCheckOut(LocalDateTime checkOut) {
         this.checkOut = checkOut;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public Guest getGuest() {
+        return guest;
+    }
+
+    public void setGuest(Guest guest) {
+        this.guest = guest;
     }
 
 }

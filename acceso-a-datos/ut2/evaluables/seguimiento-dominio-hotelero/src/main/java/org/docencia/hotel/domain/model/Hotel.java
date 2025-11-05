@@ -1,8 +1,11 @@
 package org.docencia.hotel.domain.model;
 
+import java.util.ArrayList;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -24,6 +27,9 @@ public class Hotel {
     @Size(max = 255)
     @NotBlank
     private String address;
+
+    @OneToMany(mappedBy = "hotel")
+    private ArrayList<Room> rooms = new ArrayList<>();
 
     public int getId() {
         return this.id;
@@ -47,5 +53,13 @@ public class Hotel {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public ArrayList<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(ArrayList<Room> rooms) {
+        this.rooms = rooms;
     }
 }
