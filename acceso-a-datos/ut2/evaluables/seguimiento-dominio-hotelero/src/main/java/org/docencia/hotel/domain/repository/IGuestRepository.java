@@ -27,7 +27,7 @@ public interface IGuestRepository {
 
     /**
      * Obtiene la lista de entidades Guest.
-     * @return un {@code ArrayList} con todos los huespedes.
+     * @return un {@code List} con todos los huespedes.
      */
     public List<Guest> findAll();
 

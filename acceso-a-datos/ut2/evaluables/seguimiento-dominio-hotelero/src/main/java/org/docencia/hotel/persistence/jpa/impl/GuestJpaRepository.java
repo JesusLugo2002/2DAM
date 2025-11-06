@@ -13,5 +13,4 @@ public class GuestJpaRepository extends JpaAbstractRepository<Guest, String> imp
         super(repository);
     }
 
-
 }

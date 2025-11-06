@@ -18,8 +18,7 @@ public class RoomJpaRepository extends JpaAbstractRepository<Room, String> imple
 
     @Override
     public List<Room> getRoomsByHotel(Hotel hotel) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRoomsByHotel'");
+        return hotel.getRooms();
     }
 
 }

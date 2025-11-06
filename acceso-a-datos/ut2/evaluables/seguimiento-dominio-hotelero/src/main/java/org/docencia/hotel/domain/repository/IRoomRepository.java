@@ -28,7 +28,7 @@ public interface IRoomRepository {
 
     /**
      * Obtiene la lista de entidades Room.
-     * @return un {@code ArrayList} con todas las habitaciones.
+     * @return un {@code List} con todas las habitaciones.
      */
     public List<Room> findAll();
 
@@ -49,7 +49,7 @@ public interface IRoomRepository {
     /**
      * Obtiene todas las habitaciones de un hotel concreto.
      * @param hotel Entidad Hotel donde se extraeran sus habitaciones.
-     * @return Un {@code ArrayList} con todas las habitaciones del hotel.
+     * @return Un {@code List} con todas las habitaciones del hotel.
      */
     public List<Room> getRoomsByHotel(Hotel hotel);
 }

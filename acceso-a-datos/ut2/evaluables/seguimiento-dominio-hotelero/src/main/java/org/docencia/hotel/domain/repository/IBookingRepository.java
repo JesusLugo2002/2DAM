@@ -29,7 +29,7 @@ public interface IBookingRepository {
 
     /**
      * Obtiene la lista de entidades Booking.
-     * @return un {@code ArrayList} con todas las reservas.
+     * @return un {@code List} con todas las reservas.
      */
     public List<Booking> findAll();
 
