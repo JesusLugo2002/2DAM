@@ -4,7 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -22,7 +21,7 @@ public class Guest {
 
     @Column(name = "email", nullable = false)
     @NotBlank
-    private Email email;
+    private String email;
 
     @Column(name = "phoneNumber", nullable = false)
     @NotBlank
@@ -30,7 +29,7 @@ public class Guest {
 
     public Guest() {}
 
-    public Guest(String id, @NotBlank String fullname, @NotBlank Email email, @NotBlank String phoneNumber) {
+    public Guest(String id, @NotBlank String fullname, @NotBlank String email, @NotBlank String phoneNumber) {
         this.id = id;
         this.fullname = fullname;
         this.email = email;
@@ -53,11 +52,11 @@ public class Guest {
         this.fullname = fullname;
     }
 
-    public Email getEmail() {
+    public String getEmail() {
         return this.email;
     }
 
-    public void setEmail(Email email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 

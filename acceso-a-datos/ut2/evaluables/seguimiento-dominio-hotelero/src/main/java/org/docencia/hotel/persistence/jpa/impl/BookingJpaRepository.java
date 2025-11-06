@@ -7,13 +7,15 @@ import org.docencia.hotel.domain.repository.IBookingRepository;
 import org.docencia.hotel.model.Booking;
 import org.docencia.hotel.model.Room;
 import org.docencia.hotel.persistence.jpa.abstracts.JpaAbstractRepository;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.docencia.hotel.persistence.jpa.interfaces.IBookingJpaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class BookingJpaRepository extends JpaAbstractRepository<Booking, String> implements IBookingRepository {
 
-    public BookingJpaRepository(JpaRepository<Booking, String> repository) {
+    @Autowired
+    public BookingJpaRepository(IBookingJpaRepository repository) {
         super(repository);
     }
 

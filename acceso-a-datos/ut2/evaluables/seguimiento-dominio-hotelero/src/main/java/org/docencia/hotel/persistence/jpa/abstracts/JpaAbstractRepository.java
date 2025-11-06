@@ -41,6 +41,12 @@ public abstract class JpaAbstractRepository<T, ID> implements CrudInterface<T, I
 
     @Override
     public T save(T entity) {
+        /*
+         * TODO: Hace falta asignar alguna interfaz a entity para usar getId() y setId().
+         * if (entity.getId() == null) {
+         *     entity.setId(UUID.randomUUID().toString())
+         * }
+         */
         return repository.save(entity);
     }
 }
