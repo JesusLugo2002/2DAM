@@ -1,6 +1,6 @@
 package org.docencia.hotel.domain.repository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.docencia.hotel.model.Guest;
 
@@ -29,7 +29,7 @@ public interface IGuestRepository {
      * Obtiene la lista de entidades Guest.
      * @return un {@code ArrayList} con todos los huespedes.
      */
-    public ArrayList<Guest> findAll();
+    public List<Guest> findAll();
 
     /**
      * Crea o actualiza la entidad Guest dependiendo si ya existe o no.

@@ -1,6 +1,6 @@
 package org.docencia.hotel.domain.repository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.docencia.hotel.model.Hotel;
 import org.docencia.hotel.model.Room;
@@ -30,7 +30,7 @@ public interface IRoomRepository {
      * Obtiene la lista de entidades Room.
      * @return un {@code ArrayList} con todas las habitaciones.
      */
-    public ArrayList<Room> findAll();
+    public List<Room> findAll();
 
     /**
      * Crea o actualiza la entidad Room dependiendo si ya existe o no.
@@ -51,5 +51,5 @@ public interface IRoomRepository {
      * @param hotel Entidad Hotel donde se extraeran sus habitaciones.
      * @return Un {@code ArrayList} con todas las habitaciones del hotel.
      */
-    public ArrayList<Room> getRoomsByHotel(Hotel hotel);
+    public List<Room> getRoomsByHotel(Hotel hotel);
 }

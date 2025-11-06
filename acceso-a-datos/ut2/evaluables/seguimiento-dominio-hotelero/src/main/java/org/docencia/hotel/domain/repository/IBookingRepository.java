@@ -1,7 +1,7 @@
 package org.docencia.hotel.domain.repository;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.docencia.hotel.model.Booking;
 import org.docencia.hotel.model.Room;
@@ -31,7 +31,7 @@ public interface IBookingRepository {
      * Obtiene la lista de entidades Booking.
      * @return un {@code ArrayList} con todas las reservas.
      */
-    public ArrayList<Booking> findAll();
+    public List<Booking> findAll();
 
     /**
      * Crea o actualiza la entidad Booking dependiendo si ya existe o no.
@@ -55,5 +55,5 @@ public interface IBookingRepository {
      * @param endDate fecha de fin.
      * @return Una lista de reservas de la habitacion en el rango de fechas determinado.
      */
-    public ArrayList<Booking> findRoomBookings(Room room, LocalDateTime startDate, LocalDateTime endDate);
+    public List<Booking> findRoomBookings(Room room, LocalDateTime startDate, LocalDateTime endDate);
 }

@@ -1,6 +1,6 @@
 package org.docencia.hotel.domain.repository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.docencia.hotel.model.Hotel;
 
@@ -27,9 +27,9 @@ public interface IHotelRepository {
 
     /**
      * Obtiene la lista de entidades Hotel.
-     * @return un {@code ArrayList} con todos los hoteles.
+     * @return un {@code List} con todos los hoteles.
      */
-    public ArrayList<Hotel> findAll();
+    public List<Hotel> findAll();
 
     /**
      * Crea o actualiza la entidad Hotel dependiendo si ya existe o no.
