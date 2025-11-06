@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "bookings")
+@Table(name = "booking")
 public class Booking {
 
     @Id
@@ -20,10 +20,10 @@ public class Booking {
     @NotBlank
     private String id;
 
-    @Column(name = "checkIn", nullable = false)
+    @Column(name = "check_in", nullable = false)
     private LocalDateTime checkIn;
 
-    @Column(name = "checkOut")
+    @Column(name = "check_out")
     private LocalDateTime checkOut;
 
     @ManyToOne

@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "rooms")
+@Table(name = "room")
 public class Room {
 
     @Id
@@ -26,7 +26,7 @@ public class Room {
     @Column(name = "type")
     private String type;
 
-    @Column(name = "pricePerNight", nullable = false)
+    @Column(name = "price_per_night", nullable = false)
     private double pricePerNight;
 
     @ManyToOne

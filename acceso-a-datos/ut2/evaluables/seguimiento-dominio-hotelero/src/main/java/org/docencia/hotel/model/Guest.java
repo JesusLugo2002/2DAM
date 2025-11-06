@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "guests")
+@Table(name = "guest")
 public class Guest {
 
     @Id
@@ -15,7 +15,7 @@ public class Guest {
     @NotBlank
     private String id;
 
-    @Column(name = "fullname", nullable = false)
+    @Column(name = "full_name", nullable = false)
     @NotBlank
     private String fullname;
 
@@ -23,7 +23,7 @@ public class Guest {
     @NotBlank
     private String email;
 
-    @Column(name = "phoneNumber", nullable = false)
+    @Column(name = "phone", nullable = false)
     @NotBlank
     private String phoneNumber;
 
