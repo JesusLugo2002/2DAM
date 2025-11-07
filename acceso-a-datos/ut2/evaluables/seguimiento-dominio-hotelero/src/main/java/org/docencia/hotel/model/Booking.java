@@ -36,8 +36,7 @@ public class Booking {
 
     public Booking() {}
 
-    public Booking(String id, LocalDateTime checkIn, LocalDateTime checkOut, Room room, Guest guest) {
-        this.id = id;
+    public Booking(LocalDateTime checkIn, LocalDateTime checkOut, Room room, Guest guest) {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.room = room;

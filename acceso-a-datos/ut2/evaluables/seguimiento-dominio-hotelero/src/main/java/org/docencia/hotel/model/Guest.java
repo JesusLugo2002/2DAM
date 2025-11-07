@@ -29,8 +29,7 @@ public class Guest {
 
     public Guest() {}
 
-    public Guest(String id, @NotBlank String fullname, @NotBlank String email, @NotBlank String phoneNumber) {
-        this.id = id;
+    public Guest(@NotBlank String fullname, @NotBlank String email, @NotBlank String phoneNumber) {
         this.fullname = fullname;
         this.email = email;
         this.phoneNumber = phoneNumber;

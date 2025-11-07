@@ -1,6 +1,7 @@
 package org.docencia.hotel.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,17 +31,14 @@ public class Hotel {
     private String address;
 
     @OneToMany(mappedBy = "hotel")
-    private ArrayList<Room> rooms = new ArrayList<>();
+    private List<Room> rooms = new ArrayList<>();
 
     public Hotel() {
     }
 
-    public Hotel(String id, @Size(max = 255) @NotBlank String name, @Size(max = 255) @NotBlank String address,
-            ArrayList<Room> rooms) {
-        this.id = id;
+    public Hotel(@Size(max = 255) @NotBlank String name, @Size(max = 255) @NotBlank String address) {
         this.name = name;
         this.address = address;
-        this.rooms = rooms;
     }
 
     public String getId() {
@@ -67,11 +65,11 @@ public class Hotel {
         this.address = address;
     }
 
-    public ArrayList<Room> getRooms() {
+    public List<Room> getRooms() {
         return rooms;
     }
 
-    public void setRooms(ArrayList<Room> rooms) {
+    public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
     }
 }
