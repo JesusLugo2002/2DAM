@@ -1,0 +1,8 @@
+alias r := run
+run:
+    mvn clean spring-boot:run
+
+alias t := test
+test:
+    mvn clean test
+

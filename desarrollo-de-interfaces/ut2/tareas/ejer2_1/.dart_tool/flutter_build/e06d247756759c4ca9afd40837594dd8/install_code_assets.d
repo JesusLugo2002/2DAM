@@ -1,0 +1,1 @@
+ /home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_1/.dart_tool/flutter_build/e06d247756759c4ca9afd40837594dd8/native_assets.json: 
