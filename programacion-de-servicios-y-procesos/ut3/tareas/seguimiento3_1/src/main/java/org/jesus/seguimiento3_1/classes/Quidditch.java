@@ -3,12 +3,23 @@ package org.jesus.seguimiento3_1.classes;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * Clase Quidditch
+ * Simula una partida de Quidditch donde los equipos van puntuando de forma
+ * aleatoria hasta que la snitch dorada sea atrapada.
+ * @author JesusLugo2002
+ */
 public class Quidditch {
     static volatile boolean snitchObtained = false;
     static int aTeamScore = 0;
     static int bTeamScore = 0;
     static ReentrantLock lock = new ReentrantLock();
 
+    /**
+     * Clase HunterA
+     * Cazador designado para anotar puntos al equipo A.
+     * @author JesusLugo2002
+     */
     public static class HunterA implements Runnable {
 
         @Override
@@ -33,6 +44,11 @@ public class Quidditch {
         
     } 
 
+    /**
+     * Clase HunterB
+     * Cazador designado para anotar puntos al equipo B.
+     * @author JesusLugo2002
+     */
     public static class HunterB implements Runnable {
 
         @Override
@@ -57,6 +73,12 @@ public class Quidditch {
         
     } 
 
+    /**
+     * Clase SnitchHunter
+     * Persona destinada a atrapar la snitch con una probabilidad aleatoria. Una vez
+     * sea atrapada, la partida finaliza.
+     * @author JesusLugo2002
+     */
     public static class SnitchHunter implements Runnable {
 
         @Override

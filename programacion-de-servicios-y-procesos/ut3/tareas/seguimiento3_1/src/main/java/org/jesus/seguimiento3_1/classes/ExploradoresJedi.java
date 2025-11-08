@@ -2,6 +2,12 @@ package org.jesus.seguimiento3_1.classes;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Clase ExploradoresJedi
+ * Simula la competencia de dos exploradores Jedi para encontrar una
+ * pista en algun planeta.
+ * @author JesusLugo2002
+ */
 public class ExploradoresJedi {
     static volatile Boolean hintFound = false;
     static volatile String winner = null;
@@ -14,6 +20,12 @@ public class ExploradoresJedi {
         return winner;
     }
 
+    /**
+     * Clase Jedi
+     * Representa un Jedi / buscador de pistas, al cual se le asigna un nombre
+     * y el planeta donde realizara la busqueda.
+     * @author JesusLugo2002
+     */
     public static class Jedi implements Runnable {
         String name;
         String planet;
@@ -23,6 +35,10 @@ public class ExploradoresJedi {
             this.planet = planet;
         }
 
+        /**
+         * Una vez comience la busqueda, se determina un tiempo restante aleatorio para
+         * encontrar la pista. Cuando este tiempo termine, se le da la victoria al Jedi.
+         */
         @Override
         public void run() {
             try {
