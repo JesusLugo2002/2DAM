@@ -1,9 +1,7 @@
-package org.jesus.seguimiento3_1;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import org.jesus.seguimiento3_1.classes.FabricaDroids;
+import org.jesus.seguimiento3_1.FabricaDroids;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
