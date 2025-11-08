@@ -8,8 +8,8 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author JesusLugo2002
  */
 public class CazaHorrocruxes {
-    static volatile Boolean found = false;
-    static volatile String winner = null;
+    public static volatile Boolean found = false;
+    public static volatile String winner = null;
     private static final int MIN_RANDOM_TIME_IN_MS = 500;
     private static final int MAX_RANDOM_TIME_IN_MS = 2000;
 

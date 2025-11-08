@@ -13,7 +13,6 @@ public class CazaHorrocruxesTest {
     public void testCazaHorrocruxes() throws InterruptedException {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-
         Thread harry = new Thread(new CazaHorrocruxes.Hunter("Harry", "Bosque prohibido"));
         Thread hermione = new Thread(new CazaHorrocruxes.Hunter("Hermione", "Biblioteca antigua"));
         Thread ron = new Thread(new CazaHorrocruxes.Hunter("Ron", "Mazmorras del castillo"));
@@ -27,9 +26,9 @@ public class CazaHorrocruxesTest {
         ron.join();
 
         String output = outContent.toString();
-        Assertions.assertTrue(output.contains("Harry encontró un Horrocrux en Bosque prohibido")
-                || output.contains("Hermione encontró un Horrocrux en Biblioteca antigua")
-                || output.contains("Ron encontró un Horrocrux en Mazmorras del castillo"));
+        Assertions.assertTrue(CazaHorrocruxes.found);
+        Assertions.assertTrue(output.contains(CazaHorrocruxes.winner));
+        Assertions.assertEquals(2, output.split("Horrocrux").length);;
     }
 
 }
