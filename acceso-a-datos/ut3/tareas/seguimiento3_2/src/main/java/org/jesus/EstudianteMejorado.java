@@ -17,10 +17,15 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class EstudianteMejorado implements Runnable {
 
-    private final String name;
+    private String name;
     private static final Semaphore semaphore = new Semaphore(4);
     private static final int MIN_POSSIBLE_TIME_IN_MS = 3000;
     private static final int MAX_POSSIBLE_TIME_IN_MS = 5000;
+
+    /**
+     * Constructor por defecto
+     */
+    public EstudianteMejorado() {}
 
     /**
      * Constructor con asignacion del nombre.
@@ -54,7 +59,7 @@ public class EstudianteMejorado implements Runnable {
         }
     }
     
-    public static void main(String[] args) {
+    public void main(String[] args) {
         List<String> names = Arrays.asList("Jesus", "Rashi", "German", "Joseph", "Cesar", "David");
         HashSet<Thread> students = new HashSet<Thread>();
         names.forEach((name) -> students.add(new Thread(new EstudianteMejorado(name))));

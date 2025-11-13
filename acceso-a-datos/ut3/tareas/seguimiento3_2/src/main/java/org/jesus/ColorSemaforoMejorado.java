@@ -14,8 +14,14 @@ public class ColorSemaforoMejorado implements Runnable {
     private static final Semaphore greenTurn = new Semaphore(0);
     private static final Semaphore yellowTurn = new Semaphore(0);
 
-    private final Color color;
+    private Color color;
     private final static int PROGRAM_LIFETIME_IN_MS = 20000;
+
+    
+    /**
+     * Constructor por defecto
+     */
+    public ColorSemaforoMejorado() {}
 
     /**
      * Constructor con asignacion del color
@@ -71,7 +77,7 @@ public class ColorSemaforoMejorado implements Runnable {
         }
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public void main(String[] args) throws InterruptedException {
         Thread semaforoRojo = new Thread(new ColorSemaforoMejorado(Color.ROJO));
         Thread semaforoVerde = new Thread(new ColorSemaforoMejorado(Color.VERDE));
         Thread semaforoAmbar = new Thread(new ColorSemaforoMejorado(Color.AMBAR));

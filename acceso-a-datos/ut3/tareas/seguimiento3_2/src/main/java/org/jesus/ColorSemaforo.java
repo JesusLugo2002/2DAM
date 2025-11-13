@@ -10,9 +10,15 @@ import java.util.concurrent.Semaphore;
 public class ColorSemaforo implements Runnable {
     
     private static final Semaphore semaphore = new Semaphore(1, true);
-    private final Color color;
+    private Color color;
     private final static int PROGRAM_LIFETIME_IN_MS = 20000;
+
     
+    /**
+     * Constructor por defecto
+     */
+    public ColorSemaforo() {}
+
     /**
      * Constructor con asignacion del color
      * @param color color a asignar
@@ -46,7 +52,7 @@ public class ColorSemaforo implements Runnable {
         }
     }
     
-    public static void main(String[] args) throws InterruptedException {
+    public void main(String[] args) throws InterruptedException {
         Thread semaforoRojo = new Thread(new ColorSemaforo(Color.ROJO));
         Thread semaforoVerde = new Thread(new ColorSemaforo(Color.VERDE));
         Thread semaforoAmbar = new Thread(new ColorSemaforo(Color.AMBAR));
