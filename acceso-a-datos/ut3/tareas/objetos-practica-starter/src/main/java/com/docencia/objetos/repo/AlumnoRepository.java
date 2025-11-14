@@ -9,6 +9,6 @@ public interface AlumnoRepository {
   Optional<Alumno> findById(Long id);
   Alumno save(Alumno alumno);
   boolean existsByEmail(String email);
-  void deleteById(Long id);
+  boolean deleteById(Long id);
   long count();
 }
