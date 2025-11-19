@@ -1,6 +1,7 @@
 package com.docencia.objetos.repo;
 
 import com.docencia.objetos.domain.Alumno;
+import com.docencia.objetos.mapper.AlumnoMapperUtils;
 import com.docencia.objetos.repo.jpa.AlumnoEntity;
 import com.docencia.objetos.repo.jpa.AlumnoJpaRepository;
 import org.springframework.context.annotation.Profile;
@@ -21,33 +22,32 @@ public class AlumnoRepositoryJpaAdapter implements AlumnoRepository {
 
   @Override
   public List<Alumno> findAll() {
-    throw new UnsupportedOperationException("TODO: implementar usando jpa.findAll() y mapear a dominio");
+    return AlumnoMapperUtils.to(jpa.findAll());
   }
 
   @Override
   public Optional<Alumno> findById(Long id) {
-    throw new UnsupportedOperationException("TODO: implementar usando jpa.findById() y mapear a dominio");
+    return AlumnoMapperUtils.to(jpa.findById(id));
   }
 
   @Override
   public Alumno save(Alumno alumno) {
-    throw new UnsupportedOperationException("TODO: mapear dominio->entidad, jpa.save, entidad->dominio");
+    return AlumnoMapperUtils.to(jpa.save(AlumnoMapperUtils.to(alumno)));
   }
 
   @Override
   public boolean existsByEmail(String email) {
-    throw new UnsupportedOperationException("TODO: implementar (método derivado en JPA o consulta)");
+    return jpa.existsByEmail(email);
   }
 
   @Override
-  public void deleteById(Long id) {
-    throw new UnsupportedOperationException("TODO: implementar jpa.deleteById(id)");
+  public boolean deleteById(Long id) {
+    jpa.deleteById(id);
+    return true;
   }
 
   @Override
   public long count() {
-    throw new UnsupportedOperationException("TODO: implementar jpa.count()");
+    return jpa.count();
   }
-
-  // TODO: métodos de mapeo toDomain/toEntity
 }
