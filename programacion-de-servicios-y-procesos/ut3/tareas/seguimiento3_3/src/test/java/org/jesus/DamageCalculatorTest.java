@@ -23,7 +23,7 @@ public class DamageCalculatorTest {
     void testAttackCalculatorWorksCorrectly() throws InterruptedException, ExecutionException {
         ByteArrayOutputStream outContent = TestUtils.catchOutput();
         ExecutorService pool = Executors.newFixedThreadPool(1);
-        Attack attack = new Attack("Zekken", 100, 0.25, 1.5);
+        Attack attack = new Attack("Zekken", 100, 0.25, 1.5, 1.0);
         pool.submit(new DamageCalculator.CalculateDamageTask(attack)).get();
         String output = outContent.toString();
         Assertions.assertTrue(output.contains("¡CRÍTICO!") || output.contains("golpe normal"));
@@ -34,10 +34,21 @@ public class DamageCalculatorTest {
     void testCriticalAttackPrintCorrectly() throws InterruptedException, ExecutionException {
         ByteArrayOutputStream outContent = TestUtils.catchOutput();
         ExecutorService pool = Executors.newFixedThreadPool(1);
-        Attack attack = new Attack("Zekken", 100, 1, 1.5);
+        Attack attack = new Attack("Zekken", 100, 1, 1.5, 1.0);
         pool.submit(new DamageCalculator.CalculateDamageTask(attack)).get();
         String output = outContent.toString();
         Assertions.assertTrue(output.contains("¡CRÍTICO!"));
+        pool.shutdown();
+    }
+
+    @Test
+    void testMissAttackPrintCorrectly() throws InterruptedException, ExecutionException {
+        ByteArrayOutputStream outContent = TestUtils.catchOutput();
+        ExecutorService pool = Executors.newFixedThreadPool(1);
+        Attack attack = new Attack("Zekken", 100, 1, 1.5, 0);
+        pool.submit(new DamageCalculator.CalculateDamageTask(attack)).get();
+        String output = outContent.toString();
+        Assertions.assertTrue(output.contains("Falló!"));
         pool.shutdown();
     }
 
