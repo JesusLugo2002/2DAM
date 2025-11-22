@@ -3,6 +3,8 @@ package org.jesus;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.jesus.utils.ThreadLogger;
+
 /**
  * Clase DungeonsServer.
  * Servidor de mazmorras online que gestionar la entrada de jugadores en sus
@@ -50,16 +52,16 @@ public class DungeonsServer {
          */
         @Override
         public void run() {
-            String thread = "[" + Thread.currentThread().getName() + "]";
-            System.out.println(thread + " Loading dungeon '" + dungeon + "' for the player " + player);
+            ThreadLogger logger = new ThreadLogger(Thread.currentThread());
+            logger.out("Loading dungeon '" + dungeon + "' for the player " + player);
             try {
                 Thread.sleep(1000 + (int) (Math.random() * 1000));
             } catch (InterruptedException e) {
-                System.out.println(thread + " Interrupted " + player + " request.");
+                logger.out("Interrupted " + player + " request.");
                 Thread.currentThread().interrupt();
                 return;
             }
-            System.out.println(thread + " Dungeon '" + dungeon + "' completed by " + player);
+            logger.out("Dungeon '" + dungeon + "' completed by " + player);
         }
     }
 

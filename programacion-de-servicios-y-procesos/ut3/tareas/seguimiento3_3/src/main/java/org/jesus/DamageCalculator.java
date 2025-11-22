@@ -8,6 +8,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import org.jesus.utils.ThreadLogger;
+
 /**
  * Clase DamageCalculator.
  * Simula el ataque de una raid donde cada jugador lanza un ataque
@@ -39,7 +41,7 @@ public class DamageCalculator {
          * @param baseDamage - Danio base.
          * @param critChance - Probabilidad de critico (0.25 = 25%)
          * @param critDamage - Danio critico (2.0 = x2)
-         * @param precision - Probabilidad de asestar el golpe. (0.75 = 75%)
+         * @param precision  - Probabilidad de asestar el golpe. (0.75 = 75%)
          */
         Attack(String attacker, int baseDamage, double critChance, double critDamage, double precision) {
             this.attacker = attacker;
@@ -79,20 +81,18 @@ public class DamageCalculator {
          */
         @Override
         public Integer call() throws Exception {
-            String thread = "[" + Thread.currentThread().getName() + "]";
-            System.out.println(thread + " Calculando daño para " + attack.attacker);
+            ThreadLogger logger = new ThreadLogger(Thread.currentThread());
+            logger.out("Calculando daño para " + attack.attacker);
             boolean hitSuccessful = Math.random() < attack.precision;
             if (!hitSuccessful) {
-                System.out.println(thread + " ¡Falló! No ha asestado el golpe.");
+                logger.out("¡Falló! No ha asestado el golpe.");
                 return 0;
             }
             boolean isCritical = Math.random() < attack.critChance;
             double multiplier = isCritical ? attack.critDamage : 1.0;
             Thread.sleep(500 + (int) (Math.random() * 500));
             int finalDamage = (int) (attack.baseDamage * multiplier);
-            System.out.println(thread + " " + attack.attacker +
-                    (isCritical ? " ¡CRÍTICO!" : " golpe normal") +
-                    " -> daño: " + finalDamage);
+            logger.out(attack.attacker + (isCritical ? " ¡CRÍTICO!" : " golpe normal") + " -> daño: " + finalDamage);
             return finalDamage;
         }
     }

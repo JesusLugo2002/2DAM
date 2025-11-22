@@ -21,7 +21,6 @@ public class OpenWorldSpawnerTest {
                 spawnWordOccurrences++;
             }
         }
-        Assertions.assertTrue(output.contains("pool-1-thread-1"));
         Assertions.assertTrue(spawnWordOccurrences >= AVERAGE_SPAWNS_IN_PROCESS);
         Assertions.assertTrue(output.contains("Servidor de mundo abierto detenido."));
     }

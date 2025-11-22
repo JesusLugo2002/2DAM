@@ -1,9 +1,10 @@
 package org.jesus;
 
-import java.time.LocalTime;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import org.jesus.utils.ThreadLogger;
 
 /**
  * Clase OpenWorldSpawner.
@@ -46,11 +47,10 @@ public class OpenWorldSpawner {
          */
         @Override
         public void run() {
-            String thread = "[" + Thread.currentThread().getName() + "]";
-            String time = "[" + LocalTime.now() + "]";
+            ThreadLogger logger = new ThreadLogger(Thread.currentThread());
             String zone = zones[(int) (Math.random() * zones.length)];
             String enemy = enemies[(int) (Math.random() * enemies.length)];
-            System.out.println(time + thread + " Spawn de " + enemy + " en " + zone);
+            logger.out("Spawn de " + enemy + " en " + zone, true);
         }
     }
 
