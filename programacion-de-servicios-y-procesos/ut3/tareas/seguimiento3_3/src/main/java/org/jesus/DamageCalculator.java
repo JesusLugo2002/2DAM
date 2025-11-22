@@ -30,6 +30,7 @@ public class DamageCalculator {
         final int baseDamage;
         final double critChance;
         final double critDamage;
+        final double precision;
 
         /**
          * Constructor con asignacion de valores.
@@ -38,12 +39,14 @@ public class DamageCalculator {
          * @param baseDamage - Danio base.
          * @param critChance - Probabilidad de critico (0.25 = 25%)
          * @param critDamage - Danio critico (2.0 = x2)
+         * @param precision - Probabilidad de asestar el golpe. (0.75 = 75%)
          */
-        Attack(String attacker, int baseDamage, double critChance, double critDamage) {
+        Attack(String attacker, int baseDamage, double critChance, double critDamage, double precision) {
             this.attacker = attacker;
             this.baseDamage = baseDamage;
             this.critChance = critChance;
             this.critDamage = critDamage;
+            this.precision = precision;
         }
     }
 
@@ -78,6 +81,11 @@ public class DamageCalculator {
         public Integer call() throws Exception {
             String thread = "[" + Thread.currentThread().getName() + "]";
             System.out.println(thread + " Calculando daño para " + attack.attacker);
+            boolean hitSuccessful = Math.random() < attack.precision;
+            if (!hitSuccessful) {
+                System.out.println(thread + " ¡Falló! No ha asestado el golpe.");
+                return 0;
+            }
             boolean isCritical = Math.random() < attack.critChance;
             double multiplier = isCritical ? attack.critDamage : 1.0;
             Thread.sleep(500 + (int) (Math.random() * 500));
@@ -95,14 +103,14 @@ public class DamageCalculator {
 
         // Simulacion de la raid - Se crean los ataques.
         Attack[] attacks = {
-                new Attack("Mago del Fuego", 120, 0.30, 2.5),
-                new Attack("Guerrero", 150, 0.15, 2.0),
-                new Attack("Pícaro", 90, 0.50, 3.0),
-                new Attack("Arquera Élfica", 110, 0.35, 2.2),
-                new Attack("Invocador", 80, 0.40, 2.8),
-                new Attack("Paladín", 130, 0.10, 1.8),
-                new Attack("Bárbaro", 160, 0.20, 2.1),
-                new Attack("Nigromante", 100, 0.25, 2.3),
+                new Attack("Mago del Fuego", 120, 0.30, 2.5, 0.5),
+                new Attack("Guerrero", 150, 0.15, 2.0, 1.0),
+                new Attack("Pícaro", 90, 0.50, 3.0, 1.0),
+                new Attack("Arquera Élfica", 110, 0.35, 2.2, 0.9),
+                new Attack("Invocador", 80, 0.40, 2.8, 0.9),
+                new Attack("Paladín", 130, 0.10, 1.8, 0.5),
+                new Attack("Bárbaro", 160, 0.20, 2.1, 0.7),
+                new Attack("Nigromante", 100, 0.25, 2.3, 0.5),
         };
 
         // Enviamos todas las tareas al pool
@@ -124,8 +132,10 @@ public class DamageCalculator {
                 System.out.println("Error calculando daño: " + e.getCause());
             }
         }
+        int averageDamage = totalRaidDamage / attacks.length;
 
         System.out.println("Daño total de la raid: " + totalRaidDamage);
+        System.out.println("Daño promedio de la raid: " + averageDamage);
         pool.shutdown();
     }
 }
