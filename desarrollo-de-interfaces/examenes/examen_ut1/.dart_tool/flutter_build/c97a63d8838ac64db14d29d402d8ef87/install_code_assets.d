@@ -1,0 +1,1 @@
+ /home/dam/repos/2DAM/desarrollo-de-interfaces/examenes/examen_ut1/.dart_tool/flutter_build/c97a63d8838ac64db14d29d402d8ef87/native_assets.json: 
