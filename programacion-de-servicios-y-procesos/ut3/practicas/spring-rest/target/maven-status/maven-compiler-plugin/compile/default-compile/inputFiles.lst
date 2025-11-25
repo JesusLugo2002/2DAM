@@ -1,0 +1,8 @@
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut3/practicas/spring-rest/src/main/java/com/docencia/rest/RestApplication.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut3/practicas/spring-rest/src/main/java/com/docencia/rest/ServletInitializer.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut3/practicas/spring-rest/src/main/java/com/docencia/rest/controller/UsersController.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut3/practicas/spring-rest/src/main/java/com/docencia/rest/exceptions/ResourceNotFoundException.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut3/practicas/spring-rest/src/main/java/com/docencia/rest/model/User.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut3/practicas/spring-rest/src/main/java/com/docencia/rest/repo/jpa/UserRepository.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut3/practicas/spring-rest/src/main/java/com/docencia/rest/service/UserService.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut3/practicas/spring-rest/src/main/java/com/docencia/rest/service/interfaces/UserServiceInterface.java
