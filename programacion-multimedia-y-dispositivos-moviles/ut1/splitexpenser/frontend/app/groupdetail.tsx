@@ -15,9 +15,16 @@ export default function Login() {
   ]);
   const router = useRouter();
 
-  const handleDelete = () => {
-    console.log("Borro");
-    Alert.alert("Voy a borrar");
+  const handleDelete = (id: string) => {
+    console.log(`Borro el id: ${id}`);
+    Alert.alert(`Voy a borrar el id: ${id}`);
+    for (let index = 0; index < expenses.length; index++) {
+      if (expenses[index].id === id) {
+        expenses.splice(index);
+        setExpenses([...expenses]);
+        break;
+      }      
+    }
   };
 
   const handleEdit = () => {
@@ -33,7 +40,7 @@ export default function Login() {
             onPress={() => router.replace("/groupdetail")}
           >{`Precio: ${e.amount} - ${e.desc}`}</Text>
           <Button title="Editar" onPress={handleEdit} />
-          <Button title="Borrar" onPress={handleDelete} />
+          <Button title="Borrar" onPress={() => handleDelete(e.id)} />
         </View>
       ))}
 
