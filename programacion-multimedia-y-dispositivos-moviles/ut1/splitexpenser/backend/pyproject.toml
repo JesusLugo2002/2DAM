@@ -1,0 +1,21 @@
+[project]
+name = "splitexpenser"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "flask>=3.1.2",
+    "flask-cors>=6.0.1",
+    "flask-jwt-extended>=4.7.1",
+    "flask-restplus>=0.13.0",
+    "flask-restx>=1.3.2",
+    "flask-sqlalchemy>=3.1.1",
+    "gunicorn>=23.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.1",
+    "pytest-flask>=1.3.0",
+]
