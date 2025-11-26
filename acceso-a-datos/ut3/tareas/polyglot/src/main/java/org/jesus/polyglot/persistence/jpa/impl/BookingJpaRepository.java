@@ -1,6 +1,7 @@
 package org.jesus.polyglot.persistence.jpa.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.jesus.polyglot.domain.repository.BookingRepository;
 import org.jesus.polyglot.model.Booking;
@@ -18,9 +19,20 @@ public class BookingJpaRepository extends AbstractJpaRepository<Booking, Integer
         super(repository);
     }
 
+    // @Override
+    // public List<Booking> findByRoomBetweenDates(Room room, String checkIn, String checkOut) {
+    //     return repository.findByRoomBetweenDates(room, checkIn, checkOut);
+    // }
+
+    @Override
+    public Optional<Booking> find(Booking booking) {
+        return findById(booking.getId());
+    }
+
     @Override
     public List<Booking> findByRoomBetweenDates(Room room, String checkIn, String checkOut) {
-        return repository.findByRoomBetweenDates(room, checkIn, checkOut);
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findByRoomBetweenDates'");
     }
 
 }

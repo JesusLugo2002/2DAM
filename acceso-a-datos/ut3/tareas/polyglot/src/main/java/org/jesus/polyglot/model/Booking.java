@@ -1,7 +1,5 @@
 package org.jesus.polyglot.model;
 
-import org.jesus.polyglot.model.generic.Identifiable;
-
 import jakarta.persistence.*;
 
 /**
@@ -13,7 +11,7 @@ import jakarta.persistence.*;
  */
 @Entity
 @Table
-public class Booking implements Identifiable {
+public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

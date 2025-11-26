@@ -1,0 +1,1 @@
+ /home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_6/.dart_tool/flutter_build/670ee1039dd8ba1a33110c498fe1a1ee/dart_build_result.json: 

@@ -3,8 +3,6 @@ package org.jesus.polyglot.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jesus.polyglot.model.generic.Identifiable;
-
 import jakarta.persistence.*;
 
 /**
@@ -15,7 +13,7 @@ import jakarta.persistence.*;
  */
 @Entity
 @Table(name = "hotels")
-public class Hotel implements Identifiable {
+public class Hotel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

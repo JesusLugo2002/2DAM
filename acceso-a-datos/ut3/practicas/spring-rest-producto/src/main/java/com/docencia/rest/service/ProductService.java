@@ -3,6 +3,7 @@ package com.docencia.rest.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.docencia.rest.model.Product;
@@ -14,6 +15,7 @@ public class ProductService implements ProductServiceInterface {
 
     private ProductRepository repository;
 
+    @Autowired
     public void setRepository(ProductRepository repository) {
         this.repository = repository;
     }
@@ -47,7 +49,6 @@ public class ProductService implements ProductServiceInterface {
 
     @Override
     public Product save(Product product) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        return repository.save(product);
     }
 }

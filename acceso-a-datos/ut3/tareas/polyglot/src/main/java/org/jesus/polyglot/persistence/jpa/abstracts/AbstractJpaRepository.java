@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.jesus.polyglot.domain.repository.shared.GenericRepository;
-import org.jesus.polyglot.model.generic.Identifiable;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -40,10 +38,7 @@ public abstract class AbstractJpaRepository<ENTITY, ID> implements GenericReposi
     }
 
     @Override
-    public Optional<ENTITY> find(ENTITY entity) {
-        // TODO: Implementar Identifiable en Entity para habilitar getId()
-        return findById(entity.getId());
-    }
+    public abstract Optional<ENTITY> find(ENTITY entity);
 
     @Override
     public List<ENTITY> findAll() {

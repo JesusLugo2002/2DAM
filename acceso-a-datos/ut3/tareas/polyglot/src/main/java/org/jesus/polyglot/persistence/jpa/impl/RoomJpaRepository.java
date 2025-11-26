@@ -1,6 +1,7 @@
 package org.jesus.polyglot.persistence.jpa.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.jesus.polyglot.domain.repository.RoomRepository;
 import org.jesus.polyglot.model.Hotel;
@@ -22,5 +23,11 @@ public class RoomJpaRepository extends AbstractJpaRepository<Room, Integer> impl
     public List<Room> findByHotel(Hotel hotel) {
         return repository.findAllByHotel(hotel);
     }
+
+    @Override
+    public Optional<Room> find(Room room) {
+        return findById(room.getId());
+    }
+    
 
 }

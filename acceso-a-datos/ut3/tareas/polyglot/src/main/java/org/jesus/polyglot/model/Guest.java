@@ -1,6 +1,5 @@
 package org.jesus.polyglot.model;
 
-import org.jesus.polyglot.model.generic.Identifiable;
 import org.jesus.polyglot.model.nosql.GuestPreferences;
 
 import jakarta.persistence.*;
@@ -14,7 +13,7 @@ import jakarta.persistence.*;
  */
 @Entity
 @Table(name = "guests")
-public class Guest implements Identifiable {
+public class Guest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,6 +27,10 @@ public class Guest implements Identifiable {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @OneToOne
+    @JoinColumn(name = "booking_id")
+    private Booking booking;
 
     @Transient
     private GuestPreferences preferences;

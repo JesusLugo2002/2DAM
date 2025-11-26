@@ -1,5 +1,7 @@
 package org.jesus.polyglot.persistence.jpa.impl;
 
+import java.util.Optional;
+
 import org.jesus.polyglot.domain.repository.HotelRepository;
 import org.jesus.polyglot.model.Hotel;
 import org.jesus.polyglot.persistence.jpa.abstracts.AbstractJpaRepository;
@@ -13,5 +15,8 @@ public class HotelJpaRepository extends AbstractJpaRepository<Hotel, Integer> im
         super(repository);
     }
 
-
+    @Override
+    public Optional<Hotel> find(Hotel hotel) {
+        return findById(hotel.getId());
+    }
 }
