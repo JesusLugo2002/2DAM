@@ -13,7 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>polyglot</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Ejercicio de seguimiento sobre BBDD de SQL y NoSQL</description>
 	<url/>
 	<licenses>
 		<license/>
