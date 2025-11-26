@@ -29,7 +29,7 @@ public class Room {
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Booking> bookings = new ArrayList<>();
 
     /**
@@ -44,7 +44,7 @@ public class Room {
      * @param id - Identificador unico de la habitacion.
      */
     public Room(int id) {
-        setId(id);
+        this.id = id;
     }
 
     /**
@@ -58,6 +58,14 @@ public class Room {
         this.number = number;
         this.pricePerNight = pricePerNight;
         this.hotel = hotel;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 
     public int getId() {
@@ -92,9 +100,4 @@ public class Room {
         this.hotel = hotel;
     }
 
-    @Override
-    public String toString() {
-        return "Room [id=" + getId() + ", number=" + number + ", pricePerNight=" + pricePerNight + ", hotel=" + hotel
-                + "]";
-    }
 }

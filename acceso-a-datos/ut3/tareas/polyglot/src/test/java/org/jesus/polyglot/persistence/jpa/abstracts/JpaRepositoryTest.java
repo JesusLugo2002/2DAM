@@ -1,5 +1,7 @@
 package org.jesus.polyglot.persistence.jpa.abstracts;
 
+import java.util.List;
+
 import org.jesus.polyglot.model.Booking;
 import org.jesus.polyglot.model.Guest;
 import org.jesus.polyglot.model.Hotel;
@@ -14,8 +16,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-
-import jakarta.transaction.Transactional;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -44,6 +44,7 @@ public class JpaRepositoryTest {
     private Room roomB;
     private final int roomBNumber = 505;
     private final double roomBPrice = 35.5;
+    
     private Guest guest;
     private final String guestName = "Alan Wake";
     private final String guestEmail = "alanwake@example.es";
@@ -53,9 +54,8 @@ public class JpaRepositoryTest {
     private final String bookingCheckIn = "01-01-2024";
     private final String bookingCheckOut = "01-01-2025";
 
-    @Transactional
     @BeforeEach
-    void BeforeEach() {
+    void beforeEach() {
         hotel = new Hotel(hotelName, hotelAddress);
         hotelRepository.save(hotel);
 
@@ -69,15 +69,45 @@ public class JpaRepositoryTest {
 
         booking = new Booking(bookingCheckIn, bookingCheckOut, roomA, guest);
         bookingRepository.save(booking);
-    }
-    
-    @Test
-    void testEntitiesExistsInBBDD() {
+
         Assertions.assertTrue(hotelRepository.existsById(hotel.getId()));
         Assertions.assertTrue(roomRepository.existsById(roomA.getId()));
         Assertions.assertTrue(roomRepository.existsById(roomB.getId()));
         Assertions.assertTrue(guestRepository.existsById(guest.getId()));
         Assertions.assertTrue(bookingRepository.existsById(booking.getId()));
+    }
+
+    @Test
+    void testFindAll() {
+        List<Guest> guests = guestRepository.findAll();
+        Assertions.assertTrue(guests.size() == 1);
+    }
+
+    @Test
+    void testFind() {
+        Hotel hotelFound = hotelRepository.find(hotel).get();
+        Assertions.assertNotNull(hotelFound);
+        Assertions.assertEquals(hotelFound.getName(), hotel.getName());
+    }
+
+    @Test
+    void testFindById() {
+        Booking bookingFound = bookingRepository.findById(booking.getId()).get();
+        Assertions.assertEquals(bookingFound.getRoom().getNumber(), booking.getRoom().getNumber());
+    }
+
+    @Test
+    void testDeleteById() {
+        List<Room> startingRooms = roomRepository.findAll();
+        Assertions.assertTrue(roomRepository.deleteById(roomA.getId()));
+        Assertions.assertTrue(startingRooms.size() > roomRepository.findAll().size());
+    }
+
+    @Test
+    void testDelete() {
+        List<Room> startingRooms = roomRepository.findAll();
+        Assertions.assertTrue(roomRepository.delete(roomA));
+        Assertions.assertTrue(startingRooms.size() > roomRepository.findAll().size());
     }
 
 }

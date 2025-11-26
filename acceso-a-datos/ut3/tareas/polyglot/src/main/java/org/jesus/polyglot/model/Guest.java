@@ -47,7 +47,7 @@ public class Guest {
      * @param id - Identificador unico del huesped.
      */
     public Guest(int id) {
-        setId(id);
+        this.id = id;
     }
 
     /**
@@ -95,8 +95,4 @@ public class Guest {
         this.phoneNumber = phoneNumber;
     }
 
-    @Override
-    public String toString() {
-        return "Guest [id=" + getId() + ", fullname=" + fullname + ", email=" + email + ", phoneNumber=" + phoneNumber + "]";
-    }
 }

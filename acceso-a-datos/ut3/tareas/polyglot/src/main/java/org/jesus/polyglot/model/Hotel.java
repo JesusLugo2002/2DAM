@@ -40,7 +40,7 @@ public class Hotel {
      * @param id - Identificador unico del hotel.
      */
     public Hotel(int id) {
-        setId(id);
+        this.id = id;
     }
 
     /**
@@ -86,8 +86,4 @@ public class Hotel {
         this.rooms = rooms;
     }
 
-    @Override
-    public String toString() {
-        return "Hotel [id=" + getId() + ", name=" + name + ", address=" + address + ", rooms=" + rooms + "]";
-    }
 }

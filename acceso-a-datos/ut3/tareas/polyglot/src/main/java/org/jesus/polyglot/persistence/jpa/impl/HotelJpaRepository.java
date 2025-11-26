@@ -19,4 +19,9 @@ public class HotelJpaRepository extends AbstractJpaRepository<Hotel, Integer> im
     public Optional<Hotel> find(Hotel hotel) {
         return findById(hotel.getId());
     }
+
+    @Override
+    public boolean delete(Hotel hotel) {
+        return deleteById(hotel.getId());
+    }
 }

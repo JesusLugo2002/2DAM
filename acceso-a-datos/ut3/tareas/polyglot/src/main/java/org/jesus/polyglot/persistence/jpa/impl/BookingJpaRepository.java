@@ -18,17 +18,16 @@ public class BookingJpaRepository extends AbstractJpaRepository<Booking, Integer
     public BookingJpaRepository(IBookingJpaRepository repository) {
         super(repository);
     }
-
-    // @Override
-    // public List<Booking> findByRoomBetweenDates(Room room, String checkIn, String checkOut) {
-    //     return repository.findByRoomBetweenDates(room, checkIn, checkOut);
-    // }
-
     @Override
     public Optional<Booking> find(Booking booking) {
         return findById(booking.getId());
     }
 
+    @Override
+    public boolean delete(Booking entity) {
+        return deleteById(entity.getId());
+    }
+    
     @Override
     public List<Booking> findByRoomBetweenDates(Room room, String checkIn, String checkOut) {
         // TODO Auto-generated method stub

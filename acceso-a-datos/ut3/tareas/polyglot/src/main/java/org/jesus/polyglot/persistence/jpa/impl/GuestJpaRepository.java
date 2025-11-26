@@ -19,4 +19,9 @@ public class GuestJpaRepository extends AbstractJpaRepository<Guest, Integer> im
     public Optional<Guest> find(Guest guest) {
         return findById(guest.getId());
     }
+
+    @Override
+    public boolean delete(Guest guest) {
+        return deleteById(guest.getId());
+    }
 }

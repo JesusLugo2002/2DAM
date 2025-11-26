@@ -28,6 +28,11 @@ public class RoomJpaRepository extends AbstractJpaRepository<Room, Integer> impl
     public Optional<Room> find(Room room) {
         return findById(room.getId());
     }
+
+    @Override
+    public boolean delete(Room room) {
+        return deleteById(room.getId());
+    }
     
 
 }

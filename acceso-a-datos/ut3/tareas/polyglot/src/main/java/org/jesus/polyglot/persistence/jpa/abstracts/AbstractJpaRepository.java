@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public abstract class AbstractJpaRepository<ENTITY, ID> implements GenericRepository<ENTITY, ID> {
 
-    JpaRepository<ENTITY, ID> repository;
+    private JpaRepository<ENTITY, ID> repository;
 
     public AbstractJpaRepository(JpaRepository<ENTITY, ID> repository) {
         this.repository = repository;
@@ -21,10 +21,7 @@ public abstract class AbstractJpaRepository<ENTITY, ID> implements GenericReposi
     }
 
     @Override
-    public boolean delete(ENTITY entity) {
-        repository.delete(entity);
-        return true;
-    }
+    public abstract boolean delete(ENTITY entity);
 
     @Override
     public boolean deleteById(ID id) {

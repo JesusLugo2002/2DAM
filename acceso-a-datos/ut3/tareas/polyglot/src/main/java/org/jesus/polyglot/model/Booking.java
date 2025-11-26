@@ -42,7 +42,7 @@ public class Booking {
      * @param id - Identificador unico de la reserva.
      */
     public Booking(int id) {
-        setId(id);
+        this.id = id;
     }
 
     /**
@@ -98,13 +98,6 @@ public class Booking {
 
     public void setGuest(Guest guest) {
         this.guest = guest;
-    }
-
-    @Override
-    public String toString() {
-        return "Booking [id=" + getId() + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", room=" + room
-                + ", guest="
-                + guest + "]";
     }
 
 }
