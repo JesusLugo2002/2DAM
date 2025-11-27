@@ -8,17 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.docencia.rest.domain.Product;
 import com.docencia.rest.exceptions.ResourceNotFoundException;
-import com.docencia.rest.model.Product;
 import com.docencia.rest.service.ProductService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/products")
+@Tag(name = "Products", description = "Products operations")
 public class ProductController {
 
     private ProductService service;
@@ -71,5 +73,4 @@ public class ProductController {
     public Product createProduct(@Valid @RequestBody Product product) {
         return service.save(product);
     }
-
 }

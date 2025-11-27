@@ -1,25 +1,17 @@
-package com.docencia.rest.model;
+package com.docencia.rest.domain;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
-import jakarta.persistence.*;
+import com.docencia.rest.domain.ProductDetail;
 
-@Entity
-@Table(name = "products")
 public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private int id;
-
-    @Column(name = "name", nullable = false)
     private String nombre;
-
-    @Column(name = "price")
     private BigDecimal precio;
-
-    @Column(name = "stock")
     private int stock;
+    private ProductDetail detail;
 
     /**
      * Constructor vacio

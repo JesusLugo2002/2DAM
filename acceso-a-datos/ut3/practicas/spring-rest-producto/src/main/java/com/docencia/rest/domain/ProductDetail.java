@@ -1,19 +1,13 @@
-package com.docencia.rest.model;
+package com.docencia.rest.domain;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection = "product_detail")
 public class ProductDetail {
 
-    @Id
-    private String id;
+    private int id;
 
-    private Long productId;
+    private int productId;
 
     private String description;
 
@@ -27,19 +21,19 @@ public class ProductDetail {
     public ProductDetail() {
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Long getProductId() {
+    public int getProductId() {
         return productId;
     }
 
-    public void setProductId(Long productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
 
@@ -69,7 +63,10 @@ public class ProductDetail {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + id;
+        return result;
     }
 
     @Override
@@ -81,12 +78,11 @@ public class ProductDetail {
         if (getClass() != obj.getClass())
             return false;
         ProductDetail other = (ProductDetail) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
+        if (id != other.id)
             return false;
         return true;
     }
+
+    
 
 }
