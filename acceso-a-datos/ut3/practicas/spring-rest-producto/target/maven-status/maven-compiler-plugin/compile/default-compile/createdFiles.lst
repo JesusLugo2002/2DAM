@@ -1,0 +1,17 @@
+com/docencia/rest/repo/interfaces/jpa/ProductRepository.class
+com/docencia/rest/domain/Product.class
+com/docencia/rest/controller/UsersController.class
+com/docencia/rest/ServletInitializer.class
+com/docencia/rest/controller/ProductController.class
+com/docencia/rest/service/ProductService.class
+com/docencia/rest/model/ProductEntity.class
+com/docencia/rest/service/UserService.class
+com/docencia/rest/repo/interfaces/ProductDetailRepository.class
+com/docencia/rest/exceptions/ResourceNotFoundException.class
+com/docencia/rest/service/interfaces/ProductServiceInterface.class
+com/docencia/rest/model/User.class
+com/docencia/rest/RestApplication.class
+com/docencia/rest/service/interfaces/UserServiceInterface.class
+com/docencia/rest/repo/interfaces/jpa/UserRepository.class
+com/docencia/rest/model/ProductDetailDocument.class
+com/docencia/rest/domain/ProductDetail.class
