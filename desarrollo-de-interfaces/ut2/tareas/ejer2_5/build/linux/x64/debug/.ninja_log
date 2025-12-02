@@ -1,4 +1,34 @@
 # ninja log v5
+<<<<<<< HEAD
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/libflutter_linux_gtk.so	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_engine.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_method_call.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_method_response.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_value.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_view.h	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/flutter_linux.h	242022da5450d347
+1	10590	0	flutter/_phony_	242022da5450d347
+1	10590	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/build/linux/x64/debug/flutter/_phony_	242022da5450d347
+10591	11479	1764168474450823141	runner/CMakeFiles/ejer2_5.dir/main.cc.o	7ae635d50828af68
+10591	11494	1764168474465823236	runner/CMakeFiles/ejer2_5.dir/__/flutter/generated_plugin_registrant.cc.o	22141cbdf442e86f
+10591	11562	1764168474532823661	runner/CMakeFiles/ejer2_5.dir/my_application.cc.o	27c36ba48d309a0e
+11563	11799	1764168474773825187	intermediates_do_not_run/ejer2_5	6ca8f31b685cfe7d
+11799	12000	0	CMakeFiles/install.util	69a909ff401989e3
+=======
 1	11793	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h	242022da5450d347
 1	11793	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h	242022da5450d347
 11794	12696	1763996674123304630	runner/CMakeFiles/ejer2_5.dir/main.cc.o	7ae635d50828af68
@@ -52,3 +82,4 @@
 4	4314	0	/home/dam/repos/2DAM/desarrollo-de-interfaces/ut2/tareas/ejer2_5/build/linux/x64/debug/flutter/_phony_	242022da5450d347
 4315	4494	1763996832209673603	intermediates_do_not_run/ejer2_5	f280b0c9c86c23e5
 4494	4721	0	CMakeFiles/install.util	69a909ff401989e3
+>>>>>>> main

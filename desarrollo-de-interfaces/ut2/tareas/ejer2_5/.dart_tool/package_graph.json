@@ -8,7 +8,12 @@
       "version": "1.0.0+1",
       "dependencies": [
         "cupertino_icons",
+<<<<<<< HEAD
+        "flutter",
+        "provider"
+=======
         "flutter"
+>>>>>>> main
       ],
       "devDependencies": [
         "flutter_lints",
@@ -41,6 +46,18 @@
       ]
     },
     {
+<<<<<<< HEAD
+      "name": "provider",
+      "version": "6.1.5+1",
+      "dependencies": [
+        "collection",
+        "flutter",
+        "nested"
+      ]
+    },
+    {
+=======
+>>>>>>> main
       "name": "cupertino_icons",
       "version": "1.0.8",
       "dependencies": []
@@ -147,6 +164,16 @@
       ]
     },
     {
+<<<<<<< HEAD
+      "name": "nested",
+      "version": "1.0.0",
+      "dependencies": [
+        "flutter"
+      ]
+    },
+    {
+=======
+>>>>>>> main
       "name": "sky_engine",
       "version": "0.0.0",
       "dependencies": []
