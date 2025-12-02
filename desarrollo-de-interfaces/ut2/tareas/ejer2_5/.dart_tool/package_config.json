@@ -104,24 +104,30 @@
       "languageVersion": "2.12"
     },
     {
+<<<<<<< HEAD
       "name": "nested",
       "rootUri": "file:///home/dam/.pub-cache/hosted/pub.dev/nested-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
+=======
+>>>>>>> main
       "name": "path",
       "rootUri": "file:///home/dam/.pub-cache/hosted/pub.dev/path-1.9.1",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
+<<<<<<< HEAD
       "name": "provider",
       "rootUri": "file:///home/dam/.pub-cache/hosted/pub.dev/provider-6.1.5+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
+=======
+>>>>>>> main
       "name": "sky_engine",
       "rootUri": "file:///home/dam/.local/share/flutter-sdk/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
