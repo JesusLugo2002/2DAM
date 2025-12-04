@@ -1,9 +1,7 @@
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-    <!-- Definimos como es la vista explicita de la litas-->
     <record model="ir.ui.view" id="lista_tareas.list">
-      <field name="name">lista_tareas list</field>
+      <field name="name">lista_tareas.view.list</field>
       <field name="model">lista_tareas.lista_tareas</field>
       <field name="arch" type="xml">
         <tree>
@@ -11,13 +9,34 @@
           <field name="prioridad" />
           <field name="urgente" />
           <field name="realizada" />
+          <field name="asignado_a" />
         </tree>
       </field>
     </record>
-    <!-- actions opening views on models -->
-    <!-- Acciones al abrir las vistas en los modelos
-https://www.odoo.com/documentation/17.0/developer/reference/addons/actions.html
--->
+    <record id="lista_tareas_view_form" model="ir.ui.view">
+      <field name="name">lista_tareas.view.form</field>
+      <field name="model">lista_tareas.lista_tareas</field>
+      <field name="arch" type="xml">
+        <form string="">
+          <sheet>
+            <group>
+              <h1>
+                <field name="tarea" />
+              </h1>
+            </group>
+            <group>
+              <field name="prioridad" />
+              <field name="urgente" />
+            </group>
+            <group>
+              <field name="realizada" />
+              <field name="asignado_a" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
     <record model="ir.actions.act_window" id="lista_tareas.action_window">
       <field name="name">Listado de tareas pendientes</field>
       <field name="res_model">lista_tareas.lista_tareas</field>
