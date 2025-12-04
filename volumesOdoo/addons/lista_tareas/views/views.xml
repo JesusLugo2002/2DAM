@@ -36,11 +36,22 @@
         </form>
       </field>
     </record>
+    <record id="lista_tareas_view_graph" model="ir.ui.view">
+      <field name="name">lista_tareas.view.graph</field>
+      <field name="model">lista_tareas.lista_tareas</field>
+      <field name="arch" type="xml">
+        <graph string="Tareas asignadas" type="bar">
+          <field name="id" type="measure" />
+          <field name="realizada" type="col" />
+          <field name="asignado_a" type="row" />
+        </graph>
+      </field>
+    </record>
 
     <record model="ir.actions.act_window" id="lista_tareas.action_window">
       <field name="name">Listado de tareas pendientes</field>
       <field name="res_model">lista_tareas.lista_tareas</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">tree,form,graph</field>
     </record>
 
     <!-- Top menu item -->
