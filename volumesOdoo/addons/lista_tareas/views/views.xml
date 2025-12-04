@@ -20,9 +20,7 @@
         <form string="">
           <sheet>
             <group>
-              <h1>
-                <field name="tarea" />
-              </h1>
+              <field name="tarea" />
             </group>
             <group>
               <field name="prioridad" />
