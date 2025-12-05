@@ -21,7 +21,7 @@ class ListaTareas(models.Model):
         compute='_value_urgente',
         store=True
     )
-    realizada = fields.Boolean(string='Realizada')
+    realizada = fields.Boolean(string='Realizada', compute='_value_realizada', store=True)
     # El campo asignado_a lo volví opcional porque pueden existir tareas que no necesariamente
     # estén asignadas para una persona, pues puede no tener importancia quién haga la tarea.
     asignado_a = fields.Many2one('res.users', string='Asignado a', required=False, default=lambda self: self.env.user)
@@ -32,7 +32,8 @@ class ListaTareas(models.Model):
                               string="Estado", 
                               default=ESTADOS_POSIBLES[0][0], 
                               compute='_value_estado', 
-                              store=True, readonly=False
+                              store=True, readonly=False,
+                              group_expand="_sort_estado"
                             )
 
     @api.depends('prioridad')
@@ -64,6 +65,11 @@ class ListaTareas(models.Model):
             if record.realizada:
                 record.estado = self.ESTADOS_POSIBLES[3][0]
 
+    @api.depends('estado')
+    def _value_realizada(self):
+        for record in self:
+            record.realizada = record.estado == self.ESTADOS_POSIBLES[3][0]
+
     def set_estado_to_en_curso(self):
         self.write({'estado': self.ESTADOS_POSIBLES[1][0]})
 
@@ -72,3 +78,11 @@ class ListaTareas(models.Model):
 
     def set_estado_to_hecho(self):
         self.write({'estado': self.ESTADOS_POSIBLES[3][0]})
+
+    # Esta función es para ordenar los estados según son iniciados en la constante ESTADOS_POSIBLES, principalmente
+    # para que se vea bien en la vista de Kanban y no me de TOC.
+    #
+    # Fuente: https://stackoverflow.com/questions/65894919/how-to-sort-position-stages-using-default-group-by-field-selection-of-kanban-vie
+    @api.model
+    def _sort_estado(self, states, domain, order):
+        return [estado[0] for estado in self.ESTADOS_POSIBLES]
