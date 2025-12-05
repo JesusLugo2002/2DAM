@@ -3,6 +3,14 @@
 from odoo import models, fields, api
 
 class ListaTareas(models.Model):
+    # Constante creada para determinar los posibles estados de la tarea
+    ESTADOS_POSIBLES = [
+        ('nuevo', 'Nueva'), 
+        ('progreso', 'En curso'), 
+        ('bloqueado', 'Bloqueada'), 
+        ('hecho', 'Hecha')
+    ]
+
     _name = 'lista_tareas.lista_tareas'
     _description = 'Lista de tareas'
 
@@ -20,6 +28,12 @@ class ListaTareas(models.Model):
     fecha_limite = fields.Date(string='Fecha límite')
     fecha_creacion = fields.Datetime(string='Fecha de creación', default=fields.Datetime.now(), readonly=True)
     retrasada = fields.Boolean(string='Retrasada', compute='_value_retrasada', store=True)
+    estado = fields.Selection(ESTADOS_POSIBLES, 
+                              string="Estado", 
+                              default=ESTADOS_POSIBLES[0][0], 
+                              compute='_value_estado', 
+                              store=True, readonly=False
+                            )
 
     @api.depends('prioridad')
     def _value_urgente(self):
@@ -43,3 +57,9 @@ class ListaTareas(models.Model):
     def _compute_display_name(self):
         for record in self:
             record.display_name = record.tarea
+
+    @api.depends('realizada')
+    def _value_estado(self):
+        for record in self:
+            if record.realizada:
+                record.estado = self.ESTADOS_POSIBLES[3][0]
