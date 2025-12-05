@@ -10,6 +10,8 @@
           <field name="urgente" />
           <field name="realizada" />
           <field name="asignado_a" />
+          <field name="fecha_limite" />
+          <field name="retrasada" />
         </tree>
       </field>
     </record>
@@ -21,14 +23,13 @@
           <sheet>
             <group>
               <field name="tarea" />
-            </group>
-            <group>
               <field name="prioridad" />
               <field name="urgente" />
-            </group>
-            <group>
               <field name="realizada" />
               <field name="asignado_a" />
+              <field name="fecha_creacion" />
+              <field name="fecha_limite" />
+              <field name="retrasada" />
             </group>
           </sheet>
         </form>
