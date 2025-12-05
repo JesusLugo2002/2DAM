@@ -61,11 +61,14 @@
       <field name="arch" type="xml">
         <search string="Busqueda">
           <field name="tarea" string="Nombre de la tarea"/>
-          <filter name="asignado_a" string="Asignado a..."/>
-          <filter name="realizada" string="Realizada"/>
-          <filter name="retrasada" string="Retrasada" />
-          <filter name="asignado_a" string="Asignado a..." context='{"group_by": "asignado_a"}'/>
-          <filter name="realizada" string="Realizada" context='{"group_by": "realizada"}'/>
+          <filter name="asignado_a_jesus" string="Asignado a Jesus" domain="[('asignado_a', '=', 'Jesus')]" />
+          <filter name="asignado_a_susan" string="Asignado a Susan" domain="[('asignado_a', '=', 'Susan')]" />
+          <filter name="asignado_a_alison" string="Asignado a Alison" domain="[('asignado_a', '=', 'Alison')]" />
+          <filter name="realizada" string="Realizada" domain="[('realizada', '=', 'true')]"/>
+          <filter name="no_realizada" string="No realizada" domain="[('realizada', '!=', 'true')]"/>
+          <filter name="retrasada" string="Retrasada" domain="[('retrasada', '=', 'true')]"/>
+          <filter name="group_by_asignado" string="Asignado" context='{"group_by": "asignado_a"}'/>
+          <filter name="group_by_realizada" string="Realizada" context='{"group_by": "realizada"}'/>
         </search>
       </field>
     </record>
