@@ -33,3 +33,13 @@ class ListaTareas(models.Model):
                 record.retrasada = not record.realizada and record.fecha_limite < fields.Date.today()
             else:
                 record.retrasada = False
+
+    # Esta función computada es para cambiar el __str__ de la tarea, para no mostrar, por ejemplo,
+    # "lista_tareas.lista_tareas.1" sino su título "Estudiar para el examen". (Especialmente
+    # para mostrarlo de mejor forma en la vista de calendario).
+    #
+    # Fuente: Una respuesta en https://www.odoo.com/es/forum/ayuda-1/how-to-display-customer-name-in-calendar-230517
+    @api.depends('tarea')
+    def _compute_display_name(self):
+        for record in self:
+            record.display_name = record.tarea

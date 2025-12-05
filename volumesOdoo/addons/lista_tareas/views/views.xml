@@ -46,11 +46,20 @@
         </graph>
       </field>
     </record>
+    <record id="lista_tareas_view_calendar" model="ir.ui.view">
+      <field name="name">lista_tareas.view.calendar</field>
+      <field name="model">lista_tareas.lista_tareas</field>
+      <field name="arch" type="xml">
+        <calendar date_start="fecha_limite" mode="month">
+          <field name="asignado_a"  />
+        </calendar>
+      </field>
+    </record>
 
     <record model="ir.actions.act_window" id="lista_tareas.action_window">
       <field name="name">Listado de tareas pendientes</field>
       <field name="res_model">lista_tareas.lista_tareas</field>
-      <field name="view_mode">tree,form,graph</field>
+      <field name="view_mode">tree,form,graph,calendar</field>
     </record>
 
     <!-- Top menu item -->
