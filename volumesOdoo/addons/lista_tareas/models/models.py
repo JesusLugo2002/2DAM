@@ -3,6 +3,14 @@
 from odoo import models, fields, api
 
 class ListaTareas(models.Model):
+    # Constante creada para determinar los posibles estados de la tarea
+    ESTADOS_POSIBLES = [
+        ('nuevo', 'Nueva'), 
+        ('progreso', 'En curso'), 
+        ('bloqueado', 'Bloqueada'), 
+        ('hecho', 'Hecha')
+    ]
+
     _name = 'lista_tareas.lista_tareas'
     _description = 'Lista de tareas'
 
@@ -13,13 +21,20 @@ class ListaTareas(models.Model):
         compute='_value_urgente',
         store=True
     )
-    realizada = fields.Boolean(string='Realizada')
+    realizada = fields.Boolean(string='Realizada', compute='_value_realizada', store=True)
     # El campo asignado_a lo volví opcional porque pueden existir tareas que no necesariamente
     # estén asignadas para una persona, pues puede no tener importancia quién haga la tarea.
     asignado_a = fields.Many2one('res.users', string='Asignado a', required=False, default=lambda self: self.env.user)
     fecha_limite = fields.Date(string='Fecha límite')
     fecha_creacion = fields.Datetime(string='Fecha de creación', default=fields.Datetime.now(), readonly=True)
     retrasada = fields.Boolean(string='Retrasada', compute='_value_retrasada', store=True)
+    estado = fields.Selection(ESTADOS_POSIBLES, 
+                              string="Estado", 
+                              default=ESTADOS_POSIBLES[0][0], 
+                              compute='_value_estado', 
+                              store=True, readonly=False,
+                              group_expand="_sort_estado"
+                            )
 
     @api.depends('prioridad')
     def _value_urgente(self):
@@ -43,3 +58,31 @@ class ListaTareas(models.Model):
     def _compute_display_name(self):
         for record in self:
             record.display_name = record.tarea
+
+    @api.depends('realizada')
+    def _value_estado(self):
+        for record in self:
+            if record.realizada:
+                record.estado = self.ESTADOS_POSIBLES[3][0]
+
+    @api.depends('estado')
+    def _value_realizada(self):
+        for record in self:
+            record.realizada = record.estado == self.ESTADOS_POSIBLES[3][0]
+
+    def set_estado_to_en_curso(self):
+        self.write({'estado': self.ESTADOS_POSIBLES[1][0]})
+
+    def set_estado_to_bloqueado(self):
+        self.write({'estado': self.ESTADOS_POSIBLES[2][0]})
+
+    def set_estado_to_hecho(self):
+        self.write({'estado': self.ESTADOS_POSIBLES[3][0]})
+
+    # Esta función es para ordenar los estados según son iniciados en la constante ESTADOS_POSIBLES, principalmente
+    # para que se vea bien en la vista de Kanban y no me de TOC.
+    #
+    # Fuente: https://stackoverflow.com/questions/65894919/how-to-sort-position-stages-using-default-group-by-field-selection-of-kanban-vie
+    @api.model
+    def _sort_estado(self, states, domain, order):
+        return [estado[0] for estado in self.ESTADOS_POSIBLES]

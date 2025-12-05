@@ -6,6 +6,7 @@
       <field name="arch" type="xml">
         <tree>
           <field name="tarea" />
+          <field name="estado" />
           <field name="prioridad" />
           <field name="urgente" />
           <field name="realizada" />
@@ -21,8 +22,17 @@
       <field name="arch" type="xml">
         <form string="">
           <sheet>
+            <header>
+              <button string="Poner en curso" name="set_estado_to_en_curso" type="object"
+                class="oe_highlight" />
+              <button string="Marcar como bloqueada" name="set_estado_to_bloqueado" type="object"
+                class="oe_highlight" />
+              <button string="Marcar como hecha" name="set_estado_to_hecho" type="object"
+                class="oe_highlight" />
+            </header>
             <group>
-              <field name="tarea" />
+              <field name="tarea" class="h1" string="" placeholder="Titulo de la tarea" />
+              <field name="estado" />
               <field name="prioridad" />
               <field name="urgente" />
               <field name="realizada" />
@@ -51,7 +61,7 @@
       <field name="model">lista_tareas.lista_tareas</field>
       <field name="arch" type="xml">
         <calendar date_start="fecha_limite" mode="month">
-          <field name="asignado_a"  />
+          <field name="asignado_a" />
         </calendar>
       </field>
     </record>
@@ -60,23 +70,49 @@
       <field name="model">lista_tareas.lista_tareas</field>
       <field name="arch" type="xml">
         <search string="Busqueda">
-          <field name="tarea" string="Nombre de la tarea"/>
-          <filter name="asignado_a_jesus" string="Asignado a Jesus" domain="[('asignado_a', '=', 'Jesus')]" />
-          <filter name="asignado_a_susan" string="Asignado a Susan" domain="[('asignado_a', '=', 'Susan')]" />
-          <filter name="asignado_a_alison" string="Asignado a Alison" domain="[('asignado_a', '=', 'Alison')]" />
-          <filter name="realizada" string="Realizada" domain="[('realizada', '=', 'true')]"/>
-          <filter name="no_realizada" string="No realizada" domain="[('realizada', '!=', 'true')]"/>
-          <filter name="retrasada" string="Retrasada" domain="[('retrasada', '=', 'true')]"/>
-          <filter name="group_by_asignado" string="Asignado" context='{"group_by": "asignado_a"}'/>
-          <filter name="group_by_realizada" string="Realizada" context='{"group_by": "realizada"}'/>
+          <field name="tarea" string="Nombre de la tarea" />
+          <filter name="asignado_a_jesus" string="Asignado a Jesus"
+            domain="[('asignado_a', '=', 'Jesus')]" />
+          <filter name="asignado_a_susan" string="Asignado a Susan"
+            domain="[('asignado_a', '=', 'Susan')]" />
+          <filter name="asignado_a_alison" string="Asignado a Alison"
+            domain="[('asignado_a', '=', 'Alison')]" />
+          <filter name="realizada" string="Realizada" domain="[('realizada', '=', 'true')]" />
+          <filter name="no_realizada" string="No realizada" domain="[('realizada', '!=', 'true')]" />
+          <filter name="retrasada" string="Retrasada" domain="[('retrasada', '=', 'true')]" />
+          <filter name="group_by_asignado" string="Asignado" context='{"group_by": "asignado_a"}' />
+          <filter name="group_by_realizada" string="Realizada" context='{"group_by": "realizada"}' />
         </search>
+      </field>
+    </record>
+    <record id="lista_tareas_view_kanban" model="ir.ui.view">
+      <field name="name">lista_tareas.view.kanban</field>
+      <field name="model">lista_tareas.lista_tareas</field>
+      <field name="arch" type="xml">
+        <!-- TODO: Añadir color dependiendo del estado -->
+        <kanban default_group_by="estado">
+          <templates>
+            <t t-name="kanban-box">
+              <div>
+                <a type="open" class="card text-reset border-0">
+                  <strong>
+                    <field name="tarea" />
+                  </strong>
+                  <field name="asignado_a" />
+                  <field name="prioridad" />
+                  <field name="estado" />
+                </a>
+              </div>
+            </t>
+          </templates>
+        </kanban>
       </field>
     </record>
 
     <record model="ir.actions.act_window" id="lista_tareas.action_window">
       <field name="name">Listado de tareas pendientes</field>
       <field name="res_model">lista_tareas.lista_tareas</field>
-      <field name="view_mode">tree,form,graph,calendar,search</field>
+      <field name="view_mode">tree,form,graph,calendar,search,kanban</field>
     </record>
 
     <!-- Top menu item -->
