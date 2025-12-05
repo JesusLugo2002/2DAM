@@ -63,3 +63,12 @@ class ListaTareas(models.Model):
         for record in self:
             if record.realizada:
                 record.estado = self.ESTADOS_POSIBLES[3][0]
+
+    def set_estado_to_en_curso(self):
+        self.write({'estado': self.ESTADOS_POSIBLES[1][0]})
+
+    def set_estado_to_bloqueado(self):
+        self.write({'estado': self.ESTADOS_POSIBLES[2][0]})
+
+    def set_estado_to_hecho(self):
+        self.write({'estado': self.ESTADOS_POSIBLES[3][0]})

@@ -22,8 +22,13 @@
       <field name="arch" type="xml">
         <form string="">
           <sheet>
+            <header>
+              <button string="Poner en curso" name="set_estado_to_en_curso" type="object" class="oe_highlight"/>
+              <button string="Marcar como bloqueada" name="set_estado_to_bloqueado" type="object" class="oe_highlight"/>
+              <button string="Marcar como hecha" name="set_estado_to_hecho" type="object" class="oe_highlight"/>
+            </header>
             <group>
-              <field name="tarea" />
+              <field name="tarea" class="h1" string="" placeholder="Titulo de la tarea"/>
               <field name="estado" />
               <field name="prioridad" />
               <field name="urgente" />
