@@ -55,11 +55,25 @@
         </calendar>
       </field>
     </record>
+    <record id="lista_tareas_view_search" model="ir.ui.view">
+      <field name="name">lista_tareas.view.search</field>
+      <field name="model">lista_tareas.lista_tareas</field>
+      <field name="arch" type="xml">
+        <search string="Busqueda">
+          <field name="tarea" string="Nombre de la tarea"/>
+          <filter name="asignado_a" string="Asignado a..."/>
+          <filter name="realizada" string="Realizada"/>
+          <filter name="retrasada" string="Retrasada" />
+          <filter name="asignado_a" string="Asignado a..." context='{"group_by": "asignado_a"}'/>
+          <filter name="realizada" string="Realizada" context='{"group_by": "realizada"}'/>
+        </search>
+      </field>
+    </record>
 
     <record model="ir.actions.act_window" id="lista_tareas.action_window">
       <field name="name">Listado de tareas pendientes</field>
       <field name="res_model">lista_tareas.lista_tareas</field>
-      <field name="view_mode">tree,form,graph,calendar</field>
+      <field name="view_mode">tree,form,graph,calendar,search</field>
     </record>
 
     <!-- Top menu item -->
