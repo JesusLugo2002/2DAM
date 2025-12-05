@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const FadeDemo());
+  runApp(const PaddingDemo());
 }
 
-class FadeDemo extends StatefulWidget {
-  const FadeDemo({super.key});
+class PaddingDemo extends StatefulWidget {
+  const PaddingDemo({super.key});
 
   @override
-  State<FadeDemo> createState() => _FadeDemoState();
-}
-
-class _FadeDemoState extends State<FadeDemo> {
+  State createState() => _PaddingDemoState();
 }
