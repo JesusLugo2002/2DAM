@@ -1,0 +1,10 @@
+com/docencia/restejercicio/model/User.class
+com/docencia/restejercicio/service/UserService.class
+com/docencia/restejercicio/model/Task.class
+com/docencia/restejercicio/common/ApiRestController.class
+com/docencia/restejercicio/controller/TaskController.class
+com/docencia/restejercicio/repository/TaskRepository.class
+com/docencia/restejercicio/repository/UserRepository.class
+com/docencia/restejercicio/RestEjercicioApplication.class
+com/docencia/restejercicio/service/TaskService.class
+com/docencia/restejercicio/controller/UserController.class

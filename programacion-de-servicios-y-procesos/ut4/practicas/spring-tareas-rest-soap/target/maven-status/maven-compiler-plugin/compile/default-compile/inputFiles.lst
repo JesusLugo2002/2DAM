@@ -1,0 +1,16 @@
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut4/practicas/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/TareasApplication.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut4/practicas/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/config/CxfConfig.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut4/practicas/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/mapper/TaskMapper.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut4/practicas/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/model/Student.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut4/practicas/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/model/Task.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut4/practicas/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/repositories/TaskRepository.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut4/practicas/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/repositories/interfaces/ITaskRepository.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut4/practicas/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/rest/TaskRestController.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut4/practicas/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/service/StudentService.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut4/practicas/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/service/TaskService.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut4/practicas/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/service/interfaces/IStudentService.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut4/practicas/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/service/interfaces/ITaskService.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut4/practicas/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/soap/StudentSoapService.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut4/practicas/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/soap/TaskSoapService.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut4/practicas/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/soap/interfaces/IStudentSoapEndpoint.java
+/home/dam/repos/2DAM/programacion-de-servicios-y-procesos/ut4/practicas/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/soap/interfaces/ITaskSoapEndpoint.java

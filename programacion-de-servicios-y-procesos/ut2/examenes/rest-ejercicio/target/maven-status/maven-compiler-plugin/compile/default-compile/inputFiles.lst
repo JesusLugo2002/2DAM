@@ -1,0 +1,15 @@
+/home/dam/examen-pgv-jesus/rest-ejercicio/rest-ejercicio/src/main/java/com/docencia/restejercicio/RestEjercicioApplication.java
+/home/dam/examen-pgv-jesus/rest-ejercicio/rest-ejercicio/src/main/java/com/docencia/restejercicio/common/ApiRestController.java
+/home/dam/examen-pgv-jesus/rest-ejercicio/rest-ejercicio/src/main/java/com/docencia/restejercicio/controller/TaskController.java
+/home/dam/examen-pgv-jesus/rest-ejercicio/rest-ejercicio/src/main/java/com/docencia/restejercicio/controller/UserController.java
+/home/dam/examen-pgv-jesus/rest-ejercicio/rest-ejercicio/src/main/java/com/docencia/restejercicio/model/Task.java
+/home/dam/examen-pgv-jesus/rest-ejercicio/rest-ejercicio/src/main/java/com/docencia/restejercicio/model/User.java
+/home/dam/examen-pgv-jesus/rest-ejercicio/rest-ejercicio/src/main/java/com/docencia/restejercicio/repository/AbstractRepository.java
+/home/dam/examen-pgv-jesus/rest-ejercicio/rest-ejercicio/src/main/java/com/docencia/restejercicio/repository/TaskRepository.java
+/home/dam/examen-pgv-jesus/rest-ejercicio/rest-ejercicio/src/main/java/com/docencia/restejercicio/repository/UserRepository.java
+/home/dam/examen-pgv-jesus/rest-ejercicio/rest-ejercicio/src/main/java/com/docencia/restejercicio/repository/interfaces/IEntityRepository.java
+/home/dam/examen-pgv-jesus/rest-ejercicio/rest-ejercicio/src/main/java/com/docencia/restejercicio/repository/interfaces/Identifiable.java
+/home/dam/examen-pgv-jesus/rest-ejercicio/rest-ejercicio/src/main/java/com/docencia/restejercicio/service/AbstractService.java
+/home/dam/examen-pgv-jesus/rest-ejercicio/rest-ejercicio/src/main/java/com/docencia/restejercicio/service/TaskService.java
+/home/dam/examen-pgv-jesus/rest-ejercicio/rest-ejercicio/src/main/java/com/docencia/restejercicio/service/UserService.java
+/home/dam/examen-pgv-jesus/rest-ejercicio/rest-ejercicio/src/main/java/com/docencia/restejercicio/service/interfaces/IEntityService.java

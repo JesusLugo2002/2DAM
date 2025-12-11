@@ -1,0 +1,17 @@
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/RestApplication.java
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/ServletInitializer.java
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/controller/ProductController.java
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/controller/UsersController.java
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/domain/Product.java
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/domain/ProductDetail.java
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/exceptions/ResourceNotFoundException.java
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/model/ProductDetailDocument.java
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/model/ProductEntity.java
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/model/User.java
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/repo/interfaces/ProductDetailRepository.java
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/repo/interfaces/jpa/ProductRepository.java
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/repo/interfaces/jpa/UserRepository.java
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/service/ProductService.java
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/service/UserService.java
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/service/interfaces/ProductServiceInterface.java
+/home/dam/repos/2DAM/acceso-a-datos/ut3/practicas/spring-rest-producto/src/main/java/com/docencia/rest/service/interfaces/UserServiceInterface.java
