@@ -15,9 +15,8 @@ export function splitJwt(token: string): JwtParts {
 }
 
 export function roleFromString(value: string): Role {
-  // "ADMIN"|"USER" (case-insensitive) => Role; si no => Error
   const normalizedValue = value.toUpperCase().trim();
-  if (normalizedValue == Role.ADMIN || normalizedValue == Role.USER) {
+  if (!Object.values(Role).includes(normalizedValue as Role)) {
     throw new Error("Invalid role");
   }
   return normalizedValue as Role;
@@ -25,5 +24,9 @@ export function roleFromString(value: string): Role {
 
 export function formatUserTag(username: string, role: Role): string {
   // "juan", ADMIN => "juan#ADMIN" (username trim, no vacío)
-  throw new Error("TODO");
+  const trimmedUsername = username.trim();
+  if (trimmedUsername.length == 0) {
+    throw new Error("Empty username")
+  }
+  return trimmedUsername + "#" + role.toUpperCase();
 }
