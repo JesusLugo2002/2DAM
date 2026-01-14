@@ -7,16 +7,23 @@ import { Task } from "../models";
 export type AdminTask = Task & { adminOnly: true };
 
 export function makeAdminTask(task: Task): AdminTask {
-  // devuelve task + adminOnly=true (sin mutar task original)
-  throw new Error("TODO");
+  return Object.assign({ adminOnly: true }, task) as AdminTask;
 }
 
 export function buildAuthHeaders(token: string): Record<string, string> {
-  // { Authorization: "Bearer <token>", "Content-Type": "application/json" } token trim no vacío
-  throw new Error("TODO");
+  return { Authorization: "Bearer " + token.trim(), "Content-Type": "application/json" }
 }
 
 export function groupByCompleted(tasks: Task[]): Record<"done" | "pending", Task[]> {
-  // retorna { done: [...], pending: [...] } (arrays nuevos)
-  throw new Error("TODO");
+  const result: Record<"done" | "pending", Task[]> = {
+    "done": [], "pending": []
+  }
+  tasks.forEach((task) => {
+    if (task.completed) {
+      result.done.push(task)
+    } else {
+      result.pending.push(task)
+    }
+  })
+  return result;
 }
