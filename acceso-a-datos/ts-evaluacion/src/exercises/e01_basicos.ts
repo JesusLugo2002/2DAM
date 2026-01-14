@@ -3,11 +3,11 @@
  */
 
 export function normalizeBearer(authHeader: string): string {
-  const splittedHeader = authHeader.trim().split(" ");
+  const splittedHeader = authHeader.trim().split(/\s+/);
   if (!splittedHeader[0].toLowerCase().includes("bearer")) {
     throw new Error("Invalid header")
   }
-  const normalizedHeader = splittedHeader.filter((text) => text.length > 0).join(" ");
+  const normalizedHeader = splittedHeader.join(" ");
   return "B" + normalizedHeader.substring(1);
 }
 

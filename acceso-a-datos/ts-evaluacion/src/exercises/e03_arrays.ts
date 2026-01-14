@@ -5,13 +5,12 @@ import { Task } from "../models";
  */
 
 export function pendingTasks(tasks: Task[]): Task[] {
-  // retorna nuevas tareas con completed=false
-  throw new Error("TODO");
+  return tasks.filter((task) => !task.completed);
 }
 
 export function titlesSorted(tasks: Task[]): string[] {
   // devuelve títulos ordenados alfabéticamente (localeCompare), sin mutar tasks
-  throw new Error("TODO");
+  throw new Error("TODO")
 }
 
 export function completionPercent(tasks: Task[]): number {
