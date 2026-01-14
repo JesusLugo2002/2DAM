@@ -14,7 +14,11 @@ export function uniqueRoles(roles: Role[]): Set<Role> {
   throw new Error("TODO");
 }
 
-export function touchSession(sessions: Map<string, Date>, token: string, now: Date): Date | undefined {
+export function touchSession(
+  sessions: Map<string, Date>,
+  token: string,
+  now: Date
+): Date | undefined {
   // devuelve fecha previa si existía y actualiza token->now
   throw new Error("TODO");
 }
