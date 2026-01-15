@@ -10,11 +10,23 @@ export function first<T>(items: T[]): T {
 }
 
 export function unique<T>(items: T[]): T[] {
-  // devuelve array sin duplicados preservando orden (usa Set internamente)
-  throw new Error("");
+  return [...new Set(items)];
 }
 
-export function groupBy<T, K extends string | number>(items: T[], keyFn: (item: T) => K): Record<K, T[]> {
-  // agrupa por clave y devuelve Record (arrays nuevos)
-  throw new Error("TODO");
+export function groupBy<T, K extends string | number>(
+  items: T[],
+  keyFn: (item: T) => K
+): Record<K, T[]> {
+  const result = new Map<K, T[]>();
+  items.forEach(item => {
+    const key = keyFn(item);
+    const value = result.get(key);
+    if (value == undefined) {
+      result.set(key, [item])
+    } else {
+      value.push(item);
+      result.set(key, value);
+    }
+  });
+  return Object.fromEntries(result) as Record<K, T[]>;
 }

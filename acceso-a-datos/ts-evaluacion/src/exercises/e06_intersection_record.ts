@@ -11,7 +11,11 @@ export function makeAdminTask(task: Task): AdminTask {
 }
 
 export function buildAuthHeaders(token: string): Record<string, string> {
-  return { Authorization: "Bearer " + token.trim(), "Content-Type": "application/json" }
+  const trimmedToken = token.trim();
+  if (trimmedToken == "") {
+    throw new Error("Token empty")
+  }
+  return { Authorization: `Bearer ${trimmedToken}`, "Content-Type": "application/json" }
 }
 
 export function groupByCompleted(tasks: Task[]): Record<"done" | "pending", Task[]> {
@@ -19,11 +23,7 @@ export function groupByCompleted(tasks: Task[]): Record<"done" | "pending", Task
     "done": [], "pending": []
   }
   tasks.forEach((task) => {
-    if (task.completed) {
-      result.done.push(task)
-    } else {
-      result.pending.push(task)
-    }
+    task.completed ? result.done.push(task) : result.pending.push(task);
   })
   return result;
 }

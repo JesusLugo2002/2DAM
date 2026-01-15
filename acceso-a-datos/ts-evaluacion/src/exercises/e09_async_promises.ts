@@ -3,16 +3,27 @@
  */
 
 export async function delay(ms: number): Promise<void> {
-  // resuelve tras ms; Error si ms<0 o no finito
-  throw new Error("TODO");
+  if (!isFinite(ms) || ms < 0) {
+    throw new Error("Ms is zero or not finite");
+  }
+  return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 export async function retry<T>(fn: () => Promise<T>, attempts: number): Promise<T> {
-  // reintenta attempts veces; si resuelve devuelve; si falla siempre lanza último error
-  throw new Error("TODO");
+  return new Promise<T>((resolve, reject) => {
+    for (let attempt = 0; attempt < attempts; attempt++) {
+      fn().then(value => resolve(value)).catch((reason) => reject(reason))
+    }
+  })
 }
 
 export async function parallelSum(values: Array<Promise<number>>): Promise<number> {
-  // Promise.all y suma; Error si alguno no es finito
-  throw new Error("TODO");
+  return Promise.all<number>(values).then((values) => {
+    return values.reduce((a, b) => {
+      if (!isFinite(a) || !isFinite(b)) {
+        throw new Error("Some number is not finite");
+      }
+      return a + b;
+    });
+  })
 }
