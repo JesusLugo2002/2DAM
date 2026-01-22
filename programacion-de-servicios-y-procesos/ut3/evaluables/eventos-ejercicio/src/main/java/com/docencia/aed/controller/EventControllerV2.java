@@ -7,6 +7,8 @@ import com.docencia.aed.entity.Event;
 import com.docencia.aed.entity.EventStatus;
 import com.docencia.aed.service.EventService;
 import com.docencia.aed.util.SecurityUtils;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v2/events")
+@Tag(name = "Events API v2")
 public class EventControllerV2 {
 
     private final EventService service;

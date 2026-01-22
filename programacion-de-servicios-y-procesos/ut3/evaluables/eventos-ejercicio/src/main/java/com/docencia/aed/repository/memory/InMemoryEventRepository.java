@@ -5,7 +5,6 @@ import com.docencia.aed.entity.EventStatus;
 import com.docencia.aed.repository.EventRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;

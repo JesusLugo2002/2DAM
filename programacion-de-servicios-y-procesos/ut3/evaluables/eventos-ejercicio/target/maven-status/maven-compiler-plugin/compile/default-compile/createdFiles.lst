@@ -7,14 +7,14 @@ com/docencia/aed/infrastructure/security/JwtService.class
 com/docencia/aed/infrastructure/openapi/OpenApiConfig.class
 com/docencia/aed/infrastructure/security/AppSecurityProperties$Permissions.class
 com/docencia/aed/domain/RejectRequest.class
-com/docencia/aed/service/EventService.class
 com/docencia/aed/exception/ForbiddenException.class
+com/docencia/aed/service/EventService.class
 com/docencia/aed/exception/ResourceNotFoundException.class
 com/docencia/aed/domain/LoginResponse.class
 com/docencia/aed/infrastructure/security/AppSecurityProperties$User.class
 com/docencia/aed/infrastructure/security/AppSecurityProperties$Routes.class
-com/docencia/aed/controller/AuthController.class
 com/docencia/aed/infrastructure/security/AppSecurityProperties$Jwt.class
+com/docencia/aed/controller/AuthController.class
 com/docencia/aed/infrastructure/security/AppSecurityProperties$RolePermissions.class
 com/docencia/aed/infrastructure/security/SecurityConfig.class
 com/docencia/aed/repository/memory/InMemoryEventRepository.class
