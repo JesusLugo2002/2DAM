@@ -4,6 +4,7 @@ import com.docencia.aed.domain.EventCreateRequest;
 import com.docencia.aed.domain.EventPatchRequest;
 import com.docencia.aed.entity.Event;
 import com.docencia.aed.entity.EventStatus;
+import com.docencia.aed.exception.ResourceNotFoundException;
 import com.docencia.aed.repository.EventRepository;
 import com.docencia.aed.service.EventService;
 import org.springframework.stereotype.Service;
@@ -30,12 +31,19 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> listPublicApproved() {
-        throw new UnsupportedOperationException("TODO: implementar");
+        return repo.findByStatus(EventStatus.APPROVED);
     }
 
     @Override
     public Event getPublicApprovedById(Long id) {
-        throw new UnsupportedOperationException("TODO: implementar");
+        Event event = repo.findById(id).orElse(null);
+        if (event == null) {
+            throw new ResourceNotFoundException("Event not found");
+        }
+        if (event.getStatus() != EventStatus.APPROVED) {
+            throw new ResourceNotFoundException("The event is not approved");
+        }
+        return event;
     }
 
     @Override
